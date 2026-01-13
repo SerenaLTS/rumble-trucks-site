@@ -34,10 +34,8 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (MATCH index.html) ---------- */
-header{
-  border-bottom:1px solid var(--line);
-}
+/* ---------- Header ---------- */
+header{border-bottom:1px solid var(--line)}
 .nav{
   display:flex;
   align-items:center;
@@ -50,33 +48,25 @@ header{
   gap:14px;
 }
 
-/* logo 底座（关键） */
+/* 真正铭牌式 logo：无底色、无边框 */
 .logo-plate{
-  width:52px;
-  height:52px;
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  background:rgba(229,231,235,0.06);
-  border:1px solid var(--line);
 }
-
-/* logo 本体 */
 .logo-plate img{
-  width:44px;
   height:44px;
+  width:auto;
+  display:block;
   object-fit:contain;
-  filter: drop-shadow(0 2px 10px rgba(255,255,255,.18));
+  filter: drop-shadow(0 3px 14px rgba(0,0,0,.45));
 }
 
-/* RUMBLE 文本 */
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
   font-size:22px;
   letter-spacing:.2em;
 }
 
-/* nav links */
 .nav a{
   margin-left:24px;
   font-size:14px;
@@ -132,7 +122,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   width:100%;
   height:100%;
   object-fit:cover;
-  display:none; /* enable later */
+  display:none;
 }
 
 .hero-media .hero-placeholder{
@@ -173,7 +163,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
 .hero-media h1{color:#FFFFFF}
 .hero-media p{color:#E5E7EB; max-width:520px}
 
-.hero-media .hero-box{
+.hero-box{
   max-width:620px;
   padding:22px;
   border:1px solid rgba(229,231,235,0.22);
@@ -209,20 +199,13 @@ input,select,textarea{
 }
 textarea{min-height:120px}
 
-/* ---------- Footer (MATCH index.html detailed footer) ---------- */
+/* ---------- Footer（与 index 同款） ---------- */
 footer{
   border-top:1px solid var(--line);
   padding:40px 0;
   font-size:13px;
   color:var(--muted);
 }
-.footer-nav{
-  display:flex;
-  gap:24px;
-  justify-content:center;
-  margin-bottom:16px;
-}
-.footer-nav a:hover{color:var(--text)}
 
 @media(max-width:980px){
   .grid2,.grid3{grid-template-columns:1fr}
@@ -246,7 +229,7 @@ footer{
       <a href="index.html">Home</a>
       <a href="models.html">Models</a>
       <a href="services.html">Services</a>
-      <a href="fleet-finance.html">Fleet &amp; Finance</a>
+      <a href="fleet-finance.html">Fleet & Finance</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
@@ -254,11 +237,9 @@ footer{
 
 <!-- HERO -->
 <section class="hero-media">
-  <video autoplay muted loop playsinline preload="metadata"></video>
-
   <div class="hero-placeholder">
     CONTACT PAGE MEDIA PLACEHOLDER<br><br>
-    (VIDEO OR IMAGE CAN BE USED HERE)
+    (VIDEO OR IMAGE IN FUTURE)
   </div>
 
   <div class="overlay">
@@ -281,9 +262,7 @@ footer{
 <section>
   <div class="wrap">
     <h2>CONTACT INFORMATION</h2>
-    <p style="margin-bottom:24px;">
-      Our team will respond as soon as possible.
-    </p>
+    <p style="margin-bottom:24px;">Our team will respond as soon as possible.</p>
 
     <div class="grid3">
       <div class="info-item">
@@ -296,7 +275,7 @@ footer{
       </div>
       <div class="info-item">
         <div class="label">LOCATION</div>
-        <div class="value">Australia (Details TBC)</div>
+        <div class="value">Australia (TBC)</div>
       </div>
     </div>
   </div>
@@ -307,15 +286,10 @@ footer{
   <div class="wrap grid2">
     <div>
       <h2>ENQUIRY</h2>
-      <p>
-        Submit your enquiry and our team will contact you with the relevant
-        information or next steps.
-      </p>
-
+      <p>Submit your enquiry and our team will contact you shortly.</p>
       <div class="hr"></div>
-
       <p class="meta">
-        For service bookings or parts enquiries, you may also visit the
+        For service or parts enquiries, please also visit the
         <a href="services.html" style="text-decoration:underline;">Services page</a>.
       </p>
     </div>
@@ -325,20 +299,16 @@ footer{
         <form class="grid2">
           <input placeholder="Name" required>
           <input placeholder="Phone / Email" required>
-
           <select required>
             <option value="">Enquiry Type</option>
             <option>Sales Enquiry</option>
-            <option>Service &amp; Maintenance</option>
+            <option>Service & Maintenance</option>
             <option>Parts Enquiry</option>
             <option>Fleet / Finance</option>
             <option>General Enquiry</option>
           </select>
-
           <input placeholder="Preferred Model / Topic (optional)">
-
           <textarea placeholder="Message" required></textarea>
-
           <div>
             <button class="btn" type="submit">SUBMIT ENQUIRY</button>
           </div>
@@ -357,8 +327,6 @@ footer{
       gap:40px;
       margin-bottom:24px;
     ">
-
-      <!-- Brand -->
       <div>
         <div style="
           font-family:'Roboto Condensed', sans-serif;
@@ -366,66 +334,56 @@ footer{
           font-size:18px;
           margin-bottom:12px;
           color:#E5E7EB;
-        ">
-          RUMBLE
-        </div>
+        ">RUMBLE</div>
         <p style="max-width:260px;">
           Commercial trucks and fleet solutions built for real work.
         </p>
       </div>
 
-      <!-- Models -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">MODELS</strong>
-        <div style="display:grid;gap:8px;">
+        <strong>MODELS</strong>
+        <div style="display:grid;gap:8px;margin-top:12px;">
           <a href="models.html">All Models</a>
           <a href="models.html#series">Series</a>
           <a href="models.html#categories">Applications</a>
         </div>
       </div>
 
-      <!-- Services -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">SERVICES</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="services.html#maintenance">Maintenance &amp; Repairs</a>
+        <strong>SERVICES</strong>
+        <div style="display:grid;gap:8px;margin-top:12px;">
+          <a href="services.html#maintenance">Maintenance</a>
           <a href="services.html#parts">Genuine Parts</a>
           <a href="services.html#fleet">Fleet Programs</a>
           <a href="services.html#tech">Technical Support</a>
         </div>
       </div>
 
-      <!-- Company -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">COMPANY</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <strong>COMPANY</strong>
+        <div style="display:grid;gap:8px;margin-top:12px;">
+          <a href="fleet-finance.html">Fleet & Finance</a>
           <a href="contact.html">Contact</a>
           <a href="#">About</a>
           <a href="#">Privacy Policy</a>
         </div>
       </div>
-
     </div>
 
     <div style="
       display:flex;
       justify-content:space-between;
       align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
       border-top:1px solid var(--line);
       padding-top:16px;
       font-size:12px;
-      color:var(--muted);
     ">
       <div>© <span id="y"></span> RUMBLE Trucks</div>
-
       <div style="display:flex;gap:20px;">
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="fleet-finance.html">Fleet & Finance</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
