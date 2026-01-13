@@ -34,59 +34,44 @@ a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
 /* ---------- Header ---------- */
-/* ---------- Header ---------- */
 header{
   border-bottom:1px solid var(--line);
 }
-
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:18px 0;
 }
-
 .brand{
   display:flex;
   align-items:center;
   gap:14px;
 }
 
-/* logo 底座（关键） */
-.logo-plate{
-  width:52px;
-  height:52px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(229,231,235,0.06); /* 很浅的工业灰 */
-  border:1px solid var(--line);
-}
-
-/* logo 本体 */
-.logo-plate img{
-  width:44px;
-  height:44px;
+/* ✅ 铭牌式：无边框、靠浮雕阴影让金属牌“贴在”页眉上 */
+.brand-logo{
+  width:64px;
+  height:auto;
   object-fit:contain;
-  filter: drop-shadow(0 2px 10px rgba(255,255,255,.18));
+  flex-shrink:0;
+  filter:
+    drop-shadow(0 1px 1px rgba(255,255,255,0.35))
+    drop-shadow(0 6px 12px rgba(0,0,0,0.55));
 }
 
-/* RUMBLE 文本 */
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
   font-size:22px;
   letter-spacing:.2em;
 }
 
-/* nav links */
 .nav a{
   margin-left:24px;
   font-size:14px;
   color:var(--muted);
 }
-.nav a:hover{
-  color:var(--text);
-}
+.nav a:hover{color:var(--text)}
 
 /* ---------- General ---------- */
 section{padding:64px 0}
@@ -194,7 +179,7 @@ p{margin:0;color:var(--muted)}
   backdrop-filter: blur(6px);
 }
 
-/* Mobile: keep placeholder (fast + clean). When you enable video later, you can still hide it here. */
+/* Mobile */
 @media(max-width:900px){
   .hero-media{height:64vh; min-height:460px;}
   .hero-media video{display:none;}
@@ -300,9 +285,8 @@ footer{
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <span class="logo-plate">
-        <img src="logo.png" alt="RUMBLE logo">
-      </span>
+      <!-- ✅ 去掉底座：直接铭牌贴页眉 -->
+      <img class="brand-logo" src="logo.png" alt="RUMBLE logo">
       <span class="brand-text">RUMBLE</span>
     </div>
 
@@ -316,30 +300,22 @@ footer{
   </div>
 </header>
 
-<!-- HERO (Placeholder for future video/image background + floating slogan) -->
+<!-- HERO -->
 <section class="hero-media">
-  <!-- Future Video Background (disabled for now; enable later) -->
   <video autoplay muted loop playsinline preload="metadata">
-    <!--
-      FUTURE VIDEO LOCATION (example):
-      <source src="https://your-cdn.com/hero-truck.mp4" type="video/mp4">
-    -->
+    <!-- <source src="https://your-cdn.com/hero-truck.mp4" type="video/mp4"> -->
   </video>
 
-  <!-- Placeholder background (no assets required) -->
   <div class="hero-placeholder">
     BACKGROUND MEDIA PLACEHOLDER<br><br>
     (THIS AREA WILL BE A VIDEO OR IMAGE IN THE FUTURE)
   </div>
 
-  <!-- Overlay content -->
   <div class="overlay">
     <div class="wrap">
       <div class="slogan-box">
         <h1>BUILT FOR REAL WORK</h1>
-        <p>
-          Commercial trucks engineered for durability, payload efficiency, and long-term uptime.
-        </p>
+        <p>Commercial trucks engineered for durability, payload efficiency, and long-term uptime.</p>
 
         <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
           <a class="btn" href="models.html">VIEW OUR MODELS</a>
@@ -364,9 +340,7 @@ footer{
       </div>
     </div>
 
-    <div class="models-slider" id="modelsSlider" aria-label="Models slider">
-      <!-- Cards will be injected by JS -->
-    </div>
+    <div class="models-slider" id="modelsSlider" aria-label="Models slider"></div>
 
     <div style="margin-top:24px;">
       <a class="btn" href="models.html">VIEW ALL MODELS</a>
@@ -378,34 +352,13 @@ footer{
 <section>
   <div class="wrap">
     <h2>SERVICES & SUPPORT</h2>
-    <p style="margin-bottom:24px;">
-      Supporting your trucks throughout their working life.
-    </p>
+    <p style="margin-bottom:24px;">Supporting your trucks throughout their working life.</p>
 
     <div class="grid4">
-      <a class="card" href="services.html#maintenance">
-        <div class="body">
-          <strong>MAINTENANCE & REPAIRS</strong>
-        </div>
-      </a>
-
-      <a class="card" href="services.html#parts">
-        <div class="body">
-          <strong>GENUINE PARTS</strong>
-        </div>
-      </a>
-
-      <a class="card" href="services.html#fleet">
-        <div class="body">
-          <strong>FLEET PROGRAMS</strong>
-        </div>
-      </a>
-
-      <a class="card" href="services.html#tech">
-        <div class="body">
-          <strong>TECHNICAL SUPPORT</strong>
-        </div>
-      </a>
+      <a class="card" href="services.html#maintenance"><div class="body"><strong>MAINTENANCE & REPAIRS</strong></div></a>
+      <a class="card" href="services.html#parts"><div class="body"><strong>GENUINE PARTS</strong></div></a>
+      <a class="card" href="services.html#fleet"><div class="body"><strong>FLEET PROGRAMS</strong></div></a>
+      <a class="card" href="services.html#tech"><div class="body"><strong>TECHNICAL SUPPORT</strong></div></a>
     </div>
 
     <div style="margin-top:24px;">
@@ -418,23 +371,12 @@ footer{
 <section>
   <div class="wrap">
     <h2>NEWS & UPDATES</h2>
-    <p style="margin-bottom:24px;">
-      Latest product updates, deliveries and company news.
-    </p>
+    <p style="margin-bottom:24px;">Latest product updates, deliveries and company news.</p>
 
     <div class="grid3">
-      <div class="card">
-        <div class="img">News Image</div>
-        <div class="body"><strong>News article placeholder</strong></div>
-      </div>
-      <div class="card">
-        <div class="img">News Image</div>
-        <div class="body"><strong>News article placeholder</strong></div>
-      </div>
-      <div class="card">
-        <div class="img">News Image</div>
-        <div class="body"><strong>News article placeholder</strong></div>
-      </div>
+      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
+      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
+      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
     </div>
 
     <div style="margin-top:24px;">
@@ -447,9 +389,7 @@ footer{
 <section id="enquiry">
   <div class="wrap">
     <h2>ENQUIRY</h2>
-    <p style="margin-bottom:24px;">
-      Contact our team for pricing, specifications or fleet solutions.
-    </p>
+    <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
 
     <form class="grid2">
       <input placeholder="Name">
@@ -464,36 +404,17 @@ footer{
       </select>
       <input placeholder="Preferred Model">
       <textarea placeholder="Message"></textarea>
-      <div>
-        <button class="btn" type="submit">SUBMIT ENQUIRY</button>
-      </div>
+      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
     </form>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-
-    <div style="
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap:40px;
-      margin-bottom:24px;
-    ">
-
+    <div style="display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:24px;">
       <div>
-        <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
-          color:#E5E7EB;
-        ">
-          RUMBLE
-        </div>
-        <p style="max-width:260px;">
-          Commercial trucks and fleet solutions built for real work.
-        </p>
+        <div style="font-family:'Roboto Condensed', sans-serif; letter-spacing:.2em; font-size:18px; margin-bottom:12px; color:#E5E7EB;">RUMBLE</div>
+        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
       </div>
 
       <div>
@@ -524,20 +445,9 @@ footer{
           <a href="#">Privacy Policy</a>
         </div>
       </div>
-
     </div>
 
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12px;
-      color:var(--muted);
-    ">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; border-top:1px solid var(--line); padding-top:16px; font-size:12px; color:var(--muted);">
       <div>© <span id="y"></span> RUMBLE Trucks</div>
       <div style="display:flex;gap:20px;">
         <a href="models.html">Models</a>
@@ -546,7 +456,6 @@ footer{
         <a href="contact.html">Contact</a>
       </div>
     </div>
-
   </div>
 </footer>
 
@@ -555,7 +464,6 @@ footer{
 </script>
 
 <script>
-  // Replace these with your real products later
   const MODELS = [
     { name: "Model 1", meta: "SERIES · 6x4", href: "models.html", image: "" },
     { name: "Model 2", meta: "SERIES · 4x2", href: "models.html", image: "" },
@@ -625,7 +533,6 @@ footer{
   prev.addEventListener("click", ()=>scrollByCard(-1));
   next.addEventListener("click", ()=>scrollByCard(1));
 
-  // drag-to-scroll (desktop)
   let isDown = false, startX = 0, startScrollLeft = 0;
   slider.addEventListener("mousedown", (e)=>{
     isDown = true;
