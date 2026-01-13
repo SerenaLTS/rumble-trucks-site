@@ -34,7 +34,7 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (GLOBAL STANDARD) ---------- */
+/* ---------- Header (FINAL v2) ---------- */
 header{
   border-bottom:1px solid var(--line);
 }
@@ -43,38 +43,40 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:76px;              /* ⭐ 固定高度 */
+  height:88px;              /* ⬅️ 原 82 → 88 */
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:18px;                 /* ⬅️ 原 16 → 18 */
 }
 
-/* 铭牌式 logo：统一尺寸 */
 .logo-plate{
   display:flex;
   align-items:center;
 }
 
+/* ⭐ 核心：logo 再放大一档 */
 .logo-plate img{
-  height:42px;              /* ⭐ 唯一允许的 logo 高度 */
+  height:58px;              /* ⬅️ 原 52 → 58（关键） */
   width:auto;
   display:block;
   object-fit:contain;
-  filter: drop-shadow(0 3px 12px rgba(0,0,0,.45));
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.5));
 }
 
+/* RUMBLE 文本同步放大 */
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
-  font-size:22px;
-  letter-spacing:.2em;
+  font-size:26px;           /* ⬅️ 原 24 → 26 */
+  letter-spacing:.22em;
   line-height:1;
 }
 
+/* nav links 不动 */
 .nav a{
-  margin-left:24px;
+  margin-left:26px;
   font-size:14px;
   color:var(--muted);
   line-height:1;
