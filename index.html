@@ -34,30 +34,59 @@ a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
 /* ---------- Header ---------- */
-header{border-bottom:1px solid var(--line)}
+/* ---------- Header ---------- */
+header{
+  border-bottom:1px solid var(--line);
+}
+
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:18px 0;
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
 }
-.brand img{width:40px;height:40px;object-fit:contain}
-.brand span{
+
+/* logo 底座（关键） */
+.logo-plate{
+  width:52px;
+  height:52px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(229,231,235,0.06); /* 很浅的工业灰 */
+  border:1px solid var(--line);
+}
+
+/* logo 本体 */
+.logo-plate img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  filter: drop-shadow(0 2px 10px rgba(255,255,255,.18));
+}
+
+/* RUMBLE 文本 */
+.brand-text{
   font-family:"Roboto Condensed", sans-serif;
   font-size:22px;
   letter-spacing:.2em;
 }
+
+/* nav links */
 .nav a{
   margin-left:24px;
   font-size:14px;
   color:var(--muted);
 }
-.nav a:hover{color:var(--text)}
+.nav a:hover{
+  color:var(--text);
+}
 
 /* ---------- General ---------- */
 section{padding:64px 0}
@@ -271,9 +300,12 @@ footer{
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <img src="logo.png" alt="RUMBLE logo">
-      <span>RUMBLE</span>
+      <span class="logo-plate">
+        <img src="logo.png" alt="RUMBLE logo">
+      </span>
+      <span class="brand-text">RUMBLE</span>
     </div>
+
     <nav>
       <a href="index.html">Home</a>
       <a href="models.html">Models</a>
