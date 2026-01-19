@@ -12,13 +12,20 @@
 
 <style>
 :root{
-  --bg:#1F2328;
-  --panel:#2A2F36;
-  --panel2:#242930;
-  --line:#3A3F46;
-  --text:#E5E7EB;
-  --muted:#9CA3AF;
-  --accent:#FFFFFF;
+  /* Backgrounds */
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --panel2:#F0F4F8;
+
+  /* Lines */
+  --line:#D6DEE8;
+
+  /* Text */
+  --text:#1F2937;
+  --muted:#64748B;
+
+  /* Accent */
+  --accent:#2563EB;
 
   --radius:4px;
   --max:1200px;
@@ -34,8 +41,9 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (FINAL v2) ---------- */
+/* ================= HEADER (统一 index/contact 版本) ================= */
 header{
+  background:#FFFFFF;
   border-bottom:1px solid var(--line);
 }
 
@@ -43,46 +51,37 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:88px;              /* ⬅️ 原 82 → 88 */
+  height:98px; /* ✅ 统一 98 */
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:18px;                 /* ⬅️ 原 16 → 18 */
+  gap:18px;
 }
 
-.logo-plate{
-  display:flex;
-  align-items:center;
-}
-
-/* ⭐ 核心：logo 再放大一档 */
 .logo-plate img{
-  height:58px;              /* ⬅️ 原 52 → 58（关键） */
+  height:98px;               /* ✅ 铭牌大小统一 */
   width:auto;
   display:block;
   object-fit:contain;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,.5));
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.25));
 }
 
-/* RUMBLE 文本同步放大 */
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
-  font-size:26px;           /* ⬅️ 原 24 → 26 */
+  font-size:30px;            /* ✅ 统一 */
   letter-spacing:.22em;
   line-height:1;
 }
 
-/* nav links 不动 */
 .nav a{
   margin-left:26px;
   font-size:14px;
   color:var(--muted);
-  line-height:1;
 }
-.nav a:hover{color:var(--text)}
-  
+.nav a:hover{color:var(--text)} /* ✅ 统一 contact 行为 */
+
 /* ---------- General ---------- */
 section{padding:64px 0}
 h1,h2,h3{
@@ -92,7 +91,7 @@ h1,h2,h3{
 }
 h1{font-size:40px}
 h2{font-size:28px}
-h3{font-size:16px; margin:0}
+h3{font-size:16px}
 p{margin:0;color:var(--muted); line-height:1.6}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
@@ -114,10 +113,14 @@ p{margin:0;color:var(--muted); line-height:1.6}
   font-weight:600;
   letter-spacing:.08em;
   background:transparent;
-  color:var(--text);
+  color:var(--accent);
+}
+.btn:hover{
+  background:var(--accent);
+  color:#FFFFFF;
 }
 
-/* ---------- Hero (placeholder for media) ---------- */
+/* ---------- Hero ---------- */
 .hero-media{
   position:relative;
   height:56vh;
@@ -125,16 +128,6 @@ p{margin:0;color:var(--muted); line-height:1.6}
   overflow:hidden;
   border-bottom:1px solid var(--line);
 }
-
-.hero-media video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:none; /* enable later */
-}
-
 .hero-media .hero-placeholder{
   position:absolute;
   inset:0;
@@ -146,17 +139,16 @@ p{margin:0;color:var(--muted); line-height:1.6}
   background:
     repeating-linear-gradient(
       45deg,
-      #2A2F36,
-      #2A2F36 20px,
-      #31363D 20px,
-      #31363D 40px
+      #E5EBF3,
+      #E5EBF3 20px,
+      #EDF2F7 20px,
+      #EDF2F7 40px
     );
-  color:#9CA3AF;
+  color:var(--muted);
   font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
 }
-
 .hero-media .overlay{
   position:relative;
   z-index:2;
@@ -165,26 +157,21 @@ p{margin:0;color:var(--muted); line-height:1.6}
   align-items:center;
   background:linear-gradient(
     to right,
-    rgba(31,35,40,0.82),
-    rgba(31,35,40,0.35)
+    rgba(245,247,250,.9),
+    rgba(245,247,250,.6)
   );
 }
-
-.hero-media h1{color:#FFFFFF}
-.hero-media p{color:#E5E7EB; max-width:560px}
-
-.hero-media .hero-box{
+.hero-box{
   max-width:680px;
   padding:22px;
-  border:1px solid rgba(229,231,235,0.22);
-  background:rgba(31,35,40,0.35);
-  backdrop-filter: blur(6px);
+  border:1px solid var(--line);
+  background:#FFFFFF;
 }
 
-/* ---------- Feature list ---------- */
+/* ---------- KPI ---------- */
 .kpi{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:14px;
 }
 .kpi .item{
@@ -203,7 +190,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   letter-spacing:.08em;
 }
 
-/* ---------- Process Steps ---------- */
+/* ---------- Steps ---------- */
 .step{
   background:var(--panel);
   border:1px solid var(--line);
@@ -217,11 +204,11 @@ p{margin:0;color:var(--muted); line-height:1.6}
   margin-bottom:10px;
 }
 
-/* ---------- Enquiry ---------- */
+/* ---------- Form ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
-  background:#1C1F24;
+  background:#FFFFFF;
   border:1px solid var(--line);
   color:var(--text);
   font-family:Inter;
@@ -235,18 +222,16 @@ footer{
   font-size:13px;
   color:var(--muted);
 }
-.footer-nav{
-  display:flex;
-  gap:24px;
-  justify-content:center;
-  margin-bottom:16px;
-}
-.footer-nav a:hover{color:var(--text)}
 
 @media(max-width:980px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
-  .hero-media{height:46vh; min-height:360px;}
   .kpi{grid-template-columns:1fr}
+  .hero-media{height:46vh; min-height:360px;}
+
+  /* ✅ 统一 contact 的移动端 header 尺寸 */
+  .nav{height:88px}
+  .logo-plate img{height:72px}
+  .brand-text{font-size:24px}
 }
 </style>
 </head>
@@ -261,7 +246,6 @@ footer{
       </span>
       <span class="brand-text">RUMBLE</span>
     </div>
-
     <nav>
       <a href="index.html">Home</a>
       <a href="models.html">Models</a>
@@ -272,32 +256,17 @@ footer{
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero-media">
-  <!-- Future video background (disabled now) -->
-  <video autoplay muted loop playsinline preload="metadata">
-    <!--
-      FUTURE VIDEO LOCATION (example):
-      <source src="https://your-cdn.com/fleet-hero.mp4" type="video/mp4">
-    -->
-  </video>
-
-  <!-- Placeholder background -->
   <div class="hero-placeholder">
-    FLEET & FINANCE MEDIA PLACEHOLDER<br><br>
-    (THIS AREA WILL BE A VIDEO OR IMAGE)
+    FLEET & FINANCE MEDIA PLACEHOLDER
   </div>
-
-  <!-- Overlay content -->
   <div class="overlay">
     <div class="wrap">
       <div class="hero-box">
         <h1>FLEET & FINANCE</h1>
         <p>
-          Solutions designed for commercial operators — fleet planning, delivery coordination,
-          and finance pathways. Tell us your requirements and we’ll tailor a quote.
+          Fleet planning and finance pathways tailored for commercial operators.
         </p>
-
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
           <a class="btn" href="#fleet">FLEET SOLUTIONS</a>
           <a class="btn" href="#finance">FINANCE OPTIONS</a>
@@ -308,39 +277,19 @@ footer{
   </div>
 </section>
 
-<!-- FLEET SOLUTIONS -->
 <section id="fleet">
   <div class="wrap grid2">
     <div>
       <h2>FLEET SOLUTIONS</h2>
       <p>
-        Built for businesses operating multiple trucks. We can support procurement planning,
-        model selection, lead times, and delivery coordination.
+        Support for multi-vehicle operations including planning, delivery coordination and uptime.
       </p>
-
       <div class="hr"></div>
-
       <div class="kpi">
-        <div class="item">
-          <div class="label">FLEET PLANNING</div>
-          <div class="value">SPEC-TO-JOB MATCHING</div>
-        </div>
-        <div class="item">
-          <div class="label">DELIVERY</div>
-          <div class="value">COORDINATED HANDOVER</div>
-        </div>
-        <div class="item">
-          <div class="label">UPTIME SUPPORT</div>
-          <div class="value">SERVICE PATHWAYS</div>
-        </div>
-        <div class="item">
-          <div class="label">QUOTING</div>
-          <div class="value">VOLUME PRICING (TBC)</div>
-        </div>
-      </div>
-
-      <div style="margin-top:22px;">
-        <a class="btn" href="models.html">BROWSE MODELS</a>
+        <div class="item"><div class="label">PLANNING</div><div class="value">SPEC MATCHING</div></div>
+        <div class="item"><div class="label">DELIVERY</div><div class="value">COORDINATED</div></div>
+        <div class="item"><div class="label">UPTIME</div><div class="value">SUPPORT PATHWAYS</div></div>
+        <div class="item"><div class="label">PRICING</div><div class="value">VOLUME (TBC)</div></div>
       </div>
     </div>
 
@@ -348,120 +297,35 @@ footer{
       <div class="body">
         <h3>FLEET CHECKLIST</h3>
         <p style="margin-top:10px;">
-          To speed up your quote, prepare: expected payload, routes, axle preference, body type,
-          annual km, and delivery timeframe.
+          Payload, routes, axle setup, body type, annual km and delivery timeframe.
         </p>
-        <div class="hr"></div>
-        <div class="meta">PLACEHOLDER: add your fleet brochure / PDF link later.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINANCE OPTIONS -->
 <section id="finance">
   <div class="wrap">
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-      <div>
-        <h2>FINANCE OPTIONS</h2>
-        <p>Flexible pathways — structure depends on operator profile and requirements.</p>
-      </div>
-      <a class="btn" href="#enquiry">TALK TO US</a>
-    </div>
-
-    <div style="margin-top:22px;" class="grid3">
-      <div class="card">
-        <div class="body">
-          <h3>BUSINESS FINANCE</h3>
-          <p style="margin-top:10px;">For operators seeking predictable monthly payments.</p>
-          <div class="hr"></div>
-          <div class="meta">PLACEHOLDER: list example terms later.</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="body">
-          <h3>LEASE / RENTAL</h3>
-          <p style="margin-top:10px;">For flexibility and fleet refresh cycles.</p>
-          <div class="hr"></div>
-          <div class="meta">PLACEHOLDER: add product notes later.</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="body">
-          <h3>FLEET PACKAGE</h3>
-          <p style="margin-top:10px;">Bundle support services and maintenance planning.</p>
-          <div class="hr"></div>
-          <div class="meta">PLACEHOLDER: package inclusions later.</div>
-        </div>
-      </div>
+    <h2>FINANCE OPTIONS</h2>
+    <p>Structures depend on operator profile and requirements.</p>
+    <div class="grid3" style="margin-top:22px;">
+      <div class="card"><div class="body"><h3>BUSINESS FINANCE</h3></div></div>
+      <div class="card"><div class="body"><h3>LEASE / RENTAL</h3></div></div>
+      <div class="card"><div class="body"><h3>FLEET PACKAGE</h3></div></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section>
-  <div class="wrap">
-    <h2>HOW IT WORKS</h2>
-    <p style="margin-bottom:18px;">A simple flow from requirements to delivery.</p>
-
-    <div class="grid4">
-      <div class="step">
-        <div class="num">STEP 01</div>
-        <h3>REQUIREMENTS</h3>
-        <p style="margin-top:10px;">Tell us your application, payload, and delivery timeline.</p>
-      </div>
-      <div class="step">
-        <div class="num">STEP 02</div>
-        <h3>MODEL & SPEC</h3>
-        <p style="margin-top:10px;">We propose suitable models and configurations.</p>
-      </div>
-      <div class="step">
-        <div class="num">STEP 03</div>
-        <h3>QUOTE</h3>
-        <p style="margin-top:10px;">Pricing, availability, and finance pathways (if required).</p>
-      </div>
-      <div class="step">
-        <div class="num">STEP 04</div>
-        <h3>DELIVERY</h3>
-        <p style="margin-top:10px;">Coordinate delivery and aftersales support.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ENQUIRY -->
 <section id="enquiry">
   <div class="wrap">
     <h2>FLEET & FINANCE ENQUIRY</h2>
-    <p style="margin-bottom:24px;">
-      Provide basic details and we’ll contact you with tailored options.
-    </p>
-
     <form class="grid2">
-      <input placeholder="Business / Contact Name" required>
-      <input placeholder="Phone / Email" required>
-
-      <select required>
-        <option value="">Enquiry Type</option>
-        <option>Fleet / Finance</option>
-        <option>Sales Enquiry</option>
-        <option>Service & Maintenance</option>
-        <option>Parts Enquiry</option>
-        <option>General Enquiry</option>
-      </select>
-
-      <input placeholder="Fleet Size (optional)">
-
-      <input placeholder="Preferred Model / Application (optional)">
-      <input placeholder="Delivery Timeframe (optional)">
-
-      <textarea placeholder="Tell us what you need (routes, payload, body type, finance preference)"></textarea>
-
-      <div>
-        <button class="btn" type="submit">SUBMIT ENQUIRY</button>
-      </div>
+      <input placeholder="Business / Contact Name">
+      <input placeholder="Phone / Email">
+      <input placeholder="Fleet Size">
+      <input placeholder="Preferred Model / Application">
+      <textarea placeholder="Your requirements"></textarea>
+      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
     </form>
   </div>
 </section>
@@ -469,7 +333,6 @@ footer{
 <footer>
   <div class="wrap">
 
-    <!-- 上半部分：四栏信息 -->
     <div style="
       display:grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -477,14 +340,13 @@ footer{
       margin-bottom:24px;
     ">
 
-      <!-- Brand -->
       <div>
         <div style="
           font-family:'Roboto Condensed', sans-serif;
           letter-spacing:.2em;
           font-size:18px;
           margin-bottom:12px;
-          color:#E5E7EB;
+          color:var(--text);
         ">
           RUMBLE
         </div>
@@ -493,41 +355,37 @@ footer{
         </p>
       </div>
 
-      <!-- Models -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">MODELS</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
         <div style="display:grid;gap:8px;">
           <a href="models.html">All Models</a>
-          <a href="models.html#series">Series</a>
-          <a href="models.html#categories">Applications</a>
+          <a href="models.html">Series</a>
+          <a href="models.html">Applications</a>
         </div>
       </div>
 
-      <!-- Services -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">SERVICES</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
         <div style="display:grid;gap:8px;">
-          <a href="services.html#maintenance">Maintenance & Repairs</a>
+          <a href="services.html#maintenance">Maintenance</a>
           <a href="services.html#parts">Genuine Parts</a>
           <a href="services.html#fleet">Fleet Programs</a>
           <a href="services.html#tech">Technical Support</a>
         </div>
       </div>
 
-      <!-- Company -->
       <div>
-        <strong style="display:block;margin-bottom:12px;">COMPANY</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
         <div style="display:grid;gap:8px;">
+          <a href="#">About</a>
           <a href="fleet-finance.html">Fleet & Finance</a>
           <a href="contact.html">Contact</a>
-          <a href="#">About</a>
           <a href="#">Privacy Policy</a>
         </div>
       </div>
 
     </div>
 
-    <!-- 下半部分：版权 + 快速导航 -->
     <div style="
       display:flex;
       justify-content:space-between;
@@ -540,9 +398,7 @@ footer{
       color:var(--muted);
     ">
       <div>© <span id="y"></span> RUMBLE Trucks</div>
-
       <div style="display:flex;gap:20px;">
-        <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
         <a href="fleet-finance.html">Fleet & Finance</a>
