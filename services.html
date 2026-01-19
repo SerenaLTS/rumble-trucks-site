@@ -12,16 +12,17 @@
 
 <style>
 :root{
-  /* ✅ Unified palette (match Contact / Fleet / Models) */
+  /* ✅ 与最新 index / models 完全统一 */
   --bg:#F5F7FA;
   --panel:#FFFFFF;
-  --panel2:#F0F4F8;
+  --panel-soft:#EEF2F7;
   --line:#D6DEE8;
-
-  --text:#1F2937;
+  --text:#0F172A;
   --muted:#64748B;
+  --accent:#1F4FD8;
 
-  --accent:#2563EB;
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 10px 22px rgba(20,40,80,.10);
 
   --radius:4px;
   --max:1200px;
@@ -37,41 +38,71 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ================= HEADER (统一 index/contact 版本) ================= */
+/* ================= HEADER（同 index/models）================= */
 header{
   background:#FFFFFF;
   border-bottom:1px solid var(--line);
 }
+
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:98px; /* ✅ 统一 98 */
+  height:98px;
+  flex-wrap:nowrap;   /* ⭐关键：禁止换行 */
+  gap:18px;
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:18px;
+  flex-shrink:0;
+  min-width:0;
 }
-.logo-plate img{
-  height:98px;               /* ✅ 铭牌大小统一 */
-  width:auto;
-  display:block;
-  object-fit:contain;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,.25));
-}
+
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
   font-size:30px;
   letter-spacing:.22em;
   line-height:1;
+  white-space:nowrap; /* ⭐RUMBLE AUTO 不换行 */
 }
-.nav a{
-  margin-left:26px;
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;
+  margin-left:auto;
+  min-width:0;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  white-space:nowrap; /* ⭐导航不换行 */
+}
+
+.nav-links a{
   font-size:14px;
   color:var(--muted);
+  line-height:1;
 }
-.nav a:hover{color:var(--text)}
+.nav-links a:hover{color:var(--accent)}
+
+.logo-plate{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.logo-plate img{
+  height:98px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+}
 
 /* ---------- General ---------- */
 section{padding:64px 0}
@@ -89,32 +120,23 @@ p{margin:0;color:var(--muted); line-height:1.6}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
+/* Cards（同 index 的 shadow/hover） */
 .card{
   background:var(--panel);
   border:1px solid var(--line);
   border-radius:var(--radius);
   overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
-.img{
-  height:220px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #E5EBF3,
-      #E5EBF3 20px,
-      #EDF2F7 20px,
-      #EDF2F7 40px
-    );
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
+.card:hover{
+  border-color:#C3D2E7;
+  box-shadow:var(--shadow2);
+  transform:translateY(-2px);
 }
 .body{padding:18px}
 
+/* Buttons（同 index） */
 .btn{
   display:inline-block;
   padding:12px 20px;
@@ -122,34 +144,36 @@ p{margin:0;color:var(--muted); line-height:1.6}
   font-size:14px;
   font-weight:600;
   letter-spacing:.08em;
+  background:var(--accent);
+  color:#FFFFFF;
+  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
+}
+.btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.secondary{
   background:transparent;
   color:var(--accent);
 }
-.btn:hover{
-  background:var(--accent);
-  color:#FFFFFF;
-}
 
-/* ---------- Page Hero (统一浅色 placeholder + overlay) ---------- */
+/* ---------- Page Hero（改成 index 那种干净渐变） ---------- */
 .page-hero{
   position:relative;
   border-bottom:1px solid var(--line);
   overflow:hidden;
+  padding:0;
+  background:var(--panel-soft);
 }
 .page-hero .hero-bg{
   height:360px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #E5EBF3,
-      #E5EBF3 20px,
-      #EDF2F7 20px,
-      #EDF2F7 40px
-    );
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--muted);
+  text-align:center;
+  padding:24px;
+  background:
+    radial-gradient(1200px 600px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
+  color:#64748B;
   letter-spacing:.14em;
   text-transform:uppercase;
   font-size:13px;
@@ -159,7 +183,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   inset:0;
   background:linear-gradient(
     to right,
-    rgba(245,247,250,.90),
+    rgba(245,247,250,.92),
     rgba(245,247,250,.55)
   );
 }
@@ -170,11 +194,11 @@ p{margin:0;color:var(--muted); line-height:1.6}
   align-items:center;
 }
 .hero-box{
-  max-width:680px;
-  padding:22px;
+  max-width:640px;
+  padding:28px;
   border:1px solid var(--line);
-  background:#FFFFFFCC;
-  backdrop-filter: blur(6px);
+  background:#FFFFFF;
+  box-shadow:var(--shadow);
 }
 
 /* ---------- Service Detail Blocks ---------- */
@@ -186,19 +210,13 @@ p{margin:0;color:var(--muted); line-height:1.6}
 }
 .service-block .block-img{
   min-height:220px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      #E5EBF3,
-      #E5EBF3 20px,
-      #EDF2F7 20px,
-      #EDF2F7 40px
-    );
+  background:var(--panel-soft);
   border:1px solid var(--line);
+  border-radius:var(--radius);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:var(--muted);
+  color:#94A3B8;
   font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
@@ -206,8 +224,9 @@ p{margin:0;color:var(--muted); line-height:1.6}
 .service-block .block-card{
   background:var(--panel);
   border:1px solid var(--line);
-  padding:18px;
   border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
 }
 
 .kv{
@@ -223,10 +242,11 @@ p{margin:0;color:var(--muted); line-height:1.6}
   font-size:12px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  background:var(--panel2);
+  background:var(--panel-soft);
+  border-radius:var(--radius);
 }
 
-/* ---------- Enquiry Mini (统一浅色表单) ---------- */
+/* ---------- Enquiry（同 index 的 input focus） ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
@@ -234,26 +254,34 @@ input,select,textarea{
   border:1px solid var(--line);
   color:var(--text);
   font-family:Inter;
+  outline:none;
+  border-radius:var(--radius);
+}
+input:focus, select:focus, textarea:focus{
+  border-color:#9CB6E8;
+  box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
 textarea{min-height:110px}
 
-/* ---------- Footer (统一浅色) ---------- */
+/* ---------- Footer（同 index/contact） ---------- */
 footer{
+  background:#FFFFFF;
   border-top:1px solid var(--line);
-  padding:40px 0;
+  padding:48px 0;
   font-size:13px;
   color:var(--muted);
 }
-footer a:hover{color:var(--text)}
+footer a:hover{color:var(--accent)}
 
 @media(max-width:980px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
   .service-block{grid-template-columns:1fr}
   .kv{grid-template-columns:1fr}
 
-  /* ✅ 统一 contact 的移动端 header 尺寸 */
-  .nav{height:88px}
-  .logo-plate img{height:72px}
+  .nav{height:auto; padding:14px 0;}
+  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
+  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
+  .logo-plate img{height:78px;}
   .brand-text{font-size:24px}
 }
 </style>
@@ -263,13 +291,10 @@ footer a:hover{color:var(--text)}
 
 <header>
   <div class="wrap nav">
-
-    <!-- LEFT: brand text -->
     <div class="brand">
       <span class="brand-text">RUMBLE&nbsp;AUTO</span>
     </div>
 
-    <!-- RIGHT: nav + logo -->
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -283,12 +308,11 @@ footer a:hover{color:var(--text)}
         <img src="logo.png" alt="RUMBLE logo">
       </span>
     </div>
-
   </div>
 </header>
 
 <!-- PAGE HERO -->
-<section class="page-hero" style="padding:0;">
+<section class="page-hero">
   <div class="hero-bg">SERVICE PAGE MEDIA PLACEHOLDER</div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -300,7 +324,7 @@ footer a:hover{color:var(--text)}
           Built for uptime — designed for real work.
         </p>
         <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn" href="#service-list">VIEW SERVICES</a>
+          <a class="btn secondary" href="#service-list">VIEW SERVICES</a>
           <a class="btn" href="#service-enquiry">BOOK A SERVICE</a>
         </div>
       </div>
@@ -318,16 +342,28 @@ footer a:hover{color:var(--text)}
 
     <div class="grid4">
       <a class="card" href="#maintenance">
-        <div class="body"><strong>MAINTENANCE & REPAIRS</strong><br><span style="color:var(--muted);font-size:13px;">Scheduled servicing & diagnostics</span></div>
+        <div class="body">
+          <strong>MAINTENANCE & REPAIRS</strong><br>
+          <span style="color:var(--muted);font-size:13px;">Scheduled servicing & diagnostics</span>
+        </div>
       </a>
       <a class="card" href="#parts">
-        <div class="body"><strong>GENUINE PARTS</strong><br><span style="color:var(--muted);font-size:13px;">OEM parts & consumables</span></div>
+        <div class="body">
+          <strong>GENUINE PARTS</strong><br>
+          <span style="color:var(--muted);font-size:13px;">OEM parts & consumables</span>
+        </div>
       </a>
       <a class="card" href="#fleet">
-        <div class="body"><strong>FLEET PROGRAMS</strong><br><span style="color:var(--muted);font-size:13px;">Service plans for operators</span></div>
+        <div class="body">
+          <strong>FLEET PROGRAMS</strong><br>
+          <span style="color:var(--muted);font-size:13px;">Service plans for operators</span>
+        </div>
       </a>
       <a class="card" href="#tech">
-        <div class="body"><strong>TECHNICAL SUPPORT</strong><br><span style="color:var(--muted);font-size:13px;">Warranty, training & guidance</span></div>
+        <div class="body">
+          <strong>TECHNICAL SUPPORT</strong><br>
+          <span style="color:var(--muted);font-size:13px;">Warranty, training & guidance</span>
+        </div>
       </a>
     </div>
   </div>
@@ -396,7 +432,7 @@ footer a:hover{color:var(--text)}
           <div class="pill">Operator Support</div>
         </div>
         <div style="margin-top:18px;">
-          <a class="btn" href="fleet-finance.html">FLEET & FINANCE</a>
+          <a class="btn secondary" href="fleet-finance.html">FLEET &amp; FINANCE</a>
         </div>
       </div>
     </div>
@@ -430,37 +466,35 @@ footer a:hover{color:var(--text)}
 <section id="service-enquiry">
   <div class="wrap">
     <h2>SERVICE ENQUIRY</h2>
-    <p style="margin-bottom:24px;">
-      Tell us what you need — our team will get back to you.
-    </p>
+    <p style="margin-bottom:24px;">Tell us what you need — our team will get back to you.</p>
 
     <form class="grid2">
-        <input placeholder="Name" required>
-        <input placeholder="Phone / Email" required>
+      <input placeholder="Name" required>
+      <input placeholder="Phone / Email" required>
 
-        <select required>
-            <option value="">Enquiry Type</option>
-            <option>Sales Enquiry</option>
-            <option selected>Service & Maintenance</option>
-            <option>Parts Enquiry</option>
-            <option>Fleet / Finance</option>
-            <option>General Enquiry</option>
-        </select>
+      <select required>
+        <option value="">Enquiry Type</option>
+        <option>Sales Enquiry</option>
+        <option selected>Service & Maintenance</option>
+        <option>Parts Enquiry</option>
+        <option>Fleet / Finance</option>
+        <option>General Enquiry</option>
+      </select>
 
-        <input placeholder="Truck Model / VIN (optional)">
-        <input placeholder="Preferred Service Date (optional)">
+      <input placeholder="Truck Model / VIN (optional)">
+      <input placeholder="Preferred Service Date (optional)">
 
-        <textarea
-            placeholder="Describe the issue, service required, or parts needed"
-            required
-        ></textarea>
+      <textarea
+        placeholder="Describe the issue, service required, or parts needed"
+        required
+      ></textarea>
 
-        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-            <button class="btn" type="submit">SUBMIT REQUEST</button>
-            <span style="color:var(--muted); font-size:13px;">
-            (Our service team will contact you.)
-            </span>
-        </div>
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button class="btn" type="submit">SUBMIT REQUEST</button>
+        <span style="color:var(--muted); font-size:13px;">
+          (Our service team will contact you.)
+        </span>
+      </div>
     </form>
   </div>
 </section>
@@ -475,7 +509,6 @@ footer a:hover{color:var(--text)}
       margin-bottom:24px;
     ">
 
-      <!-- Brand -->
       <div>
         <div style="
           font-family:'Roboto Condensed', sans-serif;
@@ -483,25 +516,19 @@ footer a:hover{color:var(--text)}
           font-size:18px;
           margin-bottom:12px;
           color:var(--text);
-        ">
-          RUMBLE
-        </div>
-        <p style="max-width:260px;">
-          Commercial trucks and fleet solutions built for real work.
-        </p>
+        ">RUMBLE</div>
+        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
       </div>
 
-      <!-- Models -->
       <div>
         <strong style="display:block;margin-bottom:12px; color:var(--text);">MODELS</strong>
         <div style="display:grid;gap:8px;">
           <a href="models.html">All Models</a>
-          <a href="models.html">Series</a>
-          <a href="models.html">Applications</a>
+          <a href="models.html#series">Series</a>
+          <a href="models.html#categories">Applications</a>
         </div>
       </div>
 
-      <!-- Services -->
       <div>
         <strong style="display:block;margin-bottom:12px; color:var(--text);">SERVICES</strong>
         <div style="display:grid;gap:8px;">
@@ -512,7 +539,6 @@ footer a:hover{color:var(--text)}
         </div>
       </div>
 
-      <!-- Company -->
       <div>
         <strong style="display:block;margin-bottom:12px; color:var(--text);">COMPANY</strong>
         <div style="display:grid;gap:8px;">
@@ -525,7 +551,6 @@ footer a:hover{color:var(--text)}
 
     </div>
 
-    <!-- Bottom row -->
     <div style="
       display:flex;
       justify-content:space-between;
@@ -540,6 +565,7 @@ footer a:hover{color:var(--text)}
       <div>© <span id="y"></span> RUMBLE Trucks</div>
 
       <div style="display:flex;gap:20px; flex-wrap:wrap;">
+        <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
         <a href="fleet-finance.html">Fleet & Finance</a>
