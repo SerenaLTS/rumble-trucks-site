@@ -38,7 +38,7 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (FINAL v2) ---------- */
+/* ---------- Header (RUMBLE AUTO left, nav+logo right) ---------- */
 header{
   background:#FFFFFF;
   border-bottom:1px solid var(--line);
@@ -48,45 +48,63 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:98px;              /* keep */
+  height:98px;
+  flex-wrap:nowrap;          /* ⭐关键：禁止换行 */
+  gap:18px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:18px;                 /* keep */
+  flex-shrink:0;
+  min-width:0;
 }
+
+.brand-text{
+  font-family:"Roboto Condensed", sans-serif;
+  font-size:30px;
+  letter-spacing:.22em;
+  line-height:1;
+  white-space:nowrap;        /* ⭐关键：品牌文字不换行 */
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;             /* ⭐关键：右侧整体不掉行 */
+  margin-left:auto;          /* ⭐确保贴右 */
+  min-width:0;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  white-space:nowrap;        /* ⭐关键：导航不换行 */
+}
+
+.nav-links a{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1;
+}
+.nav-links a:hover{color:var(--accent)}
 
 .logo-plate{
   display:flex;
   align-items:center;
+  flex-shrink:0;
 }
 
-/* ⭐ 铭牌感：保持你现在大小，但换成适合白底的阴影 */
+/* ⭐ 铭牌感：保持 98px */
 .logo-plate img{
-  height:98px;              /* keep */
+  height:98px;
   width:auto;
   display:block;
   object-fit:contain;
   filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
 }
-
-/* RUMBLE 文本 */
-.brand-text{
-  font-family:"Roboto Condensed", sans-serif;
-  font-size:30px;           /* keep */
-  letter-spacing:.22em;
-  line-height:1;
-}
-
-/* nav links */
-.nav a{
-  margin-left:26px;
-  font-size:14px;
-  color:var(--muted);
-  line-height:1;
-}
-.nav a:hover{color:var(--accent)}
 
 /* ---------- General ---------- */
 section{padding:72px 0}
@@ -139,13 +157,12 @@ p{margin:0;color:var(--muted)}
 }
 .btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
 .btn:active{transform:translateY(0)}
-/* 次按钮 */
 .btn.secondary{
   background:transparent;
   color:var(--accent);
 }
 
-/* ---------- Hero Media (Placeholder now; upgrade to video/image later) ---------- */
+/* ---------- Hero Media ---------- */
 .hero-media{
   position:relative;
   height:78vh;
@@ -155,7 +172,6 @@ p{margin:0;color:var(--muted)}
   background:var(--panel-soft);
 }
 
-/* Future video layer (disabled for now) */
 .hero-media video{
   position:absolute;
   inset:0;
@@ -165,7 +181,6 @@ p{margin:0;color:var(--muted)}
   display:none;
 }
 
-/* Placeholder background（白底版本：干净一点，不用深色斜纹） */
 .hero-media .hero-placeholder{
   position:absolute;
   inset:0;
@@ -183,7 +198,6 @@ p{margin:0;color:var(--muted)}
   text-transform:uppercase;
 }
 
-/* overlay：白底版更像官网：轻遮罩 */
 .hero-media .overlay{
   position:relative;
   z-index:2;
@@ -200,7 +214,6 @@ p{margin:0;color:var(--muted)}
 .hero-media h1{color:var(--text)}
 .hero-media p{color:#475569; max-width:560px}
 
-/* slogan box：白底卡片感 */
 .hero-media .slogan-box{
   max-width:640px;
   padding:28px;
@@ -209,10 +222,14 @@ p{margin:0;color:var(--muted)}
   box-shadow:var(--shadow);
 }
 
-/* Mobile */
 @media(max-width:900px){
   .hero-media{height:64vh; min-height:460px;}
   .hero-media video{display:none;}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .nav{height:auto; padding:14px 0;}
+  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
+  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
+  .logo-plate img{height:78px;}
 }
 
 /* ---------- Enquiry ---------- */
@@ -231,7 +248,7 @@ input:focus, select:focus, textarea:focus{
 }
 textarea{min-height:110px}
 
-/* ---------- Footer（白底版本） ---------- */
+/* ---------- Footer ---------- */
 footer{
   background:#FFFFFF;
   border-top:1px solid var(--line);
@@ -317,18 +334,12 @@ footer{
   text-align:center;
 }
 
-/* 按钮在滑窗区域也用同一套风格 */
 .slider-btn.btn{
   background:transparent;
   color:var(--accent);
 }
 .slider-btn.btn:hover{
   background:rgba(31,79,216,.08);
-}
-
-/* 响应式 */
-@media(max-width:900px){
-  .grid2,.grid3,.grid4{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -338,12 +349,10 @@ footer{
 <header>
   <div class="wrap nav">
 
-    <!-- LEFT: brand text -->
     <div class="brand">
       <span class="brand-text">RUMBLE&nbsp;AUTO</span>
     </div>
 
-    <!-- RIGHT: nav + logo -->
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
