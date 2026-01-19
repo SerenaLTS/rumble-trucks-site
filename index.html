@@ -12,12 +12,17 @@
 
 <style>
 :root{
-  --bg:#1F2328;
-  --panel:#2A2F36;
-  --line:#3A3F46;
-  --text:#E5E7EB;
-  --muted:#9CA3AF;
-  --accent:#FFFFFF;
+  /* ===== 白底 + 灰蓝 + 蓝（更明亮，贴近 Sitrak 气质）===== */
+  --bg:#F5F7FA;              /* 页面主背景（冷白） */
+  --panel:#FFFFFF;           /* 卡片白 */
+  --panel-soft:#EEF2F7;      /* 浅灰蓝块 */
+  --line:#D6DEE8;            /* 分割线 */
+  --text:#0F172A;            /* 主文字 */
+  --muted:#64748B;           /* 次文字 */
+  --accent:#1F4FD8;          /* 品牌蓝（按钮/链接强调） */
+
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 10px 22px rgba(20,40,80,.10);
 
   --radius:4px;
   --max:1200px;
@@ -35,6 +40,7 @@ a{text-decoration:none;color:inherit}
 
 /* ---------- Header (FINAL v2) ---------- */
 header{
+  background:#FFFFFF;
   border-bottom:1px solid var(--line);
 }
 
@@ -42,13 +48,13 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:88px;              /* ⬅️ 原 82 → 88 */
+  height:98px;              /* keep */
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:18px;                 /* ⬅️ 原 16 → 18 */
+  gap:18px;                 /* keep */
 }
 
 .logo-plate{
@@ -56,61 +62,70 @@ header{
   align-items:center;
 }
 
-/* ⭐ 核心：logo 再放大一档 */
+/* ⭐ 铭牌感：保持你现在大小，但换成适合白底的阴影 */
 .logo-plate img{
-  height:58px;              /* ⬅️ 原 52 → 58（关键） */
+  height:98px;              /* keep */
   width:auto;
   display:block;
   object-fit:contain;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,.5));
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
 }
 
-/* RUMBLE 文本同步放大 */
+/* RUMBLE 文本 */
 .brand-text{
   font-family:"Roboto Condensed", sans-serif;
-  font-size:26px;           /* ⬅️ 原 24 → 26 */
+  font-size:30px;           /* keep */
   letter-spacing:.22em;
   line-height:1;
 }
 
-/* nav links 不动 */
+/* nav links */
 .nav a{
   margin-left:26px;
   font-size:14px;
   color:var(--muted);
   line-height:1;
 }
-.nav a:hover{color:var(--text)}
-  
+.nav a:hover{color:var(--accent)}
+
 /* ---------- General ---------- */
-section{padding:64px 0}
+section{padding:72px 0}
 h1,h2{
   font-family:"Roboto Condensed", sans-serif;
   letter-spacing:.08em;
 }
-h1{font-size:42px;margin:0 0 16px}
-h2{font-size:28px;margin:0 0 16px}
+h1{font-size:44px;margin:0 0 16px}
+h2{font-size:30px;margin:0 0 16px}
 p{margin:0;color:var(--muted)}
 
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
 .card{
   background:var(--panel);
   border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
+.card:hover{
+  border-color:#C3D2E7;
+  box-shadow:var(--shadow2);
+  transform:translateY(-2px);
+}
+
 .img{
   height:220px;
-  background:#353A40;
+  background:var(--panel-soft);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#6B7280;
+  color:#94A3B8;
   font-size:13px;
 }
 .body{padding:18px}
 
+/* ---------- Buttons ---------- */
 .btn{
   display:inline-block;
   padding:12px 20px;
@@ -118,8 +133,16 @@ p{margin:0;color:var(--muted)}
   font-size:14px;
   font-weight:600;
   letter-spacing:.08em;
+  background:var(--accent);
+  color:#FFFFFF;
+  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
+}
+.btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+/* 次按钮 */
+.btn.secondary{
   background:transparent;
-  color:var(--text);
+  color:var(--accent);
 }
 
 /* ---------- Hero Media (Placeholder now; upgrade to video/image later) ---------- */
@@ -129,6 +152,7 @@ p{margin:0;color:var(--muted)}
   min-height:520px;
   overflow:hidden;
   border-bottom:1px solid var(--line);
+  background:var(--panel-soft);
 }
 
 /* Future video layer (disabled for now) */
@@ -138,10 +162,10 @@ p{margin:0;color:var(--muted)}
   width:100%;
   height:100%;
   object-fit:cover;
-  display:none; /* enable later when you have a real video */
+  display:none;
 }
 
-/* Placeholder background (no assets required) */
+/* Placeholder background（白底版本：干净一点，不用深色斜纹） */
 .hero-media .hero-placeholder{
   position:absolute;
   inset:0;
@@ -151,19 +175,15 @@ p{margin:0;color:var(--muted)}
   text-align:center;
   padding:24px;
   background:
-    repeating-linear-gradient(
-      45deg,
-      #2A2F36,
-      #2A2F36 20px,
-      #31363D 20px,
-      #31363D 40px
-    );
-  color:#9CA3AF;
-  font-size:14px;
+    radial-gradient(1200px 600px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
+  color:#64748B;
+  font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
 }
 
+/* overlay：白底版更像官网：轻遮罩 */
 .hero-media .overlay{
   position:relative;
   z-index:2;
@@ -172,20 +192,21 @@ p{margin:0;color:var(--muted)}
   align-items:center;
   background:linear-gradient(
     to right,
-    rgba(31,35,40,0.82),
-    rgba(31,35,40,0.35)
+    rgba(245,247,250,0.92),
+    rgba(245,247,250,0.55)
   );
 }
 
-.hero-media h1{color:#FFFFFF}
-.hero-media p{color:#E5E7EB; max-width:520px}
+.hero-media h1{color:var(--text)}
+.hero-media p{color:#475569; max-width:560px}
 
+/* slogan box：白底卡片感 */
 .hero-media .slogan-box{
-  max-width:620px;
-  padding:22px 22px;
-  border:1px solid rgba(229,231,235,0.22);
-  background:rgba(31,35,40,0.35);
-  backdrop-filter: blur(6px);
+  max-width:640px;
+  padding:28px;
+  border:1px solid var(--line);
+  background:#FFFFFF;
+  box-shadow:var(--shadow);
 }
 
 /* Mobile */
@@ -198,17 +219,23 @@ p{margin:0;color:var(--muted)}
 input,select,textarea{
   width:100%;
   padding:12px;
-  background:#1C1F24;
+  background:#FFFFFF;
   border:1px solid var(--line);
   color:var(--text);
   font-family:Inter;
+  outline:none;
+}
+input:focus, select:focus, textarea:focus{
+  border-color:#9CB6E8;
+  box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
 textarea{min-height:110px}
 
-/* ---------- Footer ---------- */
+/* ---------- Footer（白底版本） ---------- */
 footer{
+  background:#FFFFFF;
   border-top:1px solid var(--line);
-  padding:40px 0;
+  padding:48px 0;
   font-size:13px;
   color:var(--muted);
 }
@@ -218,7 +245,7 @@ footer{
   justify-content:center;
   margin-bottom:16px;
 }
-.footer-nav a:hover{color:var(--text)}
+.footer-nav a:hover{color:var(--accent)}
 
 /* ---------- Models Slider ---------- */
 .models-slider{
@@ -231,7 +258,7 @@ footer{
   -webkit-overflow-scrolling:touch;
 }
 .models-slider::-webkit-scrollbar{height:10px}
-.models-slider::-webkit-scrollbar-thumb{background:var(--line)}
+.models-slider::-webkit-scrollbar-thumb{background:#CBD5E1}
 .models-slider::-webkit-scrollbar-track{background:transparent}
 
 .model-card{
@@ -239,14 +266,22 @@ footer{
   background:var(--panel);
   border:1px solid var(--line);
   scroll-snap-align:start;
+  box-shadow:var(--shadow);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
+.model-card:hover{
+  border-color:#C3D2E7;
+  box-shadow:var(--shadow2);
+  transform:translateY(-2px);
+}
+
 .model-img{
   height:220px;
-  background:#353A40;
+  background:var(--panel-soft);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#6B7280;
+  color:#94A3B8;
   font-size:13px;
 }
 .model-body{
@@ -261,6 +296,7 @@ footer{
   letter-spacing:.08em;
   font-size:16px;
   margin:0;
+  color:var(--text);
 }
 .model-meta{
   margin-top:6px;
@@ -271,11 +307,9 @@ footer{
 .model-link{
   font-size:12px;
   letter-spacing:.12em;
-  color:var(--muted);
+  color:var(--accent);
   white-space:nowrap;
 }
-.model-card:hover{border-color:#4B5563}
-.model-card:hover .model-link{color:var(--text)}
 
 .slider-btn{
   padding:10px 14px;
@@ -283,6 +317,16 @@ footer{
   text-align:center;
 }
 
+/* 按钮在滑窗区域也用同一套风格 */
+.slider-btn.btn{
+  background:transparent;
+  color:var(--accent);
+}
+.slider-btn.btn:hover{
+  background:rgba(31,79,216,.08);
+}
+
+/* 响应式 */
 @media(max-width:900px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
 }
@@ -329,7 +373,7 @@ footer{
 
         <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
           <a class="btn" href="models.html">VIEW OUR MODELS</a>
-          <a class="btn" href="#enquiry">GET A QUOTE</a>
+          <a class="btn secondary" href="#enquiry">GET A QUOTE</a>
         </div>
       </div>
     </div>
@@ -353,7 +397,7 @@ footer{
     <div class="models-slider" id="modelsSlider" aria-label="Models slider"></div>
 
     <div style="margin-top:24px;">
-      <a class="btn" href="models.html">VIEW ALL MODELS</a>
+      <a class="btn secondary" href="models.html">VIEW ALL MODELS</a>
     </div>
   </div>
 </section>
@@ -372,7 +416,7 @@ footer{
     </div>
 
     <div style="margin-top:24px;">
-      <a class="btn" href="services.html">VIEW ALL SERVICES</a>
+      <a class="btn secondary" href="services.html">VIEW ALL SERVICES</a>
     </div>
   </div>
 </section>
@@ -390,7 +434,7 @@ footer{
     </div>
 
     <div style="margin-top:24px;">
-      <a class="btn" href="#">VIEW ALL NEWS</a>
+      <a class="btn secondary" href="#">VIEW ALL NEWS</a>
     </div>
   </div>
 </section>
@@ -402,8 +446,8 @@ footer{
     <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
 
     <form class="grid2">
-      <input placeholder="Name">
-      <input placeholder="Phone / Email">
+      <input placeholder="Name" required>
+      <input placeholder="Phone / Email" required>
       <select required>
         <option value="">Enquiry Type</option>
         <option>Sales Enquiry</option>
@@ -413,7 +457,7 @@ footer{
         <option>General Enquiry</option>
       </select>
       <input placeholder="Preferred Model">
-      <textarea placeholder="Message"></textarea>
+      <textarea placeholder="Message" required></textarea>
       <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
     </form>
   </div>
@@ -421,14 +465,31 @@ footer{
 
 <footer>
   <div class="wrap">
-    <div style="display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:24px;">
+
+    <div style="
+      display:grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap:40px;
+      margin-bottom:24px;
+    ">
+
       <div>
-        <div style="font-family:'Roboto Condensed', sans-serif; letter-spacing:.2em; font-size:18px; margin-bottom:12px; color:#E5E7EB;">RUMBLE</div>
-        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
+        <div style="
+          font-family:'Roboto Condensed', sans-serif;
+          letter-spacing:.2em;
+          font-size:18px;
+          margin-bottom:12px;
+          color:var(--text);
+        ">
+          RUMBLE
+        </div>
+        <p style="max-width:260px;">
+          Commercial trucks and fleet solutions built for real work.
+        </p>
       </div>
 
       <div>
-        <strong style="display:block;margin-bottom:12px;">MODELS</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
         <div style="display:grid;gap:8px;">
           <a href="models.html">All Models</a>
           <a href="models.html">Series</a>
@@ -437,7 +498,7 @@ footer{
       </div>
 
       <div>
-        <strong style="display:block;margin-bottom:12px;">SERVICES</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
         <div style="display:grid;gap:8px;">
           <a href="services.html#maintenance">Maintenance</a>
           <a href="services.html#parts">Genuine Parts</a>
@@ -447,7 +508,7 @@ footer{
       </div>
 
       <div>
-        <strong style="display:block;margin-bottom:12px;">COMPANY</strong>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
         <div style="display:grid;gap:8px;">
           <a href="#">About</a>
           <a href="fleet-finance.html">Fleet & Finance</a>
@@ -455,9 +516,20 @@ footer{
           <a href="#">Privacy Policy</a>
         </div>
       </div>
+
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; border-top:1px solid var(--line); padding-top:16px; font-size:12px; color:var(--muted);">
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      font-size:12px;
+      color:var(--muted);
+    ">
       <div>© <span id="y"></span> RUMBLE Trucks</div>
       <div style="display:flex;gap:20px;">
         <a href="models.html">Models</a>
@@ -466,6 +538,7 @@ footer{
         <a href="contact.html">Contact</a>
       </div>
     </div>
+
   </div>
 </footer>
 
