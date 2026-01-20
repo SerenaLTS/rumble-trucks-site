@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Services | RUMBLE Trucks</title>
 
-<!-- Industrial fonts -->
+<!-- ✅ Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* ✅ 与最新 index / models 完全统一 */
+  /* ✅ Base */
   --bg:#F5F7FA;
   --panel:#FFFFFF;
   --panel-soft:#EEF2F7;
@@ -27,7 +27,7 @@
   --radius:4px;
   --max:1200px;
 
-  /* ✅ 深灰卡片系统（与 models 深灰卡片一致） */
+  /* ✅ Dark card system (same as models/index) */
   --card-dark:#0B1220;
   --card-dark-soft:#111827;
   --card-border:#1F2937;
@@ -44,41 +44,39 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ================= HEADER（同 index/models）================= */
+/* ================= HEADER (same layout, Option D type) ================= */
 header{
   background:#FFFFFF;
   border-bottom:1px solid var(--line);
 }
-
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   height:98px;
-  flex-wrap:nowrap;   /* ⭐关键：禁止换行 */
+  flex-wrap:nowrap;
   gap:18px;
 }
-
 .brand{
   display:flex;
   align-items:center;
   flex-shrink:0;
   min-width:0;
 }
-
 .brand-text{
-  font-family:"Roboto Condensed", sans-serif;
-  font-size:30px;
-  letter-spacing:.22em;
+  font-family:"Teko", sans-serif;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.18em;
   line-height:1;
-  white-space:nowrap; /* ⭐RUMBLE AUTO 不换行 */
+  white-space:nowrap;
+  transform:translateY(2px);
 }
-
 .nav-right{
   display:flex;
   align-items:center;
@@ -87,21 +85,19 @@ header{
   margin-left:auto;
   min-width:0;
 }
-
 .nav-links{
   display:flex;
   align-items:center;
   gap:26px;
-  white-space:nowrap; /* ⭐导航不换行 */
+  white-space:nowrap;
 }
-
 .nav-links a{
   font-size:14px;
   color:var(--muted);
   line-height:1;
+  font-weight:500;
 }
 .nav-links a:hover{color:var(--accent)}
-
 .logo-plate{
   display:flex;
   align-items:center;
@@ -118,37 +114,42 @@ header{
 /* ---------- General ---------- */
 section{padding:64px 0}
 h1,h2,h3{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.08em;
+  font-family:"Teko", sans-serif;
+  letter-spacing:.12em;
   margin:0 0 14px;
+  font-weight:700;
+  line-height:1;
+  transform:translateY(2px);
 }
-h1{font-size:42px}
-h2{font-size:28px}
-h3{font-size:16px; margin:0 0 10px}
-p{margin:0;color:var(--muted); line-height:1.6}
+h1{font-size:58px}
+h2{font-size:40px}
+h3{font-size:22px; margin:0 0 10px}
+p{margin:0;color:var(--muted); line-height:1.7}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
-/* ✅ Cards：改成深灰底板白字 */
+/* ✅ Cards: dark base */
 .card{
   background:var(--card-dark);
   border:1px solid var(--card-border);
   border-radius:var(--radius);
   overflow:hidden;
   box-shadow:var(--card-shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
 }
 .card:hover{
   border-color:#334155;
   box-shadow:var(--card-shadow2);
-  transform:translateY(-2px);
+  transform:translateY(-3px);
   background:var(--card-dark-soft);
 }
 .body{padding:18px; color:var(--card-text)}
+.card strong{color:var(--card-text)}
+.card .muted{color:var(--card-muted)}
 
-/* Buttons（同 index） */
+/* Buttons */
 .btn{
   display:inline-block;
   padding:12px 20px;
@@ -158,6 +159,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   letter-spacing:.08em;
   background:var(--accent);
   color:#FFFFFF;
+  border-radius:var(--radius);
   transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
 }
 .btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
@@ -167,7 +169,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   color:var(--accent);
 }
 
-/* ---------- Page Hero（保持 index 那种干净渐变） ---------- */
+/* ---------- Page Hero ---------- */
 .page-hero{
   position:relative;
   border-bottom:1px solid var(--line);
@@ -213,6 +215,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   box-shadow:var(--shadow);
   border-radius:var(--radius);
 }
+.hero-box p{color:#475569}
 
 /* ---------- Service Detail Blocks ---------- */
 .service-block{
@@ -221,8 +224,6 @@ p{margin:0;color:var(--muted); line-height:1.6}
   gap:28px;
   align-items:stretch;
 }
-
-/* ✅ 左侧图片区块改深灰占位 */
 .service-block .block-img{
   min-height:220px;
   border-radius:var(--radius);
@@ -239,7 +240,6 @@ p{margin:0;color:var(--muted); line-height:1.6}
   text-transform:uppercase;
 }
 
-/* ✅ 右侧详情卡改深灰底白字 */
 .service-block .block-card{
   background:var(--card-dark);
   border:1px solid var(--card-border);
@@ -250,7 +250,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
 }
 .service-block .block-card p{ color:var(--card-muted); }
 
-/* ✅ kv/pill 改深灰胶囊 */
+/* Pills */
 .kv{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
@@ -268,14 +268,14 @@ p{margin:0;color:var(--muted); line-height:1.6}
   color:var(--card-muted);
 }
 
-/* ---------- Enquiry（同 index 的 input focus，保持白底可读性） ---------- */
+/* ---------- Enquiry (keep inputs white for readability) ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
   background:#FFFFFF;
   border:1px solid var(--line);
   color:var(--text);
-  font-family:Inter;
+  font-family:"IBM Plex Sans", sans-serif;
   outline:none;
   border-radius:var(--radius);
 }
@@ -285,7 +285,7 @@ input:focus, select:focus, textarea:focus{
 }
 textarea{min-height:110px}
 
-/* ---------- Footer（同 index/contact） ---------- */
+/* ---------- Footer ---------- */
 footer{
   background:#FFFFFF;
   border-top:1px solid var(--line);
@@ -304,7 +304,8 @@ footer a:hover{color:var(--accent)}
   .nav-right{flex-wrap:wrap; justify-content:flex-end;}
   .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
   .logo-plate img{height:78px;}
-  .brand-text{font-size:24px}
+  .brand-text{font-size:30px}
+  h1{font-size:50px}
 }
 </style>
 </head>
@@ -322,7 +323,7 @@ footer a:hover{color:var(--accent)}
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet & Finance</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -354,7 +355,7 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
-<!-- SERVICE OVERVIEW (cards) -->
+<!-- SERVICE OVERVIEW -->
 <section id="service-list">
   <div class="wrap">
     <h2>WHAT WE OFFER</h2>
@@ -365,26 +366,26 @@ footer a:hover{color:var(--accent)}
     <div class="grid4">
       <a class="card" href="#maintenance">
         <div class="body">
-          <strong>MAINTENANCE & REPAIRS</strong><br>
-          <span style="color:var(--card-muted);font-size:13px;">Scheduled servicing & diagnostics</span>
+          <strong>MAINTENANCE &amp; REPAIRS</strong><br>
+          <span class="muted" style="font-size:13px;">Scheduled servicing &amp; diagnostics</span>
         </div>
       </a>
       <a class="card" href="#parts">
         <div class="body">
           <strong>GENUINE PARTS</strong><br>
-          <span style="color:var(--card-muted);font-size:13px;">OEM parts & consumables</span>
+          <span class="muted" style="font-size:13px;">OEM parts &amp; consumables</span>
         </div>
       </a>
       <a class="card" href="#fleet">
         <div class="body">
           <strong>FLEET PROGRAMS</strong><br>
-          <span style="color:var(--card-muted);font-size:13px;">Service plans for operators</span>
+          <span class="muted" style="font-size:13px;">Service plans for operators</span>
         </div>
       </a>
       <a class="card" href="#tech">
         <div class="body">
           <strong>TECHNICAL SUPPORT</strong><br>
-          <span style="color:var(--card-muted);font-size:13px;">Warranty, training & guidance</span>
+          <span class="muted" style="font-size:13px;">Warranty, training &amp; guidance</span>
         </div>
       </a>
     </div>
@@ -394,7 +395,7 @@ footer a:hover{color:var(--accent)}
 <!-- DETAILS -->
 <section id="maintenance">
   <div class="wrap">
-    <h2>MAINTENANCE & REPAIRS</h2>
+    <h2>MAINTENANCE &amp; REPAIRS</h2>
     <div class="service-block">
       <div class="block-img">IMAGE PLACEHOLDER</div>
       <div class="block-card">
@@ -497,7 +498,7 @@ footer a:hover{color:var(--accent)}
       <select required>
         <option value="">Enquiry Type</option>
         <option>Sales Enquiry</option>
-        <option selected>Service & Maintenance</option>
+        <option selected>Service &amp; Maintenance</option>
         <option>Parts Enquiry</option>
         <option>Fleet / Finance</option>
         <option>General Enquiry</option>
@@ -523,7 +524,6 @@ footer a:hover{color:var(--accent)}
 
 <footer>
   <div class="wrap">
-
     <div style="
       display:grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -533,11 +533,13 @@ footer a:hover{color:var(--accent)}
 
       <div>
         <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
+          font-family:'Teko', sans-serif;
+          letter-spacing:.18em;
+          font-size:22px;
+          font-weight:700;
+          margin-bottom:10px;
           color:var(--text);
+          transform:translateY(2px);
         ">RUMBLE</div>
         <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
       </div>
@@ -565,7 +567,7 @@ footer a:hover{color:var(--accent)}
         <strong style="display:block;margin-bottom:12px; color:var(--text);">COMPANY</strong>
         <div style="display:grid;gap:8px;">
           <a href="index.html">Home</a>
-          <a href="fleet-finance.html">Fleet & Finance</a>
+          <a href="fleet-finance.html">Fleet &amp; Finance</a>
           <a href="contact.html">Contact</a>
           <a href="#">Privacy Policy</a>
         </div>
@@ -590,7 +592,7 @@ footer a:hover{color:var(--accent)}
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet & Finance</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
