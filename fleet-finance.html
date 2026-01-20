@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Fleet & Finance | RUMBLE Trucks</title>
 
-<!-- Industrial fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* ✅ 与 index/contact 统一的白底灰蓝配色 */
+  /* ===== Base ===== */
   --bg:#F5F7FA;
   --panel:#FFFFFF;
   --panel-soft:#EEF2F7;
@@ -21,11 +20,18 @@
   --muted:#64748B;
   --accent:#1F4FD8;
 
-  --shadow:0 12px 28px rgba(20,40,80,.08);
-  --shadow2:0 10px 22px rgba(20,40,80,.10);
-
   --radius:4px;
   --max:1200px;
+
+  /* ===== Dark Card System (统一 index / contact) ===== */
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
@@ -38,244 +44,113 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ================= HEADER（与 index/contact 完全同款）================= */
-header{
-  background:#FFFFFF;
-  border-bottom:1px solid var(--line);
-}
-
+/* ===== Header (同 index / contact) ===== */
+header{background:#fff;border-bottom:1px solid var(--line)}
 .nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:98px;
-  flex-wrap:nowrap;     /* ⭐关键：禁止换行 */
-  gap:18px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:98px;gap:18px;flex-wrap:nowrap;
 }
-
-.brand{
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-  min-width:0;
-}
-
 .brand-text{
-  font-family:"Roboto Condensed", sans-serif;
-  font-size:30px;
-  letter-spacing:.22em;
-  line-height:1;
-  white-space:nowrap;   /* ⭐RUMBLE AUTO 不换行 */
+  font-family:"Roboto Condensed",sans-serif;
+  font-size:30px;letter-spacing:.22em;white-space:nowrap;
 }
-
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:28px;
-  flex-shrink:0;
-  margin-left:auto;
-  min-width:0;
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:26px;
-  white-space:nowrap;   /* ⭐导航不换行 */
-}
-
-.nav-links a{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1;
-}
+.nav-right{display:flex;align-items:center;gap:28px;margin-left:auto}
+.nav-links{display:flex;gap:26px;white-space:nowrap}
+.nav-links a{font-size:14px;color:var(--muted)}
 .nav-links a:hover{color:var(--accent)}
-
-.logo-plate{
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-}
 .logo-plate img{
-  height:98px;
-  width:auto;
-  display:block;
-  object-fit:contain;
-  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+  height:98px;object-fit:contain;
+  filter:drop-shadow(0 6px 18px rgba(15,23,42,.18))
 }
 
-/* ================= GENERAL ================= */
+/* ===== General ===== */
 section{padding:64px 0}
 h1,h2,h3{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.08em;
-  margin:0 0 12px;
+  font-family:"Roboto Condensed",sans-serif;
+  letter-spacing:.08em;margin:0 0 14px;
 }
 h1{font-size:40px}
 h2{font-size:28px}
 h3{font-size:16px}
-p{margin:0;color:var(--muted); line-height:1.6}
+p{margin:0;color:var(--muted);line-height:1.6}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-
-.card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-}
-.card:hover{
-  border-color:#C3D2E7;
-  box-shadow:var(--shadow2);
-  transform:translateY(-2px);
-}
-
-.body{padding:18px}
 .hr{height:1px;background:var(--line);margin:22px 0}
 
-/* ================= BUTTONS（同 index/contact）================= */
+/* ===== Buttons ===== */
 .btn{
-  display:inline-block;
-  padding:12px 20px;
+  display:inline-block;padding:12px 20px;
   border:1px solid var(--accent);
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:.08em;
-  background:var(--accent);
-  color:#FFFFFF;
-  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
+  background:var(--accent);color:#fff;
+  font-size:14px;font-weight:600;letter-spacing:.08em;
 }
-.btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn.secondary{
-  background:transparent;
-  color:var(--accent);
-}
+.btn.secondary{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
 
-/* ================= HERO（白底干净渐变，同 index/contact）================= */
+/* ===== Hero ===== */
 .hero-media{
-  position:relative;
-  height:56vh;
-  min-height:420px;
-  overflow:hidden;
-  border-bottom:1px solid var(--line);
-  background:var(--panel-soft);
+  position:relative;height:56vh;min-height:420px;
+  background:var(--panel-soft);border-bottom:1px solid var(--line);
 }
-
-.hero-media .hero-placeholder{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
+.hero-placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:
-    radial-gradient(1100px 520px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
-  color:#64748B;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
+    radial-gradient(1100px 520px at 20% 30%, #fff 0%, transparent 55%),
+    linear-gradient(135deg,#EAF0FA 0%,#F5F7FA 55%,#EEF2F7 100%);
+  color:#64748B;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
 }
-
-.hero-media .overlay{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  align-items:center;
-  background:linear-gradient(
-    to right,
-    rgba(245,247,250,.92),
-    rgba(245,247,250,.55)
-  );
-}
-
 .hero-box{
-  max-width:680px;
-  padding:24px;
-  border:1px solid var(--line);
-  background:#FFFFFF;
-  box-shadow:var(--shadow);
+  max-width:680px;padding:24px;background:#fff;
+  border:1px solid var(--line);box-shadow:0 12px 28px rgba(20,40,80,.08);
 }
 
-/* ================= KPI ================= */
-.kpi{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+/* ===== Dark Cards (核心) ===== */
+.card,.step,.kpi .item{
+  background:var(--card-dark);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow);
+  color:var(--card-text);
 }
-.kpi .item{
-  background:var(--panel-soft);
-  border:1px solid var(--line);
-  padding:14px 16px;
+.card:hover,.step:hover,.kpi .item:hover{
+  box-shadow:var(--card-shadow2);
 }
-.kpi .label{
-  font-size:12px;
-  letter-spacing:.12em;
-  color:var(--muted);
-}
+.card p,.step p{color:var(--card-muted)}
+.body{padding:18px}
+
+/* KPI */
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kpi .label{font-size:12px;letter-spacing:.12em;color:var(--card-muted)}
 .kpi .value{
-  margin-top:8px;
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.08em;
-  color:var(--text);
+  margin-top:8px;font-family:"Roboto Condensed",sans-serif;
+  letter-spacing:.08em;color:var(--card-text);
 }
 
-/* ================= Steps ================= */
-.step{
-  background:var(--panel);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  padding:18px;
-}
+/* Steps */
 .step .num{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.12em;
-  color:var(--muted);
-  font-size:12px;
+  font-size:12px;letter-spacing:.12em;color:var(--card-muted);
   margin-bottom:10px;
 }
 
-/* ================= Form（同 index/contact focus）================= */
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  background:#FFFFFF;
-  border:1px solid var(--line);
-  color:var(--text);
-  font-family:Inter;
-  outline:none;
-}
-input:focus, select:focus, textarea:focus{
-  border-color:#9CB6E8;
-  box-shadow:0 0 0 4px rgba(31,79,216,.12);
+/* ===== Form ===== */
+input,textarea{
+  width:100%;padding:12px;border-radius:var(--radius);
+  border:1px solid var(--line);background:#fff;
 }
 textarea{min-height:120px}
 
-/* ================= Footer（同 index/contact）================= */
-footer{
-  background:#FFFFFF;
-  border-top:1px solid var(--line);
-  padding:48px 0;
-  font-size:13px;
-  color:var(--muted);
-}
+/* ===== Footer ===== */
+footer{background:#fff;border-top:1px solid var(--line);padding:48px 0;font-size:13px;color:var(--muted)}
 
-/* ================= Responsive ================= */
+/* ===== Responsive ===== */
 @media(max-width:980px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
   .kpi{grid-template-columns:1fr}
-  .hero-media{height:46vh; min-height:360px;}
-
-  .nav{height:auto; padding:14px 0;}
-  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
-  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
-  .logo-plate img{height:78px;}
-  .brand-text{font-size:24px;}
+  .nav{height:auto;padding:14px 0}
+  .logo-plate img{height:78px}
+  .brand-text{font-size:24px}
 }
 </style>
 </head>
@@ -284,11 +159,7 @@ footer{
 
 <header>
   <div class="wrap nav">
-
-    <div class="brand">
-      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
-    </div>
-
+    <span class="brand-text">RUMBLE&nbsp;AUTO</span>
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -297,252 +168,67 @@ footer{
         <a href="fleet-finance.html">Fleet & Finance</a>
         <a href="contact.html">Contact</a>
       </nav>
-
-      <span class="logo-plate">
-        <img src="logo.png" alt="RUMBLE logo">
-      </span>
+      <span class="logo-plate"><img src="logo.png"></span>
     </div>
-
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero-media">
-  <div class="hero-placeholder">
-    FLEET &amp; FINANCE MEDIA PLACEHOLDER<br><br>
-    (THIS AREA WILL BE A VIDEO OR IMAGE)
-  </div>
-
-  <div class="overlay">
-    <div class="wrap">
-      <div class="hero-box">
-        <h1>FLEET &amp; FINANCE</h1>
-        <p>Fleet planning and finance pathways tailored for commercial operators.</p>
-
-        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn secondary" href="#fleet">FLEET SOLUTIONS</a>
-          <a class="btn secondary" href="#finance">FINANCE OPTIONS</a>
-          <a class="btn" href="#enquiry">REQUEST A QUOTE</a>
-        </div>
-      </div>
+  <div class="hero-placeholder">FLEET & FINANCE MEDIA PLACEHOLDER</div>
+  <div class="wrap" style="position:relative;z-index:2;padding-top:120px">
+    <div class="hero-box">
+      <h1>FLEET & FINANCE</h1>
+      <p>Fleet planning and finance pathways tailored for commercial operators.</p>
     </div>
   </div>
 </section>
 
-<!-- FLEET -->
-<section id="fleet">
+<section>
   <div class="wrap grid2">
     <div>
       <h2>FLEET SOLUTIONS</h2>
-      <p>Support for multi-vehicle operations including planning, delivery coordination and uptime.</p>
-
-      <div class="hr"></div>
-
       <div class="kpi">
-        <div class="item">
-          <div class="label">PLANNING</div>
-          <div class="value">SPEC MATCHING</div>
-        </div>
-        <div class="item">
-          <div class="label">DELIVERY</div>
-          <div class="value">COORDINATED</div>
-        </div>
-        <div class="item">
-          <div class="label">UPTIME</div>
-          <div class="value">SUPPORT PATHWAYS</div>
-        </div>
-        <div class="item">
-          <div class="label">PRICING</div>
-          <div class="value">VOLUME (TBC)</div>
-        </div>
-      </div>
-
-      <div style="margin-top:22px;">
-        <a class="btn secondary" href="models.html">BROWSE MODELS</a>
+        <div class="item"><div class="label">PLANNING</div><div class="value">SPEC MATCHING</div></div>
+        <div class="item"><div class="label">DELIVERY</div><div class="value">COORDINATED</div></div>
+        <div class="item"><div class="label">UPTIME</div><div class="value">SUPPORT PATHWAYS</div></div>
+        <div class="item"><div class="label">PRICING</div><div class="value">VOLUME (TBC)</div></div>
       </div>
     </div>
 
     <div class="card">
       <div class="body">
         <h3>FLEET CHECKLIST</h3>
-        <p style="margin-top:10px;">
-          Payload, routes, axle setup, body type, annual km and delivery timeframe.
-        </p>
-        <div class="hr"></div>
-        <p style="color:var(--muted); font-size:13px;">
-          PLACEHOLDER: add your fleet brochure / PDF link later.
-        </p>
+        <p>Payload, routes, axle setup, body type, annual km and timeframe.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINANCE -->
-<section id="finance">
+<section>
   <div class="wrap">
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-      <div>
-        <h2>FINANCE OPTIONS</h2>
-        <p>Structures depend on operator profile and requirements.</p>
-      </div>
-      <a class="btn secondary" href="#enquiry">TALK TO US</a>
-    </div>
-
-    <div class="grid3" style="margin-top:22px;">
-      <div class="card">
-        <div class="body">
-          <h3>BUSINESS FINANCE</h3>
-          <p style="margin-top:10px;">Predictable monthly payments for commercial operators.</p>
-          <div class="hr"></div>
-          <p style="font-size:13px;">PLACEHOLDER: list example terms later.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="body">
-          <h3>LEASE / RENTAL</h3>
-          <p style="margin-top:10px;">Flexibility for fleet refresh cycles.</p>
-          <div class="hr"></div>
-          <p style="font-size:13px;">PLACEHOLDER: add product notes later.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="body">
-          <h3>FLEET PACKAGE</h3>
-          <p style="margin-top:10px;">Bundle support services and maintenance planning.</p>
-          <div class="hr"></div>
-          <p style="font-size:13px;">PLACEHOLDER: package inclusions later.</p>
-        </div>
-      </div>
+    <h2>FINANCE OPTIONS</h2>
+    <div class="grid3" style="margin-top:22px">
+      <div class="card"><div class="body"><h3>BUSINESS FINANCE</h3><p>Predictable payments.</p></div></div>
+      <div class="card"><div class="body"><h3>LEASE / RENTAL</h3><p>Flexible fleet cycles.</p></div></div>
+      <div class="card"><div class="body"><h3>FLEET PACKAGE</h3><p>Bundled services.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section>
   <div class="wrap">
     <h2>HOW IT WORKS</h2>
-    <p style="margin-bottom:18px;">A simple flow from requirements to delivery.</p>
-
     <div class="grid4">
-      <div class="step">
-        <div class="num">STEP 01</div>
-        <h3>REQUIREMENTS</h3>
-        <p style="margin-top:10px;">Tell us your application, payload, and delivery timeline.</p>
-      </div>
-
-      <div class="step">
-        <div class="num">STEP 02</div>
-        <h3>MODEL &amp; SPEC</h3>
-        <p style="margin-top:10px;">We propose suitable models and configurations.</p>
-      </div>
-
-      <div class="step">
-        <div class="num">STEP 03</div>
-        <h3>QUOTE</h3>
-        <p style="margin-top:10px;">Pricing, availability, and finance pathways (if required).</p>
-      </div>
-
-      <div class="step">
-        <div class="num">STEP 04</div>
-        <h3>DELIVERY</h3>
-        <p style="margin-top:10px;">Coordinate delivery and aftersales support.</p>
-      </div>
+      <div class="step"><div class="num">STEP 01</div><h3>REQUIREMENTS</h3></div>
+      <div class="step"><div class="num">STEP 02</div><h3>MODEL & SPEC</h3></div>
+      <div class="step"><div class="num">STEP 03</div><h3>QUOTE</h3></div>
+      <div class="step"><div class="num">STEP 04</div><h3>DELIVERY</h3></div>
     </div>
   </div>
 </section>
 
-<!-- ENQUIRY -->
-<section id="enquiry">
-  <div class="wrap">
-    <h2>FLEET &amp; FINANCE ENQUIRY</h2>
-    <p style="margin-bottom:24px;">Provide basic details and we’ll contact you with tailored options.</p>
-
-    <form class="grid2">
-      <input placeholder="Business / Contact Name" required>
-      <input placeholder="Phone / Email" required>
-      <input placeholder="Fleet Size (optional)">
-      <input placeholder="Preferred Model / Application (optional)">
-      <textarea placeholder="Your requirements (routes, payload, body type, finance preference)"></textarea>
-      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="wrap">
-
-    <div style="
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap:40px;
-      margin-bottom:24px;
-    ">
-      <div>
-        <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
-          color:var(--text);
-        ">RUMBLE</div>
-
-        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="models.html">All Models</a>
-          <a href="models.html">Series</a>
-          <a href="models.html">Applications</a>
-        </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="services.html#maintenance">Maintenance</a>
-          <a href="services.html#parts">Genuine Parts</a>
-          <a href="services.html#fleet">Fleet Programs</a>
-          <a href="services.html#tech">Technical Support</a>
-        </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="#">About</a>
-          <a href="fleet-finance.html">Fleet &amp; Finance</a>
-          <a href="contact.html">Contact</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
-    </div>
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12px;
-      color:var(--muted);
-    ">
-      <div>© <span id="y"></span> RUMBLE Trucks</div>
-      <div style="display:flex;gap:20px;">
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet &amp; Finance</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-
-  </div>
+  <div class="wrap">© <span id="y"></span> RUMBLE Trucks</div>
 </footer>
 
 <script>
