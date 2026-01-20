@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RUMBLE Trucks</title>
 
-<!-- Industrial fonts -->
+<!-- Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   /* ===== 白底 + 灰蓝 + 蓝（更明亮，贴近 Sitrak 气质）===== */
   --bg:#F5F7FA;              /* 页面主背景（冷白） */
-  --panel:#FFFFFF;           /* 卡片白（保留给少量白底元素） */
+  --panel:#FFFFFF;           /* 少量白底元素（Hero box / Footer） */
   --panel-soft:#EEF2F7;      /* 浅灰蓝块 */
   --line:#D6DEE8;            /* 分割线 */
   --text:#0F172A;            /* 主文字 */
@@ -27,7 +27,7 @@
   --radius:4px;
   --max:1200px;
 
-  /* ===== 深灰卡片系统（你要的：深灰底 + 白字）===== */
+  /* ===== 深灰卡片系统（深灰底 + 白字）===== */
   --card-dark:#0B1220;        /* 深灰主卡片 */
   --card-dark-soft:#111827;   /* 次级深灰 */
   --card-border-dark:#1F2937; /* 深灰边框 */
@@ -44,7 +44,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
@@ -60,7 +60,7 @@ header{
   align-items:center;
   justify-content:space-between;
   height:98px;
-  flex-wrap:nowrap;          /* ⭐关键：禁止换行 */
+  flex-wrap:nowrap;          /* ⭐禁止换行 */
   gap:18px;
 }
 
@@ -72,19 +72,21 @@ header{
 }
 
 .brand-text{
-  font-family:"Roboto Condensed", sans-serif;
-  font-size:30px;
-  letter-spacing:.22em;
+  font-family:"Teko", sans-serif;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.18em;
   line-height:1;
-  white-space:nowrap;        /* ⭐关键：品牌文字不换行 */
+  white-space:nowrap;        /* ⭐品牌文字不换行 */
+  transform: translateY(2px); /* Teko 视觉居中微调 */
 }
 
 .nav-right{
   display:flex;
   align-items:center;
   gap:28px;
-  flex-shrink:0;             /* ⭐关键：右侧整体不掉行 */
-  margin-left:auto;          /* ⭐确保贴右 */
+  flex-shrink:0;             /* ⭐右侧整体不掉行 */
+  margin-left:auto;          /* ⭐贴右 */
   min-width:0;
 }
 
@@ -92,13 +94,14 @@ header{
   display:flex;
   align-items:center;
   gap:26px;
-  white-space:nowrap;        /* ⭐关键：导航不换行 */
+  white-space:nowrap;        /* ⭐导航不换行 */
 }
 
 .nav-links a{
   font-size:14px;
   color:var(--muted);
   line-height:1;
+  font-weight:500;
 }
 .nav-links a:hover{color:var(--accent)}
 
@@ -120,23 +123,25 @@ header{
 /* ---------- General ---------- */
 section{padding:72px 0}
 h1,h2{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.08em;
+  font-family:"Teko", sans-serif;
+  letter-spacing:.12em;
+  font-weight:700;
 }
-h1{font-size:44px;margin:0 0 16px}
-h2{font-size:30px;margin:0 0 16px}
-p{margin:0;color:var(--muted)}
+h1{font-size:56px; margin:0 0 14px; line-height:.95}
+h2{font-size:40px; margin:0 0 12px; line-height:1}
+p{margin:0;color:var(--muted); line-height:1.7}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
-/* ---------- Cards (NOW: dark cards) ---------- */
+/* ---------- Cards (dark cards) ---------- */
 .card{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
   box-shadow:var(--card-shadow);
   color:var(--card-text);
+  border-radius:var(--radius);
   transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .card:hover{
@@ -157,6 +162,7 @@ p{margin:0;color:var(--muted)}
   color:#94A3B8;
   font-size:13px;
   letter-spacing:.14em;
+  text-transform:uppercase;
 }
 .body{padding:18px}
 
@@ -171,6 +177,7 @@ p{margin:0;color:var(--muted)}
   background:var(--accent);
   color:#FFFFFF;
   transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
+  border-radius:var(--radius);
 }
 .btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
 .btn:active{transform:translateY(0)}
@@ -232,11 +239,12 @@ p{margin:0;color:var(--muted)}
 .hero-media p{color:#475569; max-width:560px}
 
 .hero-media .slogan-box{
-  max-width:640px;
+  max-width:680px;
   padding:28px;
   border:1px solid var(--line);
   background:#FFFFFF;
   box-shadow:var(--shadow);
+  border-radius:var(--radius);
 }
 
 /* ---------- Enquiry ---------- */
@@ -246,8 +254,9 @@ input,select,textarea{
   background:#FFFFFF;
   border:1px solid var(--line);
   color:var(--text);
-  font-family:Inter;
+  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   outline:none;
+  border-radius:var(--radius);
 }
 input:focus, select:focus, textarea:focus{
   border-color:#9CB6E8;
@@ -293,6 +302,8 @@ footer{
   box-shadow:var(--card-shadow);
   transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   color:var(--card-text);
+  border-radius:var(--radius);
+  overflow:hidden;
 }
 .model-card:hover{
   border-color:#334155;
@@ -309,6 +320,7 @@ footer{
   color:#94A3B8;
   font-size:13px;
   letter-spacing:.14em;
+  text-transform:uppercase;
 }
 .model-body{
   padding:16px 18px;
@@ -318,23 +330,27 @@ footer{
   gap:12px;
 }
 .model-title{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.08em;
-  font-size:16px;
+  font-family:"Teko", sans-serif;
+  letter-spacing:.10em;
+  font-size:22px;
+  line-height:1;
   margin:0;
   color:var(--card-text);
+  transform: translateY(2px);
 }
 .model-meta{
   margin-top:6px;
   font-size:12px;
   letter-spacing:.12em;
   color:var(--card-muted);
+  text-transform:uppercase;
 }
 .model-link{
   font-size:12px;
   letter-spacing:.12em;
   color:var(--card-accent);
   white-space:nowrap;
+  text-transform:uppercase;
 }
 
 .slider-btn{
@@ -361,6 +377,8 @@ footer{
   .nav-right{flex-wrap:wrap; justify-content:flex-end;}
   .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
   .logo-plate img{height:78px;}
+  .brand-text{font-size:30px;}
+  h1{font-size:48px;}
 }
 </style>
 </head>
@@ -512,11 +530,13 @@ footer{
 
       <div>
         <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
+          font-family:'Teko', sans-serif;
+          letter-spacing:.18em;
+          font-size:22px;
+          font-weight:700;
+          margin-bottom:10px;
           color:var(--text);
+          transform: translateY(2px);
         ">
           RUMBLE
         </div>
