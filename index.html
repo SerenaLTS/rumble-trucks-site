@@ -14,7 +14,7 @@
 :root{
   /* ===== 白底 + 灰蓝 + 蓝（更明亮，贴近 Sitrak 气质）===== */
   --bg:#F5F7FA;              /* 页面主背景（冷白） */
-  --panel:#FFFFFF;           /* 卡片白 */
+  --panel:#FFFFFF;           /* 卡片白（保留给少量白底元素） */
   --panel-soft:#EEF2F7;      /* 浅灰蓝块 */
   --line:#D6DEE8;            /* 分割线 */
   --text:#0F172A;            /* 主文字 */
@@ -26,6 +26,17 @@
 
   --radius:4px;
   --max:1200px;
+
+  /* ===== 深灰卡片系统（你要的：深灰底 + 白字）===== */
+  --card-dark:#0B1220;        /* 深灰主卡片 */
+  --card-dark-soft:#111827;   /* 次级深灰 */
+  --card-border-dark:#1F2937; /* 深灰边框 */
+
+  --card-text:#F8FAFC;        /* 白字 */
+  --card-muted:#CBD5E1;       /* 次白字 */
+  --card-accent:#60A5FA;      /* 亮一点的蓝强调 */
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
@@ -120,26 +131,32 @@ p{margin:0;color:var(--muted)}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
+/* ---------- Cards (NOW: dark cards) ---------- */
 .card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
+  color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .card:hover{
-  border-color:#C3D2E7;
-  box-shadow:var(--shadow2);
-  transform:translateY(-2px);
+  border-color:#334155;
+  box-shadow:var(--card-shadow2);
+  transform:translateY(-3px);
 }
+.card strong{color:var(--card-text)}
+.card p{color:var(--card-muted)}
+.card .body{color:var(--card-text)}
 
 .img{
   height:220px;
-  background:var(--panel-soft);
+  background:linear-gradient(135deg, #111827, #020617);
   display:flex;
   align-items:center;
   justify-content:center;
   color:#94A3B8;
   font-size:13px;
+  letter-spacing:.14em;
 }
 .body{padding:18px}
 
@@ -222,16 +239,6 @@ p{margin:0;color:var(--muted)}
   box-shadow:var(--shadow);
 }
 
-@media(max-width:900px){
-  .hero-media{height:64vh; min-height:460px;}
-  .hero-media video{display:none;}
-  .grid2,.grid3,.grid4{grid-template-columns:1fr}
-  .nav{height:auto; padding:14px 0;}
-  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
-  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
-  .logo-plate img{height:78px;}
-}
-
 /* ---------- Enquiry ---------- */
 input,select,textarea{
   width:100%;
@@ -280,26 +287,28 @@ footer{
 
 .model-card{
   flex:0 0 340px;
-  background:var(--panel);
-  border:1px solid var(--line);
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
   scroll-snap-align:start;
-  box-shadow:var(--shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  box-shadow:var(--card-shadow);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  color:var(--card-text);
 }
 .model-card:hover{
-  border-color:#C3D2E7;
-  box-shadow:var(--shadow2);
-  transform:translateY(-2px);
+  border-color:#334155;
+  box-shadow:var(--card-shadow2);
+  transform:translateY(-3px);
 }
 
 .model-img{
   height:220px;
-  background:var(--panel-soft);
+  background:linear-gradient(135deg, #020617, #111827);
   display:flex;
   align-items:center;
   justify-content:center;
   color:#94A3B8;
   font-size:13px;
+  letter-spacing:.14em;
 }
 .model-body{
   padding:16px 18px;
@@ -313,18 +322,18 @@ footer{
   letter-spacing:.08em;
   font-size:16px;
   margin:0;
-  color:var(--text);
+  color:var(--card-text);
 }
 .model-meta{
   margin-top:6px;
   font-size:12px;
   letter-spacing:.12em;
-  color:var(--muted);
+  color:var(--card-muted);
 }
 .model-link{
   font-size:12px;
   letter-spacing:.12em;
-  color:var(--accent);
+  color:var(--card-accent);
   white-space:nowrap;
 }
 
@@ -334,12 +343,24 @@ footer{
   text-align:center;
 }
 
+/* 按钮在滑窗区域也用同一套风格 */
 .slider-btn.btn{
   background:transparent;
   color:var(--accent);
 }
 .slider-btn.btn:hover{
   background:rgba(31,79,216,.08);
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .hero-media{height:64vh; min-height:460px;}
+  .hero-media video{display:none;}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .nav{height:auto; padding:14px 0;}
+  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
+  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
+  .logo-plate img{height:78px;}
 }
 </style>
 </head>
