@@ -26,6 +26,17 @@
 
   --radius:4px;
   --max:1200px;
+
+  /* ✅ 深灰卡片系统（与 models 深灰卡片一致） */
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
@@ -120,21 +131,22 @@ p{margin:0;color:var(--muted); line-height:1.6}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
-/* Cards（同 index 的 shadow/hover） */
+/* ✅ Cards：改成深灰底板白字 */
 .card{
-  background:var(--panel);
-  border:1px solid var(--line);
+  background:var(--card-dark);
+  border:1px solid var(--card-border);
   border-radius:var(--radius);
   overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  box-shadow:var(--card-shadow);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
 }
 .card:hover{
-  border-color:#C3D2E7;
-  box-shadow:var(--shadow2);
+  border-color:#334155;
+  box-shadow:var(--card-shadow2);
   transform:translateY(-2px);
+  background:var(--card-dark-soft);
 }
-.body{padding:18px}
+.body{padding:18px; color:var(--card-text)}
 
 /* Buttons（同 index） */
 .btn{
@@ -155,7 +167,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   color:var(--accent);
 }
 
-/* ---------- Page Hero（改成 index 那种干净渐变） ---------- */
+/* ---------- Page Hero（保持 index 那种干净渐变） ---------- */
 .page-hero{
   position:relative;
   border-bottom:1px solid var(--line);
@@ -199,6 +211,7 @@ p{margin:0;color:var(--muted); line-height:1.6}
   border:1px solid var(--line);
   background:#FFFFFF;
   box-shadow:var(--shadow);
+  border-radius:var(--radius);
 }
 
 /* ---------- Service Detail Blocks ---------- */
@@ -208,27 +221,36 @@ p{margin:0;color:var(--muted); line-height:1.6}
   gap:28px;
   align-items:stretch;
 }
+
+/* ✅ 左侧图片区块改深灰占位 */
 .service-block .block-img{
   min-height:220px;
-  background:var(--panel-soft);
-  border:1px solid var(--line);
   border-radius:var(--radius);
+  border:1px solid var(--card-border);
+  background:
+    radial-gradient(900px 420px at 20% 25%, rgba(96,165,250,.22) 0%, rgba(96,165,250,0) 55%),
+    linear-gradient(135deg, #0B1220 0%, #0F172A 55%, #111827 100%);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#94A3B8;
+  color:var(--card-muted);
   font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
 }
-.service-block .block-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
-}
 
+/* ✅ 右侧详情卡改深灰底白字 */
+.service-block .block-card{
+  background:var(--card-dark);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow);
+  padding:18px;
+  color:var(--card-text);
+}
+.service-block .block-card p{ color:var(--card-muted); }
+
+/* ✅ kv/pill 改深灰胶囊 */
 .kv{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
@@ -236,17 +258,17 @@ p{margin:0;color:var(--muted); line-height:1.6}
   margin-top:14px;
 }
 .kv .pill{
-  border:1px solid var(--line);
+  border:1px solid #334155;
   padding:10px 12px;
-  color:var(--muted);
   font-size:12px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  background:var(--panel-soft);
   border-radius:var(--radius);
+  background:rgba(255,255,255,.04);
+  color:var(--card-muted);
 }
 
-/* ---------- Enquiry（同 index 的 input focus） ---------- */
+/* ---------- Enquiry（同 index 的 input focus，保持白底可读性） ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
@@ -344,25 +366,25 @@ footer a:hover{color:var(--accent)}
       <a class="card" href="#maintenance">
         <div class="body">
           <strong>MAINTENANCE & REPAIRS</strong><br>
-          <span style="color:var(--muted);font-size:13px;">Scheduled servicing & diagnostics</span>
+          <span style="color:var(--card-muted);font-size:13px;">Scheduled servicing & diagnostics</span>
         </div>
       </a>
       <a class="card" href="#parts">
         <div class="body">
           <strong>GENUINE PARTS</strong><br>
-          <span style="color:var(--muted);font-size:13px;">OEM parts & consumables</span>
+          <span style="color:var(--card-muted);font-size:13px;">OEM parts & consumables</span>
         </div>
       </a>
       <a class="card" href="#fleet">
         <div class="body">
           <strong>FLEET PROGRAMS</strong><br>
-          <span style="color:var(--muted);font-size:13px;">Service plans for operators</span>
+          <span style="color:var(--card-muted);font-size:13px;">Service plans for operators</span>
         </div>
       </a>
       <a class="card" href="#tech">
         <div class="body">
           <strong>TECHNICAL SUPPORT</strong><br>
-          <span style="color:var(--muted);font-size:13px;">Warranty, training & guidance</span>
+          <span style="color:var(--card-muted);font-size:13px;">Warranty, training & guidance</span>
         </div>
       </a>
     </div>
