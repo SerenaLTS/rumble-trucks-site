@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Fleet & Finance | RUMBLE Trucks</title>
 
+<!-- ✅ Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -22,6 +23,10 @@
 
   --radius:4px;
   --max:1200px;
+
+  /* ===== Shadows ===== */
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 10px 22px rgba(20,40,80,.10);
 
   /* ===== Dark Card System (统一 index / contact) ===== */
   --card-dark:#0B1220;
@@ -39,7 +44,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
@@ -50,29 +55,44 @@ header{background:#fff;border-bottom:1px solid var(--line)}
   display:flex;align-items:center;justify-content:space-between;
   height:98px;gap:18px;flex-wrap:nowrap;
 }
-.brand-text{
-  font-family:"Roboto Condensed",sans-serif;
-  font-size:30px;letter-spacing:.22em;white-space:nowrap;
+.brand{
+  display:flex;align-items:center;flex-shrink:0;min-width:0;
 }
-.nav-right{display:flex;align-items:center;gap:28px;margin-left:auto}
-.nav-links{display:flex;gap:26px;white-space:nowrap}
-.nav-links a{font-size:14px;color:var(--muted)}
+.brand-text{
+  font-family:"Teko",sans-serif;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.18em;
+  white-space:nowrap;
+  line-height:1;
+  transform:translateY(2px);
+}
+.nav-right{
+  display:flex;align-items:center;gap:28px;margin-left:auto;
+  flex-shrink:0;min-width:0;
+}
+.nav-links{display:flex;gap:26px;white-space:nowrap;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);font-weight:500;line-height:1}
 .nav-links a:hover{color:var(--accent)}
+.logo-plate{display:flex;align-items:center;flex-shrink:0}
 .logo-plate img{
-  height:98px;object-fit:contain;
+  height:98px;width:auto;display:block;object-fit:contain;
   filter:drop-shadow(0 6px 18px rgba(15,23,42,.18))
 }
 
 /* ===== General ===== */
 section{padding:64px 0}
 h1,h2,h3{
-  font-family:"Roboto Condensed",sans-serif;
-  letter-spacing:.08em;margin:0 0 14px;
+  font-family:"Teko",sans-serif;
+  letter-spacing:.12em;
+  margin:0 0 14px;
+  font-weight:700;
+  line-height:1;
 }
-h1{font-size:40px}
-h2{font-size:28px}
-h3{font-size:16px}
-p{margin:0;color:var(--muted);line-height:1.6}
+h1{font-size:56px;transform:translateY(2px)}
+h2{font-size:38px;transform:translateY(2px)}
+h3{font-size:22px;transform:translateY(2px)}
+p{margin:0;color:var(--muted);line-height:1.7}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
@@ -81,30 +101,72 @@ p{margin:0;color:var(--muted);line-height:1.6}
 
 /* ===== Buttons ===== */
 .btn{
-  display:inline-block;padding:12px 20px;
+  display:inline-block;
+  padding:12px 20px;
   border:1px solid var(--accent);
-  background:var(--accent);color:#fff;
-  font-size:14px;font-weight:600;letter-spacing:.08em;
+  background:var(--accent);
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.08em;
+  border-radius:var(--radius);
+  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
 }
 .btn.secondary{background:transparent;color:var(--accent)}
 .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
 
 /* ===== Hero ===== */
 .hero-media{
-  position:relative;height:56vh;min-height:420px;
-  background:var(--panel-soft);border-bottom:1px solid var(--line);
+  position:relative;
+  height:56vh;
+  min-height:420px;
+  background:var(--panel-soft);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
 }
 .hero-placeholder{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
   background:
-    radial-gradient(1100px 520px at 20% 30%, #fff 0%, transparent 55%),
+    radial-gradient(1100px 520px at 20% 30%, #fff 0%, rgba(255,255,255,0) 55%),
     linear-gradient(135deg,#EAF0FA 0%,#F5F7FA 55%,#EEF2F7 100%);
-  color:#64748B;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:#64748B;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(245,247,250,.92),
+    rgba(245,247,250,.55)
+  );
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
 }
 .hero-box{
-  max-width:680px;padding:24px;background:#fff;
-  border:1px solid var(--line);box-shadow:0 12px 28px rgba(20,40,80,.08);
+  max-width:680px;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:var(--radius);
 }
+.hero-box h1{color:var(--text)}
+.hero-box p{color:#475569}
 
 /* ===== Dark Cards (核心) ===== */
 .card,.step,.kpi .item{
@@ -113,44 +175,84 @@ p{margin:0;color:var(--muted);line-height:1.6}
   border-radius:var(--radius);
   box-shadow:var(--card-shadow);
   color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .card:hover,.step:hover,.kpi .item:hover{
   box-shadow:var(--card-shadow2);
+  border-color:#334155;
+  transform:translateY(-3px);
 }
 .card p,.step p{color:var(--card-muted)}
 .body{padding:18px}
 
 /* KPI */
-.kpi{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.kpi .label{font-size:12px;letter-spacing:.12em;color:var(--card-muted)}
+.kpi{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.kpi .label{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+  text-transform:uppercase;
+}
 .kpi .value{
-  margin-top:8px;font-family:"Roboto Condensed",sans-serif;
-  letter-spacing:.08em;color:var(--card-text);
+  margin-top:8px;
+  font-family:"Teko",sans-serif;
+  font-size:22px;
+  letter-spacing:.10em;
+  color:var(--card-text);
+  transform:translateY(2px);
 }
 
 /* Steps */
 .step .num{
-  font-size:12px;letter-spacing:.12em;color:var(--card-muted);
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
   margin-bottom:10px;
+  text-transform:uppercase;
 }
+.step h3{margin:0}
+.step p{margin-top:10px}
 
 /* ===== Form ===== */
 input,textarea{
-  width:100%;padding:12px;border-radius:var(--radius);
-  border:1px solid var(--line);background:#fff;
+  width:100%;
+  padding:12px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:#fff;
+  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  outline:none;
+}
+input:focus, textarea:focus{
+  border-color:#9CB6E8;
+  box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
 textarea{min-height:120px}
 
-/* ===== Footer ===== */
-footer{background:#fff;border-top:1px solid var(--line);padding:48px 0;font-size:13px;color:var(--muted)}
+/* ===== Footer (详尽版，与 index/contact 一致风格) ===== */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:48px 0;
+  font-size:13px;
+  color:var(--muted);
+}
+footer a:hover{color:var(--accent)}
 
 /* ===== Responsive ===== */
 @media(max-width:980px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
   .kpi{grid-template-columns:1fr}
   .nav{height:auto;padding:14px 0}
+  .nav-right{flex-wrap:wrap;justify-content:flex-end}
+  .nav-links{flex-wrap:wrap;row-gap:10px;justify-content:flex-end}
   .logo-plate img{height:78px}
-  .brand-text{font-size:24px}
+  .brand-text{font-size:30px}
+  h1{font-size:48px}
 }
 </style>
 </head>
@@ -159,76 +261,267 @@ footer{background:#fff;border-top:1px solid var(--line);padding:48px 0;font-size
 
 <header>
   <div class="wrap nav">
-    <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    <div class="brand">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet & Finance</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
         <a href="contact.html">Contact</a>
       </nav>
-      <span class="logo-plate"><img src="logo.png"></span>
+
+      <span class="logo-plate"><img src="logo.png" alt="RUMBLE logo"></span>
     </div>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero-media">
-  <div class="hero-placeholder">FLEET & FINANCE MEDIA PLACEHOLDER</div>
-  <div class="wrap" style="position:relative;z-index:2;padding-top:120px">
-    <div class="hero-box">
-      <h1>FLEET & FINANCE</h1>
-      <p>Fleet planning and finance pathways tailored for commercial operators.</p>
+  <div class="hero-placeholder">FLEET &amp; FINANCE MEDIA PLACEHOLDER</div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="wrap">
+      <div class="hero-box">
+        <h1>FLEET &amp; FINANCE</h1>
+        <p>Fleet planning and finance pathways tailored for commercial operators.</p>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn secondary" href="#fleet">FLEET SOLUTIONS</a>
+          <a class="btn secondary" href="#finance">FINANCE OPTIONS</a>
+          <a class="btn" href="#enquiry">REQUEST A QUOTE</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- FLEET -->
+<section id="fleet">
   <div class="wrap grid2">
     <div>
       <h2>FLEET SOLUTIONS</h2>
+      <p>Support for multi-vehicle operations including planning, delivery coordination and uptime.</p>
+
+      <div class="hr"></div>
+
       <div class="kpi">
-        <div class="item"><div class="label">PLANNING</div><div class="value">SPEC MATCHING</div></div>
-        <div class="item"><div class="label">DELIVERY</div><div class="value">COORDINATED</div></div>
-        <div class="item"><div class="label">UPTIME</div><div class="value">SUPPORT PATHWAYS</div></div>
-        <div class="item"><div class="label">PRICING</div><div class="value">VOLUME (TBC)</div></div>
+        <div class="item">
+          <div class="label">PLANNING</div>
+          <div class="value">SPEC MATCHING</div>
+        </div>
+        <div class="item">
+          <div class="label">DELIVERY</div>
+          <div class="value">COORDINATED</div>
+        </div>
+        <div class="item">
+          <div class="label">UPTIME</div>
+          <div class="value">SUPPORT PATHWAYS</div>
+        </div>
+        <div class="item">
+          <div class="label">PRICING</div>
+          <div class="value">VOLUME (TBC)</div>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;">
+        <a class="btn secondary" href="models.html">BROWSE MODELS</a>
       </div>
     </div>
 
     <div class="card">
       <div class="body">
         <h3>FLEET CHECKLIST</h3>
-        <p>Payload, routes, axle setup, body type, annual km and timeframe.</p>
+        <p style="margin-top:10px;">
+          Payload, routes, axle setup, body type, annual km and delivery timeframe.
+        </p>
+        <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+        <p style="font-size:13px;">
+          PLACEHOLDER: add your fleet brochure / PDF link later.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- FINANCE -->
+<section id="finance">
   <div class="wrap">
-    <h2>FINANCE OPTIONS</h2>
-    <div class="grid3" style="margin-top:22px">
-      <div class="card"><div class="body"><h3>BUSINESS FINANCE</h3><p>Predictable payments.</p></div></div>
-      <div class="card"><div class="body"><h3>LEASE / RENTAL</h3><p>Flexible fleet cycles.</p></div></div>
-      <div class="card"><div class="body"><h3>FLEET PACKAGE</h3><p>Bundled services.</p></div></div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
+      <div>
+        <h2>FINANCE OPTIONS</h2>
+        <p>Structures depend on operator profile and requirements.</p>
+      </div>
+      <a class="btn secondary" href="#enquiry">TALK TO US</a>
+    </div>
+
+    <div class="grid3" style="margin-top:22px;">
+      <div class="card">
+        <div class="body">
+          <h3>BUSINESS FINANCE</h3>
+          <p style="margin-top:10px;">Predictable monthly payments for commercial operators.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: list example terms later.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <h3>LEASE / RENTAL</h3>
+          <p style="margin-top:10px;">Flexibility for fleet refresh cycles.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: add product notes later.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <h3>FLEET PACKAGE</h3>
+          <p style="margin-top:10px;">Bundle support services and maintenance planning.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: package inclusions later.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section>
   <div class="wrap">
     <h2>HOW IT WORKS</h2>
+    <p style="margin-bottom:18px;">A simple flow from requirements to delivery.</p>
+
     <div class="grid4">
-      <div class="step"><div class="num">STEP 01</div><h3>REQUIREMENTS</h3></div>
-      <div class="step"><div class="num">STEP 02</div><h3>MODEL & SPEC</h3></div>
-      <div class="step"><div class="num">STEP 03</div><h3>QUOTE</h3></div>
-      <div class="step"><div class="num">STEP 04</div><h3>DELIVERY</h3></div>
+      <div class="step">
+        <div class="num">STEP 01</div>
+        <h3>REQUIREMENTS</h3>
+        <p>Tell us your application, payload, and delivery timeline.</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 02</div>
+        <h3>MODEL &amp; SPEC</h3>
+        <p>We propose suitable models and configurations.</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 03</div>
+        <h3>QUOTE</h3>
+        <p>Pricing, availability, and finance pathways (if required).</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 04</div>
+        <h3>DELIVERY</h3>
+        <p>Coordinate delivery and aftersales support.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ENQUIRY -->
+<section id="enquiry">
+  <div class="wrap">
+    <h2>FLEET &amp; FINANCE ENQUIRY</h2>
+    <p style="margin-bottom:24px;">Provide basic details and we’ll contact you with tailored options.</p>
+
+    <form class="grid2">
+      <input placeholder="Business / Contact Name" required>
+      <input placeholder="Phone / Email" required>
+      <input placeholder="Fleet Size (optional)">
+      <input placeholder="Preferred Model / Application (optional)">
+      <textarea placeholder="Your requirements (routes, payload, body type, finance preference)"></textarea>
+      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER (详尽版) -->
 <footer>
-  <div class="wrap">© <span id="y"></span> RUMBLE Trucks</div>
+  <div class="wrap">
+
+    <div style="
+      display:grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap:40px;
+      margin-bottom:24px;
+    ">
+
+      <div>
+        <div style="
+          font-family:'Teko', sans-serif;
+          letter-spacing:.18em;
+          font-size:22px;
+          font-weight:700;
+          margin-bottom:10px;
+          color:var(--text);
+          transform:translateY(2px);
+        ">
+          RUMBLE
+        </div>
+        <p style="max-width:260px;">
+          Commercial trucks and fleet solutions built for real work.
+        </p>
+      </div>
+
+      <div>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
+        <div style="display:grid;gap:8px;">
+          <a href="models.html">All Models</a>
+          <a href="models.html#series">Series</a>
+          <a href="models.html#categories">Applications</a>
+        </div>
+      </div>
+
+      <div>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
+        <div style="display:grid;gap:8px;">
+          <a href="services.html#maintenance">Maintenance</a>
+          <a href="services.html#parts">Genuine Parts</a>
+          <a href="services.html#fleet">Fleet Programs</a>
+          <a href="services.html#tech">Technical Support</a>
+        </div>
+      </div>
+
+      <div>
+        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
+        <div style="display:grid;gap:8px;">
+          <a href="#">About</a>
+          <a href="fleet-finance.html">Fleet &amp; Finance</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      font-size:12px;
+      color:var(--muted);
+    ">
+      <div>© <span id="y"></span> RUMBLE Trucks</div>
+      <div style="display:flex;gap:20px; flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <a href="models.html">Models</a>
+        <a href="services.html">Services</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+
+  </div>
 </footer>
 
 <script>
