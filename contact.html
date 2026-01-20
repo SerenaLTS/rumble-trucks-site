@@ -13,7 +13,7 @@
 :root{
   /* ✅ 与 index 完全统一的白底灰蓝配色 */
   --bg:#F5F7FA;
-  --panel:#FFFFFF;
+  --panel:#FFFFFF;            /* 少量白底元素（hero-box / footer等） */
   --panel-soft:#EEF2F7;
   --line:#D6DEE8;
   --text:#0F172A;
@@ -25,6 +25,16 @@
 
   --radius:4px;
   --max:1200px;
+
+  /* ✅ 深灰卡片系统（和你最新 index 一致） */
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border-dark:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
@@ -111,13 +121,6 @@ p{margin:0;color:var(--muted); line-height:1.6}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 
-.card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  border-radius:var(--radius);
-}
-.body{padding:20px}
 .hr{height:1px;background:var(--line);margin:22px 0}
 
 /* ---------- Buttons ---------- */
@@ -181,26 +184,48 @@ p{margin:0;color:var(--muted); line-height:1.6}
   border-radius:var(--radius);
 }
 
-/* ---------- Contact Info ---------- */
+/* =======================
+   ✅ Dark Cards (Contact)
+   - Contact info boxes
+   - Enquiry form card
+   ======================= */
+.card{
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
+  border-radius:var(--radius);
+  color:var(--card-text);
+}
+.card:hover{
+  box-shadow:var(--card-shadow2);
+  border-color:#334155;
+}
+
+.body{padding:20px}
+
 .info-item{
-  background:var(--panel-soft);
-  border:1px solid var(--line);
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
   padding:18px;
   border-radius:var(--radius);
+  color:var(--card-text);
 }
 .info-item .label{
   font-size:12px;
   letter-spacing:.12em;
-  color:var(--muted);
+  color:var(--card-muted);
   margin-bottom:8px;
 }
 .info-item .value{
   font-family:"Roboto Condensed", sans-serif;
   letter-spacing:.08em;
-  color:var(--text);
+  color:var(--card-text);
 }
 
-/* ---------- Form ---------- */
+/* ---------- Form ----------
+   表单本身保持白底，放在深灰卡片里对比更清晰
+*/
 input,select,textarea{
   width:100%;
   padding:12px;
@@ -216,6 +241,10 @@ input:focus, select:focus, textarea:focus{
   box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
 textarea{min-height:120px}
+
+/* 让深灰卡片里的说明文字可读 */
+.card p{color:var(--card-muted)}
+.card h3, .card strong{color:var(--card-text)}
 
 /* ---------- Footer ---------- */
 footer{
