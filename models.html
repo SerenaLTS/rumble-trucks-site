@@ -25,6 +25,16 @@
 
   --radius:4px;
   --max:1200px;
+
+  /* ✅ 深灰卡片系统（同你 fleet 深灰版思路） */
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
@@ -48,7 +58,7 @@ header{
   align-items:center;
   justify-content:space-between;
   height:98px;
-  flex-wrap:nowrap;     /* ⭐关键：禁止换行 */
+  flex-wrap:nowrap;
   gap:18px;
 }
 
@@ -64,7 +74,7 @@ header{
   font-size:30px;
   letter-spacing:.22em;
   line-height:1;
-  white-space:nowrap;   /* ⭐RUMBLE AUTO 不换行 */
+  white-space:nowrap;
 }
 
 .nav-right{
@@ -80,7 +90,7 @@ header{
   display:flex;
   align-items:center;
   gap:26px;
-  white-space:nowrap;   /* ⭐导航不换行 */
+  white-space:nowrap;
 }
 
 .nav-links a{
@@ -96,7 +106,7 @@ header{
   flex-shrink:0;
 }
 .logo-plate img{
-  height:98px;  /* ✅ 铭牌 98 */
+  height:98px;
   width:auto;
   display:block;
   object-fit:contain;
@@ -117,35 +127,50 @@ p{margin:0; color:var(--muted); line-height:1.6}
 
 .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
 
-/* ================= Cards（同 index 的 shadow/hover）================= */
+/* ================= 深灰 Cards（你要的重点）================= */
 .card{
-  background:var(--panel);
-  border:1px solid var(--line);
+  background:var(--card-dark);
+  border:1px solid var(--card-border);
   border-radius:var(--radius);
   overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  box-shadow:var(--card-shadow);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
 }
 .card:hover{
-  border-color:#C3D2E7;
-  box-shadow:var(--shadow2);
+  border-color:#334155;
+  box-shadow:var(--card-shadow2);
   transform:translateY(-2px);
+  background:var(--card-dark-soft);
 }
 
 .img{
   height:240px;
-  background:var(--panel-soft);
-  display:flex; align-items:center; justify-content:center;
-  color:#94A3B8;
+  background:
+    radial-gradient(900px 420px at 20% 25%, rgba(96,165,250,.22) 0%, rgba(96,165,250,0) 55%),
+    linear-gradient(135deg, #0B1220 0%, #0F172A 55%, #111827 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--card-muted);
   font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
 }
+
 .body{
   padding:16px;
-  display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  color:var(--card-text);
 }
-.meta{font-size:12px; letter-spacing:.12em; color:var(--muted)}
+
+.meta{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+}
 
 /* Buttons（同 index） */
 .btn{
@@ -166,7 +191,7 @@ p{margin:0; color:var(--muted); line-height:1.6}
   color:var(--accent);
 }
 
-/* ---------- MODELS HERO（改成 index 那种干净渐变） ---------- */
+/* ---------- MODELS HERO（保持你原来干净渐变） ---------- */
 .models-hero{
   position:relative;
   height:56vh;
@@ -217,6 +242,7 @@ p{margin:0; color:var(--muted); line-height:1.6}
   border:1px solid var(--line);
   background:#FFFFFF;
   box-shadow:var(--shadow);
+  border-radius:var(--radius);
 }
 .models-hero h1{color:var(--text)}
 .models-hero p{color:#475569; max-width:560px}
@@ -309,7 +335,7 @@ footer a:hover{color:var(--accent)}
             <strong>G7 SERIES</strong>
             <div class="meta" style="margin-top:6px;">HEAVY DUTY · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
 
@@ -320,7 +346,7 @@ footer a:hover{color:var(--accent)}
             <strong>T5G SERIES</strong>
             <div class="meta" style="margin-top:6px;">MEDIUM DUTY · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
 
@@ -331,14 +357,14 @@ footer a:hover{color:var(--accent)}
             <strong>G5 SERIES</strong>
             <div class="meta" style="margin-top:6px;">LIGHT / MEDIUM · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- APPLICATIONS（你原来没贴，我先给你留一段结构，方便后续加） -->
+<!-- APPLICATIONS -->
 <section id="categories">
   <div class="wrap">
     <h2>APPLICATIONS</h2>
@@ -352,7 +378,7 @@ footer a:hover{color:var(--accent)}
             <strong>TIPPER</strong>
             <div class="meta" style="margin-top:6px;">CONSTRUCTION · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
 
@@ -363,7 +389,7 @@ footer a:hover{color:var(--accent)}
             <strong>CARGO</strong>
             <div class="meta" style="margin-top:6px;">LOGISTICS · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
 
@@ -374,7 +400,7 @@ footer a:hover{color:var(--accent)}
             <strong>PRIME MOVER</strong>
             <div class="meta" style="margin-top:6px;">LONG HAUL · TBC</div>
           </div>
-          <div class="meta" style="color:var(--accent);">DETAILS →</div>
+          <div class="meta" style="color:var(--card-accent);">DETAILS →</div>
         </div>
       </a>
     </div>
