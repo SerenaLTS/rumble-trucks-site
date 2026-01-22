@@ -5,36 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RUMBLE Trucks</title>
 
-<!-- Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
+<!-- Base fonts (original): Inter + Roboto Condensed
+     Brand font (header only): Black Ops One -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* ===== 白底 + 灰蓝 + 蓝（更明亮，贴近 Sitrak 气质）===== */
-  --bg:#F5F7FA;              /* 页面主背景（冷白） */
-  --panel:#FFFFFF;           /* 少量白底元素（Hero box / Footer） */
-  --panel-soft:#EEF2F7;      /* 浅灰蓝块 */
-  --line:#D6DEE8;            /* 分割线 */
-  --text:#0F172A;            /* 主文字 */
-  --muted:#64748B;           /* 次文字 */
-  --accent:#1F4FD8;          /* 品牌蓝（按钮/链接强调） */
-
-  --shadow:0 12px 28px rgba(20,40,80,.08);
-  --shadow2:0 10px 22px rgba(20,40,80,.10);
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --panel-soft:#EEF2F7;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
 
   --radius:4px;
   --max:1200px;
 
-  /* ===== 深灰卡片系统（深灰底 + 白字）===== */
-  --card-dark:#0B1220;        /* 深灰主卡片 */
-  --card-dark-soft:#111827;   /* 次级深灰 */
-  --card-border-dark:#1F2937; /* 深灰边框 */
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 10px 22px rgba(20,40,80,.10);
 
-  --card-text:#F8FAFC;        /* 白字 */
-  --card-muted:#CBD5E1;       /* 次白字 */
-  --card-accent:#60A5FA;      /* 亮一点的蓝强调 */
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border-dark:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
   --card-shadow:0 18px 36px rgba(0,0,0,.35);
   --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
@@ -44,341 +42,166 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (RUMBLE AUTO left, nav+logo right) ---------- */
+/* ===== Header (统一标准) ===== */
 header{
-  background:#FFFFFF;
+  background:#fff;
   border-bottom:1px solid var(--line);
 }
-
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   height:98px;
-  flex-wrap:nowrap;          /* ⭐禁止换行 */
   gap:18px;
 }
+.brand{display:flex;align-items:center;flex-shrink:0}
 
-.brand{
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-  min-width:0;
-}
-
+/* ✅ ONLY brand uses Black Ops One */
 .brand-text{
-  font-family:"Teko", sans-serif;
-  font-size:34px;
-  font-weight:700;
-  letter-spacing:.18em;
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:42px;
+  letter-spacing:.22em;
+  white-space:nowrap;
   line-height:1;
-  white-space:nowrap;        /* ⭐品牌文字不换行 */
-  transform: translateY(2px); /* Teko 视觉居中微调 */
+  transform:translateY(2px);
+}
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
 }
 
 .nav-right{
   display:flex;
   align-items:center;
   gap:28px;
-  flex-shrink:0;             /* ⭐右侧整体不掉行 */
-  margin-left:auto;          /* ⭐贴右 */
-  min-width:0;
+  margin-left:auto;
 }
-
 .nav-links{
   display:flex;
-  align-items:center;
   gap:26px;
-  white-space:nowrap;        /* ⭐导航不换行 */
+  white-space:nowrap;
 }
-
 .nav-links a{
   font-size:14px;
   color:var(--muted);
-  line-height:1;
   font-weight:500;
 }
 .nav-links a:hover{color:var(--accent)}
 
-.logo-plate{
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-}
-
-/* ⭐ 铭牌感：保持 98px */
 .logo-plate img{
-  height:98px;
+  height:108px;
   width:auto;
   display:block;
-  object-fit:contain;
-  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+  filter:drop-shadow(0 6px 18px rgba(15,23,42,.18));
 }
 
-/* ---------- General ---------- */
+/* ===== General typography ===== */
 section{padding:72px 0}
 h1,h2{
-  font-family:"Teko", sans-serif;
-  letter-spacing:.12em;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
   font-weight:700;
 }
-h1{font-size:56px; margin:0 0 14px; line-height:.95}
-h2{font-size:40px; margin:0 0 12px; line-height:1}
-p{margin:0;color:var(--muted); line-height:1.7}
+h1{font-size:56px;margin:0 0 14px}
+h2{font-size:40px;margin:0 0 12px}
+p{margin:0;color:var(--muted);line-height:1.7}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
-/* ---------- Cards (dark cards) ---------- */
+/* ===== Cards ===== */
 .card{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
   box-shadow:var(--card-shadow);
   color:var(--card-text);
   border-radius:var(--radius);
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  transition:.15s;
 }
 .card:hover{
-  border-color:#334155;
   box-shadow:var(--card-shadow2);
+  border-color:#334155;
   transform:translateY(-3px);
 }
-.card strong{color:var(--card-text)}
 .card p{color:var(--card-muted)}
-.card .body{color:var(--card-text)}
-
-.img{
-  height:220px;
-  background:linear-gradient(135deg, #111827, #020617);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#94A3B8;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
 .body{padding:18px}
 
-/* ---------- Buttons ---------- */
+/* ===== Buttons ===== */
 .btn{
   display:inline-block;
   padding:12px 20px;
   border:1px solid var(--accent);
+  background:var(--accent);
+  color:#fff;
   font-size:14px;
   font-weight:600;
   letter-spacing:.08em;
-  background:var(--accent);
-  color:#FFFFFF;
-  transition:transform .12s ease, filter .12s ease, background .12s ease, color .12s ease;
   border-radius:var(--radius);
 }
-.btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
 .btn.secondary{
   background:transparent;
   color:var(--accent);
 }
 
-/* ---------- Hero Media ---------- */
+/* ===== Hero ===== */
 .hero-media{
   position:relative;
   height:78vh;
   min-height:520px;
-  overflow:hidden;
-  border-bottom:1px solid var(--line);
   background:var(--panel-soft);
+  border-bottom:1px solid var(--line);
 }
-
-.hero-media video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:none;
-}
-
-.hero-media .hero-placeholder{
+.hero-placeholder{
   position:absolute;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:24px;
-  background:
-    radial-gradient(1200px 600px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
-  color:#64748B;
   font-size:13px;
   letter-spacing:.14em;
-  text-transform:uppercase;
+  color:#64748B;
 }
-
-.hero-media .overlay{
+.overlay{
   position:relative;
-  z-index:2;
   height:100%;
   display:flex;
   align-items:center;
   background:linear-gradient(
     to right,
-    rgba(245,247,250,0.92),
-    rgba(245,247,250,0.55)
+    rgba(245,247,250,.92),
+    rgba(245,247,250,.55)
   );
 }
-
-.hero-media h1{color:var(--text)}
-.hero-media p{color:#475569; max-width:560px}
-
-.hero-media .slogan-box{
+.slogan-box{
   max-width:680px;
   padding:28px;
+  background:#fff;
   border:1px solid var(--line);
-  background:#FFFFFF;
   box-shadow:var(--shadow);
-  border-radius:var(--radius);
 }
 
-/* ---------- Enquiry ---------- */
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  background:#FFFFFF;
-  border:1px solid var(--line);
-  color:var(--text);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  outline:none;
-  border-radius:var(--radius);
-}
-input:focus, select:focus, textarea:focus{
-  border-color:#9CB6E8;
-  box-shadow:0 0 0 4px rgba(31,79,216,.12);
-}
-textarea{min-height:110px}
-
-/* ---------- Footer ---------- */
+/* ===== Footer ===== */
 footer{
-  background:#FFFFFF;
+  background:#fff;
   border-top:1px solid var(--line);
   padding:48px 0;
   font-size:13px;
   color:var(--muted);
 }
-.footer-nav{
-  display:flex;
-  gap:24px;
-  justify-content:center;
-  margin-bottom:16px;
-}
-.footer-nav a:hover{color:var(--accent)}
 
-/* ---------- Models Slider ---------- */
-.models-slider{
-  margin-top:22px;
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  padding:6px 2px 12px;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-}
-.models-slider::-webkit-scrollbar{height:10px}
-.models-slider::-webkit-scrollbar-thumb{background:#CBD5E1}
-.models-slider::-webkit-scrollbar-track{background:transparent}
-
-.model-card{
-  flex:0 0 340px;
-  background:var(--card-dark);
-  border:1px solid var(--card-border-dark);
-  scroll-snap-align:start;
-  box-shadow:var(--card-shadow);
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  color:var(--card-text);
-  border-radius:var(--radius);
-  overflow:hidden;
-}
-.model-card:hover{
-  border-color:#334155;
-  box-shadow:var(--card-shadow2);
-  transform:translateY(-3px);
-}
-
-.model-img{
-  height:220px;
-  background:linear-gradient(135deg, #020617, #111827);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#94A3B8;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-.model-body{
-  padding:16px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-}
-.model-title{
-  font-family:"Teko", sans-serif;
-  letter-spacing:.10em;
-  font-size:22px;
-  line-height:1;
-  margin:0;
-  color:var(--card-text);
-  transform: translateY(2px);
-}
-.model-meta{
-  margin-top:6px;
-  font-size:12px;
-  letter-spacing:.12em;
-  color:var(--card-muted);
-  text-transform:uppercase;
-}
-.model-link{
-  font-size:12px;
-  letter-spacing:.12em;
-  color:var(--card-accent);
-  white-space:nowrap;
-  text-transform:uppercase;
-}
-
-.slider-btn{
-  padding:10px 14px;
-  min-width:44px;
-  text-align:center;
-}
-
-/* 按钮在滑窗区域也用同一套风格 */
-.slider-btn.btn{
-  background:transparent;
-  color:var(--accent);
-}
-.slider-btn.btn:hover{
-  background:rgba(31,79,216,.08);
-}
-
-/* ---------- Responsive ---------- */
+/* ===== Responsive ===== */
 @media(max-width:900px){
-  .hero-media{height:64vh; min-height:460px;}
-  .hero-media video{display:none;}
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
-  .nav{height:auto; padding:14px 0;}
-  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
-  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
-  .logo-plate img{height:78px;}
-  .brand-text{font-size:30px;}
-  h1{font-size:48px;}
+  .nav{height:auto;padding:14px 0}
+  .nav-right{flex-wrap:wrap;justify-content:flex-end}
+  .logo-plate img{height:78px}
+  .brand-text{font-size:28px}
 }
 </style>
 </head>
@@ -387,11 +210,9 @@ footer{
 
 <header>
   <div class="wrap nav">
-
     <div class="brand">
       <span class="brand-text">RUMBLE&nbsp;AUTO</span>
     </div>
-
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -400,34 +221,22 @@ footer{
         <a href="fleet-finance.html">Fleet & Finance</a>
         <a href="contact.html">Contact</a>
       </nav>
-
       <span class="logo-plate">
         <img src="logo.png" alt="RUMBLE logo">
       </span>
     </div>
-
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero-media">
-  <video autoplay muted loop playsinline preload="metadata">
-    <!-- <source src="https://your-cdn.com/hero-truck.mp4" type="video/mp4"> -->
-  </video>
-
-  <div class="hero-placeholder">
-    BACKGROUND MEDIA PLACEHOLDER<br><br>
-    (THIS AREA WILL BE A VIDEO OR IMAGE IN THE FUTURE)
-  </div>
-
+  <div class="hero-placeholder">BACKGROUND MEDIA PLACEHOLDER</div>
   <div class="overlay">
     <div class="wrap">
       <div class="slogan-box">
         <h1>BUILT FOR REAL WORK</h1>
-        <p>Commercial trucks engineered for durability, payload efficiency, and long-term uptime.</p>
-
-        <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn" href="models.html">VIEW OUR MODELS</a>
+        <p>Commercial trucks engineered for durability and uptime.</p>
+        <div style="margin-top:24px;">
+          <a class="btn" href="models.html">VIEW MODELS</a>
           <a class="btn secondary" href="#enquiry">GET A QUOTE</a>
         </div>
       </div>
@@ -435,257 +244,12 @@ footer{
   </div>
 </section>
 
-<!-- TRUCK RANGE (SLIDER) -->
-<section>
-  <div class="wrap">
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
-      <div>
-        <h2>TRUCK RANGE</h2>
-        <p>Browse our models. Click to view details or enquire.</p>
-      </div>
-      <div style="display:flex; gap:10px;">
-        <button class="btn slider-btn" type="button" id="modelsPrev" aria-label="Previous models">←</button>
-        <button class="btn slider-btn" type="button" id="modelsNext" aria-label="Next models">→</button>
-      </div>
-    </div>
-
-    <div class="models-slider" id="modelsSlider" aria-label="Models slider"></div>
-
-    <div style="margin-top:24px;">
-      <a class="btn secondary" href="models.html">VIEW ALL MODELS</a>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section>
-  <div class="wrap">
-    <h2>SERVICES & SUPPORT</h2>
-    <p style="margin-bottom:24px;">Supporting your trucks throughout their working life.</p>
-
-    <div class="grid4">
-      <a class="card" href="services.html#maintenance"><div class="body"><strong>MAINTENANCE & REPAIRS</strong></div></a>
-      <a class="card" href="services.html#parts"><div class="body"><strong>GENUINE PARTS</strong></div></a>
-      <a class="card" href="services.html#fleet"><div class="body"><strong>FLEET PROGRAMS</strong></div></a>
-      <a class="card" href="services.html#tech"><div class="body"><strong>TECHNICAL SUPPORT</strong></div></a>
-    </div>
-
-    <div style="margin-top:24px;">
-      <a class="btn secondary" href="services.html">VIEW ALL SERVICES</a>
-    </div>
-  </div>
-</section>
-
-<!-- NEWS (PLACEHOLDER) -->
-<section>
-  <div class="wrap">
-    <h2>NEWS & UPDATES</h2>
-    <p style="margin-bottom:24px;">Latest product updates, deliveries and company news.</p>
-
-    <div class="grid3">
-      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
-      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
-      <div class="card"><div class="img">News Image</div><div class="body"><strong>News article placeholder</strong></div></div>
-    </div>
-
-    <div style="margin-top:24px;">
-      <a class="btn secondary" href="#">VIEW ALL NEWS</a>
-    </div>
-  </div>
-</section>
-
-<!-- ENQUIRY -->
-<section id="enquiry">
-  <div class="wrap">
-    <h2>ENQUIRY</h2>
-    <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
-
-    <form class="grid2">
-      <input placeholder="Name" required>
-      <input placeholder="Phone / Email" required>
-      <select required>
-        <option value="">Enquiry Type</option>
-        <option>Sales Enquiry</option>
-        <option>Service & Maintenance</option>
-        <option>Parts Enquiry</option>
-        <option>Fleet / Finance</option>
-        <option>General Enquiry</option>
-      </select>
-      <input placeholder="Preferred Model">
-      <textarea placeholder="Message" required></textarea>
-      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
-    </form>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap">
-
-    <div style="
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap:40px;
-      margin-bottom:24px;
-    ">
-
-      <div>
-        <div style="
-          font-family:'Teko', sans-serif;
-          letter-spacing:.18em;
-          font-size:22px;
-          font-weight:700;
-          margin-bottom:10px;
-          color:var(--text);
-          transform: translateY(2px);
-        ">
-          RUMBLE
-        </div>
-        <p style="max-width:260px;">
-          Commercial trucks and fleet solutions built for real work.
-        </p>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="models.html">All Models</a>
-          <a href="models.html">Series</a>
-          <a href="models.html">Applications</a>
-        </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="services.html#maintenance">Maintenance</a>
-          <a href="services.html#parts">Genuine Parts</a>
-          <a href="services.html#fleet">Fleet Programs</a>
-          <a href="services.html#tech">Technical Support</a>
-        </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="#">About</a>
-          <a href="fleet-finance.html">Fleet & Finance</a>
-          <a href="contact.html">Contact</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12px;
-      color:var(--muted);
-    ">
-      <div>© <span id="y"></span> RUMBLE Trucks</div>
-      <div style="display:flex;gap:20px;">
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet & Finance</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-
-  </div>
+  <div class="wrap">© <span id="y"></span> RUMBLE Trucks</div>
 </footer>
 
 <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-</script>
-
-<script>
-  const MODELS = [
-    { name: "Model 1", meta: "SERIES · 6x4", href: "models.html", image: "" },
-    { name: "Model 2", meta: "SERIES · 4x2", href: "models.html", image: "" },
-    { name: "Model 3", meta: "SERIES · 8x4", href: "models.html", image: "" },
-    { name: "Model 4", meta: "SERIES · TIPPER", href: "models.html", image: "" },
-    { name: "Model 5", meta: "SERIES · PRIME MOVER", href: "models.html", image: "" },
-    { name: "Model 6", meta: "SERIES · CARGO", href: "models.html", image: "" },
-  ];
-
-  const slider = document.getElementById("modelsSlider");
-
-  function createCard(m){
-    const a = document.createElement("a");
-    a.className = "model-card";
-    a.href = m.href || "#";
-
-    const img = document.createElement("div");
-    img.className = "model-img";
-
-    if (m.image) {
-      img.style.backgroundImage = `url('${m.image}')`;
-      img.style.backgroundSize = "cover";
-      img.style.backgroundPosition = "center";
-      img.textContent = "";
-    } else {
-      img.textContent = "Model Image (placeholder)";
-    }
-
-    const body = document.createElement("div");
-    body.className = "model-body";
-
-    const left = document.createElement("div");
-
-    const title = document.createElement("div");
-    title.className = "model-title";
-    title.textContent = (m.name || "").toUpperCase();
-
-    const meta = document.createElement("div");
-    meta.className = "model-meta";
-    meta.textContent = (m.meta || "").toUpperCase();
-
-    left.appendChild(title);
-    left.appendChild(meta);
-
-    const right = document.createElement("div");
-    right.className = "model-link";
-    right.textContent = "DETAILS →";
-
-    body.appendChild(left);
-    body.appendChild(right);
-
-    a.appendChild(img);
-    a.appendChild(body);
-    return a;
-  }
-
-  MODELS.forEach(m => slider.appendChild(createCard(m)));
-
-  const prev = document.getElementById("modelsPrev");
-  const next = document.getElementById("modelsNext");
-
-  function scrollByCard(dir){
-    const card = slider.querySelector(".model-card");
-    const step = card ? (card.getBoundingClientRect().width + 18) : 360;
-    slider.scrollBy({ left: dir * step, behavior: "smooth" });
-  }
-  prev.addEventListener("click", ()=>scrollByCard(-1));
-  next.addEventListener("click", ()=>scrollByCard(1));
-
-  let isDown = false, startX = 0, startScrollLeft = 0;
-  slider.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX;
-    startScrollLeft = slider.scrollLeft;
-  });
-  window.addEventListener("mouseup", ()=>{ isDown = false; });
-  slider.addEventListener("mouseleave", ()=>{ isDown = false; });
-  slider.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    const dx = e.pageX - startX;
-    slider.scrollLeft = startScrollLeft - dx;
-  });
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
 
 </body>
