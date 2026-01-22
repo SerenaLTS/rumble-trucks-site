@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Models | RUMBLE Trucks</title>
 
-<!-- ✅ Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
+<!-- Base fonts (original): Inter + Roboto Condensed
+     Brand font (header only): Black Ops One -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* ✅ Base (same system) */
+  /* ✅ Base */
   --bg:#F5F7FA;
   --panel:#FFFFFF;
   --panel-soft:#EEF2F7;
@@ -27,7 +28,7 @@
   --radius:4px;
   --max:1200px;
 
-  /* ✅ Dark cards (same as fleet/index) */
+  /* ✅ Dark cards */
   --card-dark:#0B1220;
   --card-dark-soft:#111827;
   --card-border:#1F2937;
@@ -43,17 +44,16 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ================= HEADER（same layout, Option D type）================= */
+/* ================= HEADER（统一母版：Black Ops One + 42px + logo 108px）================= */
 header{
   background:#FFFFFF;
   border-bottom:1px solid var(--line);
 }
-
 .nav{
   display:flex;
   align-items:center;
@@ -62,7 +62,6 @@ header{
   flex-wrap:nowrap;
   gap:18px;
 }
-
 .brand{
   display:flex;
   align-items:center;
@@ -70,14 +69,17 @@ header{
   min-width:0;
 }
 
+/* ✅ ONLY header brand uses Black Ops One */
 .brand-text{
-  font-family:"Teko", sans-serif;
-  font-size:34px;
-  font-weight:700;
-  letter-spacing:.18em;
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:42px;
+  letter-spacing:.22em;
   line-height:1;
   white-space:nowrap;
   transform:translateY(2px);
+}
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
 }
 
 .nav-right{
@@ -88,14 +90,12 @@ header{
   margin-left:auto;
   min-width:0;
 }
-
 .nav-links{
   display:flex;
   align-items:center;
   gap:26px;
   white-space:nowrap;
 }
-
 .nav-links a{
   font-size:14px;
   color:var(--muted);
@@ -110,25 +110,25 @@ header{
   flex-shrink:0;
 }
 .logo-plate img{
-  height:98px;
+  height:108px;
   width:auto;
   display:block;
   object-fit:contain;
   filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
 }
 
-/* ================= Typography / Layout ================= */
+/* ================= Typography / Layout（回到原版：Roboto Condensed headings + Inter body）================= */
 section{padding:56px 0}
 h1,h2,h3{
-  font-family:"Teko", sans-serif;
-  letter-spacing:.12em;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
   margin:0 0 12px;
   font-weight:700;
-  line-height:1;
+  line-height:1.05;
 }
-h1{font-size:56px; transform:translateY(2px)}
-h2{font-size:38px; margin:0; transform:translateY(2px)}
-h3{font-size:22px; margin:0; transform:translateY(2px)}
+h1{font-size:40px}
+h2{font-size:28px; margin:0}
+h3{font-size:16px; margin:0}
 p{margin:0; color:var(--muted); line-height:1.7}
 
 .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
@@ -171,17 +171,13 @@ p{margin:0; color:var(--muted); line-height:1.7}
   gap:12px;
   color:var(--card-text);
 }
-
 .meta{
   font-size:12px;
   letter-spacing:.12em;
   color:var(--card-muted);
   text-transform:uppercase;
 }
-
-/* Make default <strong> readable on dark cards */
 .card strong{color:var(--card-text)}
-/* Accent on CTA text inside card */
 .card .cta{color:var(--card-accent)}
 
 /* Buttons */
@@ -257,7 +253,6 @@ p{margin:0; color:var(--muted); line-height:1.7}
   box-shadow:var(--shadow);
   border-radius:var(--radius);
 }
-.models-hero h1{color:var(--text)}
 .models-hero p{color:#475569; max-width:560px}
 
 /* ================= Footer ================= */
@@ -279,8 +274,8 @@ footer a:hover{color:var(--accent)}
   .nav-right{flex-wrap:wrap; justify-content:flex-end;}
   .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
   .logo-plate img{height:78px;}
-  .brand-text{font-size:30px;}
-  h1{font-size:48px}
+  .brand-text{font-size:28px; letter-spacing:.22em;}
+  h1{font-size:34px}
 }
 </style>
 </head>
@@ -436,13 +431,11 @@ footer a:hover{color:var(--accent)}
 
       <div>
         <div style="
-          font-family:'Teko', sans-serif;
-          letter-spacing:.18em;
-          font-size:22px;
-          font-weight:700;
-          margin-bottom:10px;
+          font-family:'Roboto Condensed', sans-serif;
+          letter-spacing:.2em;
+          font-size:18px;
+          margin-bottom:12px;
           color:var(--text);
-          transform:translateY(2px);
         ">RUMBLE</div>
         <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
       </div>
