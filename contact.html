@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Contact | RUMBLE Trucks</title>
 
-<!-- Option D fonts: Teko (headings/brand) + IBM Plex Sans (body) -->
+<!-- Base fonts (original style): Inter + Roboto Condensed
+     Brand font: Black Ops One (header only) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
 
 <style>
 :root{
   /* ✅ 白底灰蓝体系 */
   --bg:#F5F7FA;
-  --panel:#FFFFFF;            /* 少量白底元素（hero-box / footer等） */
+  --panel:#FFFFFF;
   --panel-soft:#EEF2F7;
   --line:#D6DEE8;
   --text:#0F172A;
@@ -27,7 +28,7 @@
   --radius:4px;
   --max:1200px;
 
-  /* ✅ 深灰卡片系统（与最新 index 一致） */
+  /* ✅ 深灰卡片系统 */
   --card-dark:#0B1220;
   --card-dark-soft:#111827;
   --card-border-dark:#1F2937;
@@ -45,12 +46,12 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ---------- Header (与 index 完全同款：RUMBLE AUTO left, nav+logo right) ---------- */
+/* ---------- Header ---------- */
 header{
   background:#FFFFFF;
   border-bottom:1px solid var(--line);
@@ -69,15 +70,22 @@ header{
   flex-shrink:0;
   min-width:0;
 }
+
+/* ✅ ONLY header brand uses Black Ops One */
 .brand-text{
-  font-family:"Teko", sans-serif;
+  font-family:"Black Ops One", system-ui, sans-serif;
   font-size:34px;
-  font-weight:700;
-  letter-spacing:.18em;
+  letter-spacing:.22em;
   line-height:1;
   white-space:nowrap;
   transform:translateY(2px);
 }
+
+/* (可选) 如果你觉得 Black Ops One 太“胖”，把字距再放大一点更像军牌 */
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
+}
+
 .nav-right{
   display:flex;
   align-items:center;
@@ -112,23 +120,22 @@ header{
   filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
 }
 
-/* ---------- General ---------- */
+/* ---------- General (back to original: Roboto Condensed headings + Inter body) ---------- */
 section{padding:64px 0}
 h1,h2,h3{
-  font-family:"Teko", sans-serif;
-  letter-spacing:.12em;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
   margin:0 0 14px;
   font-weight:700;
-  line-height:1;
+  line-height:1.05;
 }
-h1{font-size:56px; transform:translateY(2px)}
-h2{font-size:38px; transform:translateY(2px)}
-h3{font-size:22px; transform:translateY(2px)}
+h1{font-size:40px}
+h2{font-size:28px}
+h3{font-size:16px}
 p{margin:0;color:var(--muted); line-height:1.7}
 
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-
 .hr{height:1px;background:var(--line);margin:22px 0}
 
 /* ---------- Buttons ---------- */
@@ -192,14 +199,9 @@ p{margin:0;color:var(--muted); line-height:1.7}
   box-shadow:var(--shadow);
   border-radius:var(--radius);
 }
-.hero-box h1{color:var(--text)}
 .hero-box p{color:#475569}
 
-/* =======================
-   ✅ Dark Cards (Contact)
-   - Contact info boxes
-   - Enquiry form card
-   ======================= */
+/* ---------- Dark Cards ---------- */
 .card{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
@@ -213,7 +215,6 @@ p{margin:0;color:var(--muted); line-height:1.7}
   border-color:#334155;
   transform:translateY(-3px);
 }
-
 .body{padding:20px}
 
 .info-item{
@@ -238,24 +239,21 @@ p{margin:0;color:var(--muted); line-height:1.7}
   text-transform:uppercase;
 }
 .info-item .value{
-  font-family:"Teko", sans-serif;
+  font-family:"Roboto Condensed", sans-serif;
   letter-spacing:.10em;
-  font-size:22px;
-  line-height:1;
+  font-size:18px;
+  line-height:1.15;
   color:var(--card-text);
-  transform:translateY(2px);
 }
 
-/* ---------- Form ----------
-   表单本身保持白底，放在深灰卡片里对比更清晰
-*/
+/* ---------- Form (white inputs) ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
   background:#fff;
   border:1px solid var(--line);
   color:var(--text);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   outline:none;
   border-radius:var(--radius);
 }
@@ -265,7 +263,6 @@ input:focus, select:focus, textarea:focus{
 }
 textarea{min-height:120px}
 
-/* 深灰卡片内文字 */
 .card p{color:var(--card-muted)}
 .card h3, .card strong{color:var(--card-text)}
 
@@ -278,16 +275,14 @@ footer{
   color:var(--muted);
 }
 
-/* ---------- Responsive (match index) ---------- */
+/* ---------- Responsive ---------- */
 @media(max-width:980px){
   .grid2,.grid3{grid-template-columns:1fr}
-
   .nav{height:auto; padding:14px 0;}
   .nav-right{flex-wrap:wrap; justify-content:flex-end;}
   .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
   .logo-plate img{height:78px;}
-  .brand-text{font-size:30px;}
-  h1{font-size:48px;}
+  .brand-text{font-size:28px; letter-spacing:.22em;}
 }
 </style>
 </head>
@@ -414,27 +409,21 @@ footer{
 
       <div>
         <div style="
-          font-family:'Teko', sans-serif;
-          letter-spacing:.18em;
-          font-size:22px;
-          font-weight:700;
-          margin-bottom:10px;
+          font-family:'Roboto Condensed', sans-serif;
+          letter-spacing:.2em;
+          font-size:18px;
+          margin-bottom:12px;
           color:var(--text);
-          transform:translateY(2px);
-        ">
-          RUMBLE
-        </div>
-        <p style="max-width:260px;">
-          Commercial trucks and fleet solutions built for real work.
-        </p>
+        ">RUMBLE</div>
+        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
       </div>
 
       <div>
         <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
         <div style="display:grid;gap:8px;">
           <a href="models.html">All Models</a>
-          <a href="models.html">Series</a>
-          <a href="models.html">Applications</a>
+          <a href="models.html#series">Series</a>
+          <a href="models.html#categories">Applications</a>
         </div>
       </div>
 
