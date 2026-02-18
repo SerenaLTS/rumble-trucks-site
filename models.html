@@ -39,17 +39,26 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
 
-/* ================= HEADER（统一母版：Black Ops One + 42px + logo 108px）================= */
-header{ background:#FFFFFF; border-bottom:1px solid var(--line); }
+/* ================= HEADER (COPY FROM CONTACT — DO NOT TOUCH) ================= */
+header{
+  background:#FFFFFF;
+  border-bottom:1px solid var(--line);
+}
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  min-height:108px;          /* ✅ 与 logo 高度一致，整体更像 contact */
+  height:98px;
   flex-wrap:nowrap;
   gap:18px;
 }
-.brand{ display:flex; align-items:center; flex-shrink:0; min-width:0; }
+.brand{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  min-width:0;
+}
+/* ✅ ONLY header brand uses Black Ops One */
 .brand-text{
   font-family:"Black Ops One", system-ui, sans-serif;
   font-size:42px;
@@ -58,8 +67,10 @@ header{ background:#FFFFFF; border-bottom:1px solid var(--line); }
   white-space:nowrap;
   transform:translateY(2px);
 }
-@media(min-width:981px){ .brand-text{ letter-spacing:.26em; } }
-
+/* (optional same as contact) */
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
+}
 .nav-right{
   display:flex;
   align-items:center;
@@ -81,8 +92,11 @@ header{ background:#FFFFFF; border-bottom:1px solid var(--line); }
   font-weight:500;
 }
 .nav-links a:hover{color:var(--accent)}
-
-.logo-plate{ display:flex; align-items:center; flex-shrink:0; }
+.logo-plate{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
 .logo-plate img{
   height:108px;
   width:auto;
