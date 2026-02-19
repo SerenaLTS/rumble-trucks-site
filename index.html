@@ -228,6 +228,18 @@ p{margin:0;color:var(--muted); line-height:1.7}
   text-transform:uppercase;
 }
 
+.hero-media::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(255,255,255,.70),
+    rgba(255,255,255,.25)
+  );
+  z-index:1;
+}
+     
 .hero-media .overlay{
   position:relative;
   z-index:2;
@@ -256,10 +268,12 @@ p{margin:0;color:var(--muted); line-height:1.7}
 .hero-media .slogan-box{
   max-width:680px;
   padding:28px;
-  border:1px solid var(--line);
-  background:#FFFFFF;
-  box-shadow:var(--shadow);
-  border-radius:var(--radius);
+  border:none;                 /* ✅ 去边框 */
+  background:rgba(255,255,255,.35); /* ✅ 半透明 */
+  box-shadow:none;             /* ✅ 去阴影 */
+  border-radius:12px;          /* ✅ 更柔和一点 */
+  backdrop-filter: blur(10px); /* ✅ 玻璃模糊（Safari/Chrome支持） */
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* ---------- Enquiry ---------- */
@@ -426,10 +440,10 @@ footer{
 <!-- HERO -->
 <section class="hero-media">
   <iframe
-  src="https://iframe.videodelivery.net/f2e31ed15719c6893129dc7cf1f62675"
-  allow="autoplay; encrypted-media; picture-in-picture"
+  src="https://iframe.videodelivery.net/f2e31ed15719c6893129dc7c1f62675?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+  allow="autoplay; encrypted-media"
   allowfullscreen>
-  </iframe>
+</iframe>
 
   <div class="hero-placeholder">
     BACKGROUND MEDIA PLACEHOLDER<br><br>
