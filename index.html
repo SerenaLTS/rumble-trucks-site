@@ -228,31 +228,6 @@ p{margin:0;color:var(--muted); line-height:1.7}
   text-transform:uppercase;
 }
 
-.hero-media::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    to right,
-    rgba(255,255,255,.70),
-    rgba(255,255,255,.25)
-  );
-  z-index:1;
-}
-     
-.hero-media .overlay{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  align-items:center;
-  background:linear-gradient(
-    to right,
-    rgba(245,247,250,0.92),
-    rgba(245,247,250,0.55)
-  );
-}
-
 .hero-media iframe{
   position:absolute;
   inset:0;
@@ -262,6 +237,11 @@ p{margin:0;color:var(--muted); line-height:1.7}
   z-index:0;
 }
 
+.hero-media .overlay{
+  position:relative;
+  z-index:2;
+}
+     
 .hero-media h1{color:var(--text)}
 .hero-media p{color:#475569; max-width:560px}
 
