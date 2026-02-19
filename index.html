@@ -264,6 +264,73 @@ p{margin:0;color:var(--muted); line-height:1.7}
   text-align:center;
 }
 
+/* ---------- Series Grid (replaces slider) ---------- */
+.series-grid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:24px;
+}
+
+.series-card{
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
+  border-radius:var(--radius);
+  overflow:hidden;
+  color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.series-card:hover{
+  border-color:#334155;
+  box-shadow:var(--card-shadow2);
+  transform:translateY(-3px);
+}
+
+.series-img{
+  height:220px;
+  background:linear-gradient(135deg, #020617, #111827);
+  background-size:cover;
+  background-position:center;
+}
+
+.series-body{
+  padding:16px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.series-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.10em;
+  font-size:22px;
+  line-height:1;
+  margin:0;
+  color:var(--card-text);
+}
+
+.series-meta{
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+  text-transform:uppercase;
+}
+
+.series-link{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-accent);
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+
+@media(max-width:900px){
+  .series-grid{grid-template-columns:1fr;}
+}
+     
 /* ---------- Enquiry ---------- */
 input,select,textarea{
   width:100%;
@@ -461,13 +528,42 @@ footer{
         <h2>TRUCK RANGE</h2>
         <p>Browse our models. Click to view details or enquire.</p>
       </div>
-      <div style="display:flex; gap:10px;">
-        <button class="btn slider-btn" type="button" id="modelsPrev" aria-label="Previous models">←</button>
-        <button class="btn slider-btn" type="button" id="modelsNext" aria-label="Next models">→</button>
-      </div>
     </div>
 
-    <div class="models-slider" id="modelsSlider" aria-label="Models slider"></div>
+    <div class="series-grid" aria-label="Series">
+       <a class="series-card" href="models.html#g5s">
+         <div class="series-img" style="background-image:url('images/series-g5s.jpg')"></div>
+         <div class="series-body">
+           <div>
+             <div class="series-title">G5S SERIES</div>
+             <div class="series-meta">Cargo · Tipper · Mixer</div>
+           </div>
+           <div class="series-link">VIEW →</div>
+         </div>
+       </a>
+     
+       <a class="series-card" href="models.html#g7s">
+         <div class="series-img" style="background-image:url('images/series-g7s.jpg')"></div>
+         <div class="series-body">
+           <div>
+             <div class="series-title">G7S SERIES</div>
+             <div class="series-meta">Prime Mover · Tipper</div>
+           </div>
+           <div class="series-link">VIEW →</div>
+         </div>
+       </a>
+     
+       <a class="series-card" href="models.html#c9h">
+         <div class="series-img" style="background-image:url('images/series-c9h.jpg')"></div>
+         <div class="series-body">
+           <div>
+             <div class="series-title">C9H SERIES</div>
+             <div class="series-meta">Premium Prime Mover</div>
+           </div>
+           <div class="series-link">VIEW →</div>
+         </div>
+       </a>
+     </div>
 
     <div style="margin-top:24px;">
       <a class="btn secondary" href="models.html">VIEW ALL MODELS</a>
@@ -617,91 +713,6 @@ footer{
 
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
-</script>
-
-<script>
-  const MODELS = [
-    { name: "Model 1", meta: "SERIES · 6x4", href: "models.html", image: "" },
-    { name: "Model 2", meta: "SERIES · 4x2", href: "models.html", image: "" },
-    { name: "Model 3", meta: "SERIES · 8x4", href: "models.html", image: "" },
-    { name: "Model 4", meta: "SERIES · TIPPER", href: "models.html", image: "" },
-    { name: "Model 5", meta: "SERIES · PRIME MOVER", href: "models.html", image: "" },
-    { name: "Model 6", meta: "SERIES · CARGO", href: "models.html", image: "" },
-  ];
-
-  const slider = document.getElementById("modelsSlider");
-
-  function createCard(m){
-    const a = document.createElement("a");
-    a.className = "model-card";
-    a.href = m.href || "#";
-
-    const img = document.createElement("div");
-    img.className = "model-img";
-
-    if (m.image) {
-      img.style.backgroundImage = `url('${m.image}')`;
-      img.style.backgroundSize = "cover";
-      img.style.backgroundPosition = "center";
-      img.textContent = "";
-    } else {
-      img.textContent = "Model Image (placeholder)";
-    }
-
-    const body = document.createElement("div");
-    body.className = "model-body";
-
-    const left = document.createElement("div");
-
-    const title = document.createElement("div");
-    title.className = "model-title";
-    title.textContent = (m.name || "").toUpperCase();
-
-    const meta = document.createElement("div");
-    meta.className = "model-meta";
-    meta.textContent = (m.meta || "").toUpperCase();
-
-    left.appendChild(title);
-    left.appendChild(meta);
-
-    const right = document.createElement("div");
-    right.className = "model-link";
-    right.textContent = "DETAILS →";
-
-    body.appendChild(left);
-    body.appendChild(right);
-
-    a.appendChild(img);
-    a.appendChild(body);
-    return a;
-  }
-
-  MODELS.forEach(m => slider.appendChild(createCard(m)));
-
-  const prev = document.getElementById("modelsPrev");
-  const next = document.getElementById("modelsNext");
-
-  function scrollByCard(dir){
-    const card = slider.querySelector(".model-card");
-    const step = card ? (card.getBoundingClientRect().width + 18) : 360;
-    slider.scrollBy({ left: dir * step, behavior: "smooth" });
-  }
-  prev.addEventListener("click", ()=>scrollByCard(-1));
-  next.addEventListener("click", ()=>scrollByCard(1));
-
-  let isDown = false, startX = 0, startScrollLeft = 0;
-  slider.addEventListener("mousedown", (e)=>{
-    isDown = true;
-    startX = e.pageX;
-    startScrollLeft = slider.scrollLeft;
-  });
-  window.addEventListener("mouseup", ()=>{ isDown = false; });
-  slider.addEventListener("mouseleave", ()=>{ isDown = false; });
-  slider.addEventListener("mousemove", (e)=>{
-    if(!isDown) return;
-    const dx = e.pageX - startX;
-    slider.scrollLeft = startScrollLeft - dx;
-  });
 </script>
 
 </body>
