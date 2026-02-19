@@ -207,7 +207,8 @@ p{margin:0;color:var(--muted); line-height:1.7}
   width:100%;
   height:100%;
   object-fit:cover;
-  display:none;
+  display:block;   /* ✅ 改这里 */
+  z-index:0;       /* ✅ 加这一行 */
 }
 
 .hero-media .hero-placeholder{
@@ -238,6 +239,15 @@ p{margin:0;color:var(--muted); line-height:1.7}
     rgba(245,247,250,0.92),
     rgba(245,247,250,0.55)
   );
+}
+
+.hero-media iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  z-index:0;
 }
 
 .hero-media h1{color:var(--text)}
@@ -415,9 +425,11 @@ footer{
 
 <!-- HERO -->
 <section class="hero-media">
-  <video autoplay muted loop playsinline preload="metadata">
-    <!-- <source src="https://your-cdn.com/hero-truck.mp4" type="video/mp4"> -->
-  </video>
+  <iframe
+  src="https://iframe.videodelivery.net/f2e31ed15719c6893129dc7c1f62675?autoplay=true&muted=true&loop=true&background=true"
+  allow="autoplay; encrypted-media; picture-in-picture"
+  allowfullscreen>
+  </iframe>
 
   <div class="hero-placeholder">
     BACKGROUND MEDIA PLACEHOLDER<br><br>
