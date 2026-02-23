@@ -245,27 +245,27 @@ section[id]{
   z-index:0;
 }
 
+/* ===== HERO overlay: only show on hover ===== */
 .hero-media .overlay{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;   /* 新增 */
-  text-align:center;        /* 新增 */
+  opacity: 0;                 /* 默认隐藏 */
+  pointer-events: none;       /* 默认不可点击（不挡视频） */
+  transition: opacity .25s ease;
 }
-     
-.hero-media h1{color:var(--text)}
-.hero-media p{color:#475569; max-width:560px}
 
+/* 鼠标移到 hero 区域时才显示文字层 */
+.hero-media:hover .overlay{
+  opacity: 1;
+  pointer-events: auto;       /* hover 时可点击按钮 */
+}
+
+/* 可选：让出现时更“浮起来”一点 */
 .hero-media .slogan-box{
-  max-width:720px;
-  padding:32px;
-  background:rgba(255,255,255,.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius:6px;
-  text-align:center;
+  transform: translateY(10px);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.hero-media:hover .slogan-box{
+  transform: translateY(0);
 }
 
 /* ---------- Series Grid (replaces slider) ---------- */
