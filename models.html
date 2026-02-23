@@ -155,8 +155,36 @@ p{margin:0; color:var(--muted); line-height:1.7}
   height:52vh;
   min-height:380px;
   overflow:hidden;
+  background:#000;
   border-bottom:1px solid var(--line);
-  background:var(--panel-soft);
+}
+
+.models-hero .video-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+
+/* 让 iframe 永远居中 */
+.models-hero .video-bg iframe{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border:0;
+}
+
+/* ✅ COVER：铺满无黑框（会裁剪），不依赖 16:9，适用于任何比例 */
+.models-hero.hero--cover .video-bg iframe{
+  width:140vmax;
+  height:140vmax;
+}
+
+/* ✅ CONTAIN：完整显示（不裁剪），会出现边（黑框/留白是正常的） */
+.models-hero.hero--contain .video-bg iframe{
+  width:100%;
+  height:100%;
 }
 
 /* ✅ Video background (Cloudflare Stream iframe) */
@@ -346,9 +374,9 @@ footer a:hover{color:var(--accent)}
 </header>
 
 <!-- OVERVIEW HERO -->
-<section class="models-hero">
+<section class="models-hero hero--cover">
   <iframe
-     src="https://iframe.videodelivery.net/1c9d6bb6f0509adaa281d8b6ecf0a586?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+     src="https://iframe.videodelivery.net/ed203e6756e13530e7214ab41c48f37f?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
      allow="autoplay; encrypted-media"
      allowfullscreen>
   </iframe>
