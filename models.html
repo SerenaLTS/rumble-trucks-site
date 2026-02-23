@@ -228,10 +228,8 @@ p{margin:0; color:var(--muted); line-height:1.7}
   margin-top:18px;
 }
 
-/* ✅ 每个卡片必须是“竖向”布局，不允许被 flex 横向撑开 */
+/* 卡片整体 */
 .product-card{
-  display:flex;              /* ✅ 加这一行，确保竖向稳定 */
-  flex-direction:column;     /* ✅ 关键：图上字下 */
   background:#FFFFFF;
   border:1px solid var(--line);
   border-radius:var(--radius);
@@ -239,33 +237,45 @@ p{margin:0; color:var(--muted); line-height:1.7}
   overflow:hidden;
   transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
-
 .product-card:hover{
   transform:translateY(-3px);
   box-shadow:var(--shadow2);
   border-color:#B8C6DD;
 }
 
-/* ✅ 图片容器固定高度，且裁切溢出，去掉白边的关键之一 */
-.product-img{
-  height:240px;
-  background:#FFFFFF;     /* 你想要无底色也可以 transparent */
-  overflow:hidden;        /* ✅ 关键：裁切掉多余留白 */
+/* 让“图+标题”作为一个大链接区域 */
+.product-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
 }
 
-/* ✅ 图片铺满容器（去白框），不留边 */
+/* 图片区域：保持你现在的自适应效果 */
+.product-img{
+  height:240px;
+  overflow:hidden;
+}
 .product-img img{
   width:100%;
   height:100%;
-  object-fit:cover;       /* ✅ 关键：铺满 */
-  object-position:center; /* ✅ 居中裁切 */
+  object-fit:cover;
+  object-position:center;
   display:block;
 }
 
-/* 文字区域保持原来居中 */
+/* 文字区域 */
 .product-body{
   padding:16px;
   text-align:center;
+}
+
+/* ✅ 按钮区：不要被链接包住，避免嵌套 a */
+.product-actions{
+  padding:0 16px 16px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 .product-title{
   font-family:"Roboto Condensed", sans-serif;
@@ -280,12 +290,6 @@ p{margin:0; color:var(--muted); line-height:1.7}
   text-transform:uppercase;
   color:var(--muted);
   margin-bottom:14px;
-}
-.product-actions{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
 }
 .product-actions .btn{
   padding:10px 16px;
@@ -391,7 +395,7 @@ footer a:hover{color:var(--accent)}
     </div>
 
     <div class="products">
-      <a class="product-card" href="g5s-4x2-cargo-cab-chassis.html">
+      <div class="product-card" href="g5s-4x2-cargo-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/29157910-4ffc-4ba1-96bb-dab5c15a6200/public"
@@ -411,9 +415,9 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
-      <a class="product-card" href="g5s-6x4-cargo-cab-chassis.html">
+      <div class="product-card" href="g5s-6x4-cargo-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/9ffcdda7-a3e2-45fa-53d2-6b602a0cfb00/public"
@@ -433,9 +437,9 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
-      <a class="product-card" href="g5s-8x4-cargo-cab-chassis.html">
+      <div class="product-card" href="g5s-8x4-cargo-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/13023b08-e8ab-46cf-b6ab-4ca9226c9400/public"
@@ -455,9 +459,9 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
-      <a class="product-card" href="g5s-8x4-mixer-cab-chassis.html">
+      <div class="product-card" href="g5s-8x4-mixer-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/4d6d121e-76c7-4c17-eef9-dacc599b3d00/public"
@@ -477,9 +481,9 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
-      <a class="product-card" href="g5s-6x4-tipper-cab-chassis.html">
+      <div class="product-card" href="g5s-6x4-tipper-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/669c98ce-87c6-444e-d212-531cbf557800/public"
@@ -499,9 +503,9 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
-      <a class="product-card" href="g5s-8x4-tipper-cab-chassis.html">
+      <div class="product-card" href="g5s-8x4-tipper-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/76094861-f5a6-4bfa-4dae-3888f1083800/public"
@@ -521,7 +525,7 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
@@ -540,7 +544,7 @@ footer a:hover{color:var(--accent)}
 
     <div class="products">
       <!-- G7S 6x4 PRIME MOVER -->
-      <a class="product-card" href="g7s-6x4-prime-mover.html">
+      <div class="product-card" href="g7s-6x4-prime-mover.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/014dcec2-55d2-4dab-713b-756ce2b71000/public"
@@ -560,10 +564,10 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
       <!-- G7S 6x4 TIPPER CAB & CHASSIS -->
-      <a class="product-card" href="g7s-6x4-tipper-cab-chassis.html">
+      <div class="product-card" href="g7s-6x4-tipper-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/653ac598-a71e-4125-244e-d2f23c413100/public"
@@ -583,10 +587,10 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
 
       <!-- G7S 8x4 TIPPER CAB & CHASSIS -->
-      <a class="product-card" href="g7s-8x4-tipper-cab-chassis.html">
+      <div class="product-card" href="g7s-8x4-tipper-cab-chassis.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/be452d7b-2a46-4926-874d-57d744609b00/public"
@@ -606,7 +610,7 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
@@ -625,7 +629,7 @@ footer a:hover{color:var(--accent)}
 
     <div class="products">
       <!-- C9H 6x4 PRIME MOVER -->
-      <a class="product-card" href="c9h-6x4-prime-mover.html">
+      <div class="product-card" href="c9h-6x4-prime-mover.html">
         <div class="product-img">
           <img
             src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/2cc20bcf-fbc1-4f1b-ad5a-7db423318700/public"
@@ -645,7 +649,7 @@ footer a:hover{color:var(--accent)}
             </a>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
