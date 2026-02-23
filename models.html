@@ -149,7 +149,7 @@ p{margin:0; color:var(--muted); line-height:1.7}
   background:#FFFFFF;
 }
 
-/* ---------- HERO / OVERVIEW ---------- */
+/* ---------- HERO / OVERVIEW (index-style: hover to show text) ---------- */
 .models-hero{
   position:relative;
   height:52vh;
@@ -159,6 +159,7 @@ p{margin:0; color:var(--muted); line-height:1.7}
   border-bottom:1px solid var(--line);
 }
 
+/* video wrapper */
 .models-hero .video-bg{
   position:absolute;
   inset:0;
@@ -166,7 +167,7 @@ p{margin:0; color:var(--muted); line-height:1.7}
   overflow:hidden;
 }
 
-/* 让 iframe 永远居中 */
+/* iframe always centered */
 .models-hero .video-bg iframe{
   position:absolute;
   top:50%;
@@ -175,30 +176,19 @@ p{margin:0; color:var(--muted); line-height:1.7}
   border:0;
 }
 
-/* ✅ COVER：铺满无黑框（会裁剪），不依赖 16:9，适用于任何比例 */
+/* ✅ COVER：铺满无黑框（会裁剪），不依赖 16:9 */
 .models-hero.hero--cover .video-bg iframe{
   width:140vmax;
   height:140vmax;
 }
 
-/* ✅ CONTAIN：完整显示（不裁剪），会出现边（黑框/留白是正常的） */
+/* ✅ CONTAIN：完整显示（不裁剪），会有黑边/留白 */
 .models-hero.hero--contain .video-bg iframe{
   width:100%;
   height:100%;
 }
-     
-.models-hero .overlay{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center; /* ✅ 文字居中悬浮 */
-  background:transparent; /* ✅ 不要蒙版 */
-  padding:0 24px;
-}
 
-/* ✅ subtle dark overlay so text stays readable */
+/* ✅ subtle dark overlay so text stays readable (only when overlay is visible) */
 .models-hero::after{
   content:"";
   position:absolute;
@@ -209,21 +199,70 @@ p{margin:0; color:var(--muted); line-height:1.7}
     rgba(0,0,0,.10)
   );
   z-index:1;
+  opacity:0;
+  transition:opacity .25s ease;
   pointer-events:none;
 }
-     
+
+/* overlay: centered + hidden by default */
+.models-hero .overlay{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  opacity:0;                 /* 默认隐藏 */
+  pointer-events:none;       /* 默认不挡视频 */
+  transition:opacity .25s ease;
+  padding:0 24px;
+}
+
+/* hover to show overlay + gradient */
+.models-hero:hover .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+.models-hero:hover::after{
+  opacity:1;
+}
+
+/* glass text box */
 .hero-box{
   max-width:860px;
   padding:28px;
-  border:1px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.55);   /* ✅ 半透明 */
-  backdrop-filter: blur(10px);        /* ✅ 玻璃效果 */
+  border:1px solid rgba(255,255,255,.30);
+  background:rgba(255,255,255,.38);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow:var(--shadow);
-  border-radius:var(--radius);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  border-radius:10px;
+
+  transform: translateY(10px);
+  transition: transform .25s ease;
 }
-     
+
+.models-hero:hover .hero-box{
+  transform: translateY(0);
+}
+
 .hero-box p{color:#475569}
+
+/* 手机端没有 hover：默认显示 overlay */
+@media (hover: none) and (pointer: coarse){
+  .models-hero .overlay{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .models-hero::after{
+    opacity:1;
+  }
+  .hero-box{
+    transform:none;
+  }
+}
 
 /* ---------- Series section ---------- */
 .series-head{
