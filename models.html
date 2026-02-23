@@ -186,16 +186,6 @@ p{margin:0; color:var(--muted); line-height:1.7}
   width:100%;
   height:100%;
 }
-
-/* ✅ Video background (Cloudflare Stream iframe) */
-.models-hero iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-  z-index:0;
-}
      
 .models-hero .overlay{
   position:relative;
@@ -375,11 +365,13 @@ footer a:hover{color:var(--accent)}
 
 <!-- OVERVIEW HERO -->
 <section class="models-hero hero--cover">
-  <iframe
-     src="https://iframe.videodelivery.net/ed203e6756e13530e7214ab41c48f37f?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
-     allow="autoplay; encrypted-media"
-     allowfullscreen>
-  </iframe>
+       <div class="video-bg">
+         <iframe
+            src="https://iframe.videodelivery.net/ed203e6756e13530e7214ab41c48f37f?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+         </iframe>
+       </div>
 
   <div class="overlay">
     <div class="wrap">
