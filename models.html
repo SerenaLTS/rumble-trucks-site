@@ -158,42 +158,53 @@ p{margin:0; color:var(--muted); line-height:1.7}
   border-bottom:1px solid var(--line);
   background:var(--panel-soft);
 }
-.models-hero .hero-placeholder{
+
+/* ✅ Video background (Cloudflare Stream iframe) */
+.models-hero iframe{
   position:absolute;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-  background:
-    radial-gradient(1100px 520px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
-  color:#64748B;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
+  width:100%;
+  height:100%;
+  border:0;
+  z-index:0;
 }
+     
 .models-hero .overlay{
   position:relative;
   z-index:2;
   height:100%;
   display:flex;
   align-items:center;
-  background:linear-gradient(
-    to right,
-    rgba(245,247,250,0.92),
-    rgba(245,247,250,0.55)
-  );
+  justify-content:center; /* ✅ 文字居中悬浮 */
+  background:transparent; /* ✅ 不要蒙版 */
+  padding:0 24px;
 }
+
+/* ✅ subtle dark overlay so text stays readable */
+.models-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.10)
+  );
+  z-index:1;
+  pointer-events:none;
+}
+     
 .hero-box{
-  max-width:760px;
-  padding:24px;
-  border:1px solid var(--line);
-  background:#FFFFFF;
+  max-width:860px;
+  padding:28px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.55);   /* ✅ 半透明 */
+  backdrop-filter: blur(10px);        /* ✅ 玻璃效果 */
+  -webkit-backdrop-filter: blur(10px);
   box-shadow:var(--shadow);
   border-radius:var(--radius);
 }
+     
 .hero-box p{color:#475569}
 
 /* ---------- Series section ---------- */
