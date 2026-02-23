@@ -245,27 +245,57 @@ section[id]{
   z-index:0;
 }
 
-/* ===== HERO overlay: only show on hover ===== */
+/* ---------- Hero overlay (centered + glass mask, show on hover) ---------- */
 .hero-media .overlay{
-  opacity: 0;                 /* 默认隐藏 */
-  pointer-events: none;       /* 默认不可点击（不挡视频） */
-  transition: opacity .25s ease;
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  opacity:0;                 /* 默认隐藏 */
+  pointer-events:none;       /* 默认不挡视频 */
+  transition:opacity .25s ease;
+  padding:0 24px;
 }
 
-/* 鼠标移到 hero 区域时才显示文字层 */
 .hero-media:hover .overlay{
-  opacity: 1;
-  pointer-events: auto;       /* hover 时可点击按钮 */
+  opacity:1;
+  pointer-events:auto;
 }
 
-/* 可选：让出现时更“浮起来”一点 */
+/* 玻璃蒙版（文字后面那块） */
 .hero-media .slogan-box{
+  max-width:720px;
+  padding:32px;
+  text-align:center;
+
+  background: rgba(255,255,255,.38);   /* 半透明 */
+  border: 1px solid rgba(255,255,255,.32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+
   transform: translateY(10px);
-  transition: transform .25s ease, opacity .25s ease;
+  transition: transform .25s ease;
 }
 
 .hero-media:hover .slogan-box{
   transform: translateY(0);
+}
+
+/* 手机端没有 hover：默认显示 overlay */
+@media (hover: none) and (pointer: coarse){
+  .hero-media .overlay{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .hero-media .slogan-box{
+    transform:none;
+  }
 }
 
 /* ---------- Series Grid (replaces slider) ---------- */
