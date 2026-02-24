@@ -729,51 +729,7 @@ footer{
   </div>
 </footer>
 
-<script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-
-  const API_URL = "https://rumble-api.serena-wang.workers.dev/"; 
-  // 如果你 worker endpoint 是 /enquiry，那这里改成 ".../enquiry"
-
-  const form = document.getElementById("enquiryForm");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // ✅ 阻止页面刷新（最重要）
-
-    const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
-    payload.page = location.href;
-
-    // ✅ 给按钮加 loading 状态（可选，但很实用）
-    const btn = form.querySelector('button[type="submit"]');
-    const oldText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = "SENDING...";
-
-    try {
-      const r = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await r.json().catch(() => ({}));
-
-      if (!r.ok || !data.ok) {
-        alert("Submit failed: " + (data.error || ("HTTP " + r.status)));
-        return;
-      }
-
-      alert("Submitted ✅");
-      form.reset();
-    } catch (err) {
-      alert("Network error: " + err);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = oldText;
-    }
-  });
-</script>
+<script src="enquiry.js" defer></script>
 
 </body>
 </html>
