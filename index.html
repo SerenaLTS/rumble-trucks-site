@@ -629,29 +629,23 @@ footer{
     <h2>ENQUIRY</h2>
     <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
 
-    <form class="grid2" id="enquiryForm">
-      <input name="name" placeholder="Name" required>
-      <input name="contact" placeholder="Phone / Email" required>
-
-      <select name="enquiry_type" required>
-        <option value="">Enquiry Type</option>
-        <option>Sales Enquiry</option>
-        <option>Service & Maintenance</option>
-        <option>Parts Enquiry</option>
-        <option>Fleet / Finance</option>
-        <option>General Enquiry</option>
-      </select>
-
-      <input name="preferred_model" placeholder="Preferred Model">
-
-      <textarea name="message" placeholder="Message" required></textarea>
-
-      <div>
-        <button class="btn" type="submit">SUBMIT ENQUIRY</button>
-      </div>
-
-      <!-- 提交状态提示 -->
-      <div id="enquiryStatus" style="grid-column:1/-1; font-size:14px; color:var(--muted);"></div>
+    <form id="enquiryForm" class="grid2">
+         <input name="name" placeholder="Name" required>
+         <input name="contact" placeholder="Phone / Email" required>
+         
+         <select name="enquiry_type" required>
+                  <option value="">Enquiry Type</option>
+                  <option>Sales Enquiry</option>
+                  <option>Service & Maintenance</option>
+                  <option>Parts Enquiry</option>
+                  <option>Fleet / Finance</option>
+                  <option>General Enquiry</option>
+         </select>
+         
+         <input name="preferred_model" placeholder="Preferred Model">
+         <textarea name="message" placeholder="Message" required></textarea>
+         
+         <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
     </form>
   </div>
 </section>
@@ -738,38 +732,45 @@ footer{
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  const WORKER_URL = "https://rumble-api.serena-wang.workers.dev/"; // 你的 worker 根路径
+  const API_URL = "https://rumble-api.serena-wang.workers.dev/"; 
+  // 如果你 worker endpoint 是 /enquiry，那这里改成 ".../enquiry"
 
   const form = document.getElementById("enquiryForm");
-  const statusEl = document.getElementById("enquiryStatus");
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    statusEl.textContent = "Submitting…";
+    e.preventDefault(); // ✅ 阻止页面刷新（最重要）
 
     const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
-    payload.page = location.pathname; // 可选：记录来源页面
+    payload.page = location.href;
+
+    // ✅ 给按钮加 loading 状态（可选，但很实用）
+    const btn = form.querySelector('button[type="submit"]');
+    const oldText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "SENDING...";
 
     try {
-      const res = await fetch(WORKER_URL, {
+      const r = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json().catch(() => ({}));
+      const data = await r.json().catch(() => ({}));
 
-      if (!res.ok || data.ok === false) {
-        statusEl.textContent = "❌ Failed: " + (data.error || ("HTTP " + res.status));
+      if (!r.ok || !data.ok) {
+        alert("Submit failed: " + (data.error || ("HTTP " + r.status)));
         return;
       }
 
-      statusEl.textContent = "✅ Enquiry submitted. We’ll get back to you soon.";
+      alert("Submitted ✅");
       form.reset();
     } catch (err) {
-      statusEl.textContent = "❌ Network error: " + err.message;
+      alert("Network error: " + err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = oldText;
     }
   });
 </script>
