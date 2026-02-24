@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self';
+         connect-src 'self' https://rumble-api.serena-wang.workers.dev;
+         script-src 'self' https://iframe.videodelivery.net https://fonts.googleapis.com https://fonts.gstatic.com;
+         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+         font-src https://fonts.gstatic.com;
+         img-src * data:;
+         frame-src https://iframe.videodelivery.net;">
+     
 <title>RUMBLE Trucks</title>
 
 <!-- ✅ Base fonts (original style): Inter + Roboto Condensed
@@ -620,21 +629,29 @@ footer{
     <h2>ENQUIRY</h2>
     <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
 
-    <form class="grid2">
-      <input placeholder="Name" required>
-      <input placeholder="Phone / Email" required>
-      <select required>
-        <option value="">Enquiry Type</option>
-        <option>Sales Enquiry</option>
-        <option>Service & Maintenance</option>
-        <option>Parts Enquiry</option>
-        <option>Fleet / Finance</option>
-        <option>General Enquiry</option>
-      </select>
-      <input placeholder="Preferred Model">
-      <textarea placeholder="Message" required></textarea>
-      <div><button class="btn" type="submit">SUBMIT ENQUIRY</button></div>
-    </form>
+    <form id="enquiryForm" class="grid2">
+       <input name="name" placeholder="Name" required>
+       <input name="contact" placeholder="Phone / Email" required>
+     
+       <select name="type" required>
+         <option value="">Enquiry Type</option>
+         <option value="Sales Enquiry">Sales Enquiry</option>
+         <option value="Service & Maintenance">Service & Maintenance</option>
+         <option value="Parts Enquiry">Parts Enquiry</option>
+         <option value="Fleet / Finance">Fleet / Finance</option>
+         <option value="General Enquiry">General Enquiry</option>
+       </select>
+     
+       <input name="model" placeholder="Preferred Model">
+       <textarea name="message" placeholder="Message" required></textarea>
+     
+       <div>
+         <button class="btn" type="submit" id="enquirySubmitBtn">SUBMIT ENQUIRY</button>
+       </div>
+     
+       <!-- 反馈提示 -->
+       <div id="enquiryStatus" style="grid-column:1 / -1; font-size:13px; color:var(--muted);"></div>
+     </form>
   </div>
 </section>
 
@@ -719,6 +736,45 @@ footer{
 
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
+
+  const WORKER_URL = "https://rumble-api.serena-wang.workers.dev/"; 
+
+  const form = document.getElementById("enquiryForm");
+  const statusEl = document.getElementById("enquiryStatus");
+  const btn = document.getElementById("enquirySubmitBtn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    statusEl.textContent = "";
+    btn.disabled = true;
+    btn.textContent = "SENDING...";
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const out = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(out?.error || "Request failed");
+      }
+
+      statusEl.textContent = "✅ Thanks! We received your enquiry. Our team will contact you shortly.";
+      form.reset();
+    } catch (err) {
+      statusEl.textContent = "❌ Sorry, something went wrong. Please try again or contact us directly.";
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "SUBMIT ENQUIRY";
+    }
+  });
 </script>
 
 </body>
