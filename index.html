@@ -629,29 +629,30 @@ footer{
     <h2>ENQUIRY</h2>
     <p style="margin-bottom:24px;">Contact our team for pricing, specifications or fleet solutions.</p>
 
-    <form id="enquiryForm" class="grid2">
-       <input name="name" placeholder="Name" required>
-       <input name="contact" placeholder="Phone / Email" required>
-     
-       <select name="type" required>
-         <option value="">Enquiry Type</option>
-         <option value="Sales Enquiry">Sales Enquiry</option>
-         <option value="Service & Maintenance">Service & Maintenance</option>
-         <option value="Parts Enquiry">Parts Enquiry</option>
-         <option value="Fleet / Finance">Fleet / Finance</option>
-         <option value="General Enquiry">General Enquiry</option>
-       </select>
-     
-       <input name="model" placeholder="Preferred Model">
-       <textarea name="message" placeholder="Message" required></textarea>
-     
-       <div>
-         <button class="btn" type="submit" id="enquirySubmitBtn">SUBMIT ENQUIRY</button>
-       </div>
-     
-       <!-- 反馈提示 -->
-       <div id="enquiryStatus" style="grid-column:1 / -1; font-size:13px; color:var(--muted);"></div>
-     </form>
+    <form class="grid2" id="enquiryForm">
+      <input name="name" placeholder="Name" required>
+      <input name="contact" placeholder="Phone / Email" required>
+
+      <select name="enquiry_type" required>
+        <option value="">Enquiry Type</option>
+        <option>Sales Enquiry</option>
+        <option>Service & Maintenance</option>
+        <option>Parts Enquiry</option>
+        <option>Fleet / Finance</option>
+        <option>General Enquiry</option>
+      </select>
+
+      <input name="preferred_model" placeholder="Preferred Model">
+
+      <textarea name="message" placeholder="Message" required></textarea>
+
+      <div>
+        <button class="btn" type="submit">SUBMIT ENQUIRY</button>
+      </div>
+
+      <!-- 提交状态提示 -->
+      <div id="enquiryStatus" style="grid-column:1/-1; font-size:14px; color:var(--muted);"></div>
+    </form>
   </div>
 </section>
 
@@ -737,42 +738,38 @@ footer{
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  const WORKER_URL = "https://rumble-api.serena-wang.workers.dev/"; 
+  const WORKER_URL = "https://rumble-api.serena-wang.workers.dev/"; // 你的 worker 根路径
 
   const form = document.getElementById("enquiryForm");
   const statusEl = document.getElementById("enquiryStatus");
-  const btn = document.getElementById("enquirySubmitBtn");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    statusEl.textContent = "";
-    btn.disabled = true;
-    btn.textContent = "SENDING...";
+    statusEl.textContent = "Submitting…";
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    payload.page = location.pathname; // 可选：记录来源页面
 
     try {
       const res = await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
-      const out = await res.json().catch(() => ({}));
+      const data = await res.json().catch(() => ({}));
 
-      if (!res.ok) {
-        throw new Error(out?.error || "Request failed");
+      if (!res.ok || data.ok === false) {
+        statusEl.textContent = "❌ Failed: " + (data.error || ("HTTP " + res.status));
+        return;
       }
 
-      statusEl.textContent = "✅ Thanks! We received your enquiry. Our team will contact you shortly.";
+      statusEl.textContent = "✅ Enquiry submitted. We’ll get back to you soon.";
       form.reset();
     } catch (err) {
-      statusEl.textContent = "❌ Sorry, something went wrong. Please try again or contact us directly.";
-      console.error(err);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "SUBMIT ENQUIRY";
+      statusEl.textContent = "❌ Network error: " + err.message;
     }
   });
 </script>
