@@ -1,0 +1,30 @@
+console.log("ENQUIRY SCRIPT LOADED ✅");
+
+const API_URL = "https://rumble-api.serena-wang.workers.dev/";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("enquiryForm");
+  console.log("FORM FOUND:", !!form);
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log("SUBMIT INTERCEPTED ✅");
+
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    payload.page = location.href;
+
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await r.json().catch(() => ({}));
+    console.log("API RESULT:", r.status, data);
+
+    alert(r.ok && data.ok ? "Submitted ✅" : ("Failed: " + (data.error || r.status)));
+  });
+});
