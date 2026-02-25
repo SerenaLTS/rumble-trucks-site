@@ -1,6 +1,6 @@
 console.log("ENQUIRY SCRIPT LOADED ✅");
 
-const API_URL = "https://rumble-api.serena-wang.workers.dev/";
+const API_URL = "https://api.rumbleauto.com.au";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("enquiryForm");
