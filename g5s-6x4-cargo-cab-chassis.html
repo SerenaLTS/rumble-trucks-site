@@ -1,0 +1,443 @@
+<!-- c9h-6x4-prime-mover.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SITRAK G5S 6x4 Cargo Cab & Chassis | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --radius:4px;
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, system-ui, sans-serif;
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+/* ---------- Header (match Contact final) ---------- */
+header{
+  background:#FFFFFF;
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:98px;
+  flex-wrap:nowrap;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  min-width:0;
+}
+
+/* ✅ ONLY header brand uses Black Ops One */
+.brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:42px;           /* ✅ required */
+  letter-spacing:.22em;
+  line-height:1;
+  white-space:nowrap;
+  transform:translateY(2px);
+}
+/* (optional) desktop更像军牌 */
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;
+  margin-left:auto;
+  min-width:0;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  white-space:nowrap;
+}
+
+.nav-links a{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1;
+  font-weight:500;
+}
+.nav-links a:hover{color:var(--accent)}
+
+.logo-plate{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+
+/* ✅ required logo height */
+.logo-plate img{
+  height:108px;             /* ✅ required */
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+}
+
+/* ---------- General (match Contact final: Roboto Condensed headings + Inter body) ---------- */
+section{padding:72px 0}
+h1,h2{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  font-weight:700;
+}
+h1{font-size:56px; margin:0 0 14px; line-height:.95}
+h2{font-size:40px; margin:0 0 12px; line-height:1}
+p{margin:0;color:var(--muted); line-height:1.7}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border:1px solid var(--accent);
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  letter-spacing:.08em;
+  border-radius:var(--radius);
+  transition:.2s;
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--accent);
+}
+.btn:hover{transform:translateY(-2px)}
+
+/* ================= TOP INTRO ================= */
+.intro-section{
+  padding:56px 0 36px;   /* ✅ 下边距缩小 */
+}
+.top-intro{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:40px;
+  align-items:center;
+}
+.product-image{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+
+  /* ✅ 自适应高度：不强制写死 */
+  aspect-ratio: 16 / 10;     /* 你可以改成 16/9 或 4/3 */
+  height:auto;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;          /* ✅ 铺满，会裁剪 */
+  object-position:center;
+}
+
+/* ================= Content Blocks ================= */
+.block{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+.block + .block{
+  margin-top:24px;
+}
+
+/* Table */
+.spec-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.spec-table th,
+.spec-table td{
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+.spec-table th{
+  text-align:left;
+  width:40%;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.06em;
+}
+
+/* Footer */
+footer{
+  background:#FFFFFF;
+  border-top:1px solid var(--line);
+  padding:48px 0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Responsive */
+@media(max-width:980px){
+  .top-intro{grid-template-columns:1fr}
+  .product-image{height:260px}
+  .brand-text{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="models.html">Models</a>
+        <a href="services.html">Services</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <span class="logo-plate">
+        <img src="logo.png" alt="RUMBLE logo">
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TOP SECTION ================= -->
+<section style="padding-bottom:40px;">
+  <div class="wrap top-intro">
+
+    <div>
+      <h1>SITRAK G5S 6x4 Cargo Cab &amp; Chassis</h1>
+      <p>
+        <strong>Heavy-Duty Versatility for Construction &amp; Fleet Operations.</strong><br><br>
+        The SITRAK G5S 6x4 Cargo Cab &amp; Chassis is engineered for demanding commercial
+        applications requiring higher payload capacity and durable driveline performance.
+        Designed for construction transport, bulk freight and fleet logistics, the G5S 6x4
+        combines a powerful 7.36L engine, automatic Allison transmission and heavy-duty
+        chassis configuration to deliver reliability, control and long-term operational efficiency
+        across Australian conditions.
+        <br><br>
+        With reinforced frame construction, air rear suspension and advanced braking systems,
+        the G5S 6x4 provides both stability under load and comfort for daily commercial operations.
+      </p>
+
+      <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn" href="contact.html#enquiry">ENQUIRE NOW</a>
+        <a class="btn secondary" href="brochure/G5S_6x4_CargoCab&Chassis.pdf" target="_blank">
+          DOWNLOAD BROCHURE
+        </a>
+      </div>
+    </div>
+
+    <div class="product-image">
+      <!-- ✅ Replace with your Cloudflare image URL for G5S 6x4 -->
+      <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/9ffcdda7-a3e2-45fa-53d2-6b602a0cfb00/public" alt="SITRAK G5S 6x4 Cargo Cab & Chassis">
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section style="padding-top:44px;">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div class="block">
+      <h2>Overview</h2>
+      <p>
+        Built to carry more and work harder, the G5S 6x4 is a heavy-duty cab &amp; chassis platform for
+        operators who need reliable traction, stable load handling, and body-builder flexibility.
+        It’s a strong fit for construction-focused builds, regional freight, and high-utilisation fleet work.
+      </p>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="block">
+      <h2>Applications</h2>
+      <ul class="clean">
+        <li><strong>Construction &amp; Building Materials Transport</strong> — Ideal for tray bodies, tippers, service bodies and trade applications.</li>
+        <li><strong>Regional Freight &amp; Bulk Distribution</strong> — Suitable for medium-to-heavy regional freight tasks.</li>
+        <li><strong>Fleet &amp; Government Contracts</strong> — Built for reliability in high-utilisation fleet environments.</li>
+        <li><strong>Body Builder Flexibility</strong> — Compatible with multiple body configurations for industry-specific customisation.</li>
+      </ul>
+    </div>
+
+    <!-- KEY HIGHLIGHTS -->
+    <div class="block">
+      <h2>Key Highlights</h2>
+
+      <h3 style="margin-top:14px;">Proven 7.36L Powertrain</h3>
+      <ul class="clean">
+        <li>Engine Model: MC07H.33-61</li>
+        <li>Displacement: 7.36L</li>
+        <li>Max Power: 240 kW @ 2200 rpm</li>
+        <li>Max Torque: 1322 Nm @ 1200–1700 rpm</li>
+      </ul>
+      <p class="small-note">
+        Provides strong mid-range torque for stable load carrying and controlled acceleration.
+      </p>
+
+      <h3 style="margin-top:22px;">Allison Automatic Transmission</h3>
+      <ul class="clean">
+        <li>Model: Allison 3200</li>
+        <li>Smooth automatic shifting</li>
+        <li>Improved drivability in stop-start urban and construction environments</li>
+      </ul>
+      <p class="small-note">
+        Enhances driver comfort and reduces fatigue during daily operations.
+      </p>
+
+      <h3 style="margin-top:22px;">Heavy-Duty 6x4 Driveline</h3>
+      <ul class="clean">
+        <li>GVM: 25,000 kg</li>
+        <li>Front Axle Design Load: 7,000 kg</li>
+        <li>Rear Axle Design Load: 18,000 kg</li>
+        <li>Main Drive Ratio: 4.63</li>
+        <li>Differential Locks: Interwheel &amp; Interaxle</li>
+      </ul>
+      <p class="small-note">
+        Designed for improved traction and load stability on varying road conditions.
+      </p>
+
+      <h3 style="margin-top:22px;">Reinforced Ladder-Type Frame</h3>
+      <ul class="clean">
+        <li>Main Beam Cross Section: 280 × 80 × 8 mm</li>
+        <li>Frame Width: Front 965 mm / Rear 850 mm</li>
+        <li>Wide-front, narrow-rear trapezoidal frame design</li>
+      </ul>
+      <p class="small-note">
+        Optimised for strength and body mounting flexibility.
+      </p>
+
+      <h3 style="margin-top:22px;">Air Suspension Stability</h3>
+      <ul class="clean">
+        <li>Front: Parabolic Leaf Springs</li>
+        <li>Rear: 8-Airbag Suspension System</li>
+      </ul>
+      <p class="small-note">
+        Provides improved ride comfort and better load protection.
+      </p>
+
+      <h3 style="margin-top:22px;">Advanced Braking &amp; Safety</h3>
+      <ul class="clean">
+        <li>Dual Circuit Compressed Air Brake</li>
+        <li>EBS + ESC + HSA</li>
+        <li>AEBS + LDW</li>
+        <li>Spring Energy Air-Cut Parking Brake</li>
+      </ul>
+      <p class="small-note">
+        Supports safer fleet operations and compliance with modern safety standards.
+      </p>
+    </div>
+
+    <!-- SPECIFICATIONS -->
+    <div class="block">
+      <h2>Specifications</h2>
+
+      <h3 style="margin-top:14px;">Weight &amp; Capability</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Kerb Weight</div><div class="v">7,360 kg</div></div>
+        <div class="item"><div class="k">GVM</div><div class="v">25,000 kg</div></div>
+        <div class="item"><div class="k">Max Speed</div><div class="v">100 km/h</div></div>
+        <div class="item"><div class="k">Max Gradeability</div><div class="v">≥30%</div></div>
+        <div class="item"><div class="k">Fuel Tank Capacity</div><div class="v">300 L</div></div>
+        <div class="item"><div class="k">Minimum Turning Diameter</div><div class="v">21.9 m</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Dimensions</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Overall Length</div><div class="v">11,030 mm</div></div>
+        <div class="item"><div class="k">Width</div><div class="v">2,490 mm</div></div>
+        <div class="item"><div class="k">Height (Unloaded)</div><div class="v">3,145 mm</div></div>
+        <div class="item"><div class="k">Wheelbase</div><div class="v">6,300 mm</div></div>
+        <div class="item"><div class="k">Front Overhang</div><div class="v">1,430 mm</div></div>
+        <div class="item"><div class="k">Rear Overhang</div><div class="v">2,600 mm</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Tyres &amp; Wheels</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Front Rim</div><div class="v">22.5 × 9.0 Aluminium</div></div>
+        <div class="item"><div class="k">Rear Rim</div><div class="v">22.5 × 8.25 Aluminium</div></div>
+        <div class="item"><div class="k">Front Tyres</div><div class="v">295/80R22.5</div></div>
+        <div class="item"><div class="k">Rear Tyres</div><div class="v">11R22.5</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Electrical System</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Operating Voltage</div><div class="v">24V</div></div>
+        <div class="item"><div class="k">Alternator Power</div><div class="v">3 kW</div></div>
+        <div class="item"><div class="k">Batteries</div><div class="v">2 × 12V / 180Ah</div></div>
+      </div>
+    </div>
+
+    <!-- WHY CHOOSE -->
+    <div class="block">
+      <h2>Why Choose the G5S 6x4?</h2>
+      <p>
+        The SITRAK G5S 6x4 Cargo Cab &amp; Chassis offers the ideal balance between payload capacity,
+        automatic drivability and chassis durability. Designed for construction, logistics and commercial
+        body applications, it delivers reliable performance while maintaining operational efficiency and
+        fleet cost control.
+      </p>
+
+      <div style="margin-top:22px;">
+        <a class="btn" href="contact.html#enquiry">REQUEST A QUOTE</a>
+        <a class="btn secondary" style="margin-left:10px;" href="models.html#g5">BACK TO G5 SERIES</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="y"></span> RUMBLE Trucks
+  </div>
+</footer>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
