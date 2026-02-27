@@ -171,43 +171,45 @@ p{margin:0;color:var(--muted); line-height:1.7}
   border-bottom:1px solid var(--line);
   background:var(--panel-soft);
 }
-.hero-media .hero-placeholder{
+/* ===== Hero video bg (same style as homepage) ===== */
+.hero-media .video-bg{
   position:absolute;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-  background:
-    radial-gradient(1100px 520px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
-  color:#64748B;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
+  z-index:0;
+  overflow:hidden;
 }
+
+.hero-media .video-bg iframe{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border:0;
+}
+
+/* ✅ COVER：铺满无黑边（会裁剪），不依赖 16:9 */
+.hero-media.hero--cover .video-bg iframe{
+  width:140vmax;
+  height:140vmax;
+}
+
+/* ✅ subtle overlay for readability */
+.hero-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right, rgba(245,247,250,0.92), rgba(245,247,250,0.55));
+  z-index:1;
+}
+
+/* overlay/hero-box must be above video */
 .hero-media .overlay{
   position:relative;
   z-index:2;
-  height:100%;
-  display:flex;
-  align-items:center;
-  background:linear-gradient(
-    to right,
-    rgba(245,247,250,0.92),
-    rgba(245,247,250,0.55)
-  );
 }
-.hero-box{
-  max-width:620px;
-  padding:24px;
-  border:1px solid var(--line);
-  background:#FFFFFF;
-  box-shadow:var(--shadow);
-  border-radius:var(--radius);
-}
-.hero-box p{color:#475569}
+
+/* optional: hide placeholder when video exists */
+.hero-media .hero-placeholder{ display:none; }
 
 /* ---------- Dark Cards ---------- */
 .card{
@@ -356,9 +358,13 @@ footer{
 </header>
 
 <!-- HERO -->
-<section class="hero-media">
-  <div class="hero-placeholder">
-    CONTACT PAGE MEDIA PLACEHOLDER
+<section class="hero-media hero--cover">
+  <div class="video-bg">
+    <iframe
+      src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <div class="overlay">
