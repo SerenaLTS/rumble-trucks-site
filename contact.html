@@ -371,27 +371,27 @@ footer{
 
     <div class="card">
       <div class="body">
-        <form class="grid2">
-          <input placeholder="Name" required>
-          <input placeholder="Phone / Email" required>
-
-          <select required>
-            <option value="">Enquiry Type</option>
-            <option>Sales Enquiry</option>
-            <option>Service & Maintenance</option>
-            <option>Parts Enquiry</option>
-            <option>Fleet / Finance</option>
-            <option>General Enquiry</option>
-          </select>
-
-          <input placeholder="Preferred Model / Topic">
-
-          <textarea placeholder="Message" required></textarea>
-
-          <div>
-            <button class="btn" type="submit">SUBMIT ENQUIRY</button>
-          </div>
-        </form>
+        <form id="enquiry-form" class="grid2">
+            <input name="name" placeholder="Name" required>
+            <input name="contact" placeholder="Phone / Email" required>
+          
+            <select name="enquiry_type" required>
+              <option value="">Enquiry Type</option>
+              <option>Sales Enquiry</option>
+              <option>Service & Maintenance</option>
+              <option>Parts Enquiry</option>
+              <option>Fleet / Finance</option>
+              <option>General Enquiry</option>
+            </select>
+          
+            <input name="preferred_model" placeholder="Preferred Model / Topic">
+          
+            <textarea name="message" placeholder="Message" required></textarea>
+          
+            <div>
+              <button class="btn" type="submit">SUBMIT ENQUIRY</button>
+            </div>
+          </form>
       </div>
     </div>
   </div>
@@ -475,6 +475,8 @@ footer{
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
 </script>
+
+<script src="enquiry.js" defer></script>
 
 </body>
 </html>
