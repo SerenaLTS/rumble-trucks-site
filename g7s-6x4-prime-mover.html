@@ -1,0 +1,438 @@
+<!-- g7s-6x4-prime-mover.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SITRAK-G7S 6x4 Prime Mover | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --radius:4px;
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, system-ui, sans-serif;
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+/* ---------- Header (match Contact final) ---------- */
+header{
+  background:#FFFFFF;
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:98px;
+  flex-wrap:nowrap;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  min-width:0;
+}
+
+/* ✅ ONLY header brand uses Black Ops One */
+.brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:42px;           /* ✅ required */
+  letter-spacing:.22em;
+  line-height:1;
+  white-space:nowrap;
+  transform:translateY(2px);
+}
+/* (optional) desktop更像军牌 */
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;
+  margin-left:auto;
+  min-width:0;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  white-space:nowrap;
+}
+
+.nav-links a{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1;
+  font-weight:500;
+}
+.nav-links a:hover{color:var(--accent)}
+
+.logo-plate{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+
+/* ✅ required logo height */
+.logo-plate img{
+  height:108px;             /* ✅ required */
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+}
+
+/* ---------- General (match Contact final: Roboto Condensed headings + Inter body) ---------- */
+section{padding:72px 0}
+h1,h2{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  font-weight:700;
+}
+h1{font-size:56px; margin:0 0 14px; line-height:.95}
+h2{font-size:40px; margin:0 0 12px; line-height:1}
+p{margin:0;color:var(--muted); line-height:1.7}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border:1px solid var(--accent);
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  letter-spacing:.08em;
+  border-radius:var(--radius);
+  transition:.2s;
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--accent);
+}
+.btn:hover{transform:translateY(-2px)}
+
+/* ================= TOP INTRO ================= */
+.intro-section{
+  padding:56px 0 36px;   /* ✅ 下边距缩小 */
+}
+.top-intro{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:40px;
+  align-items:center;
+}
+.product-image{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+
+  /* ✅ 自适应高度：不强制写死 */
+  aspect-ratio: 16 / 10;     /* 你可以改成 16/9 或 4/3 */
+  height:auto;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;          /* ✅ 铺满，会裁剪 */
+  object-position:center;
+}
+
+/* ================= Content Blocks ================= */
+.block{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+.block + .block{
+  margin-top:24px;
+}
+
+/* Table */
+.spec-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.spec-table th,
+.spec-table td{
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+.spec-table th{
+  text-align:left;
+  width:40%;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.06em;
+}
+
+/* Footer */
+footer{
+  background:#FFFFFF;
+  border-top:1px solid var(--line);
+  padding:48px 0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Responsive */
+@media(max-width:980px){
+  .top-intro{grid-template-columns:1fr}
+  .product-image{height:260px}
+  .brand-text{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="models.html">Models</a>
+        <a href="services.html">Services</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <span class="logo-plate">
+        <img src="logo.png" alt="RUMBLE logo">
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TOP SECTION ================= -->
+<section style="padding-bottom:40px;">
+  <div class="wrap top-intro">
+
+    <div>
+      <h1>SITRAK G7S 6x4 Prime Mover</h1>
+      <p>
+        <strong>Premium Long-Haul Performance for Modern Fleet Operations.</strong><br><br>
+        The SITRAK G7S 6x4 Prime Mover is engineered for high-efficiency interstate
+        transport and heavy combination applications across Australia. Featuring
+        a 12.42L high-output engine paired with a ZF TraXon automated transmission,
+        the G7S delivers powerful torque, refined drivability and improved fuel
+        efficiency for long-distance freight operations.
+        <br><br>
+        Designed with a reinforced chassis structure, advanced safety systems and
+        air suspension stability, the G7S is built to maximise uptime while
+        maintaining driver comfort and operational cost control.
+      </p>
+
+      <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn" href="contact.html#enquiry">ENQUIRE NOW</a>
+        <a class="btn secondary" href="brochure/G7S_6x4_PrimeMover.pdf" target="_blank">
+          DOWNLOAD BROCHURE
+        </a>
+      </div>
+    </div>
+
+    <div class="product-image">
+      <!-- Replace with your Cloudflare image URL -->
+      <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/014dcec2-55d2-4dab-713b-756ce2b71000/public" alt="SITRAK G7S 6x4 Prime Mover">
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section style="padding-top:44px;">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div class="block">
+      <h2>Overview</h2>
+      <p>
+        The G7S 6x4 Prime Mover is designed for modern linehaul fleets requiring
+        fuel efficiency, durability and high torque output. With a powerful 12.42L
+        engine and premium European transmission technology, it provides the
+        performance and reliability needed for long-distance freight operations
+        across national transport corridors.
+      </p>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="block">
+      <h2>Applications</h2>
+      <ul class="clean">
+        <li><strong>Interstate Linehaul Transport</strong> — Optimised for long-distance freight across NSW, VIC, QLD and national corridors.</li>
+        <li><strong>B-Double &amp; Heavy Combination Operations</strong> — Designed to handle demanding GCM requirements and high-load applications.</li>
+        <li><strong>Fleet &amp; Logistics Operators</strong> — Built for high-utilisation commercial fleets requiring reliability and efficiency.</li>
+        <li><strong>General Freight &amp; Container Transport</strong> — Suitable for curtain-siders, skeletal trailers and refrigerated combinations.</li>
+      </ul>
+    </div>
+
+    <!-- KEY HIGHLIGHTS -->
+    <div class="block">
+      <h2>Key Highlights</h2>
+
+      <h3 style="margin-top:14px;">High-Performance 12.42L Engine</h3>
+      <ul class="clean">
+        <li>Engine Model: MC13.54-61</li>
+        <li>Displacement: 12.42L</li>
+        <li>Max Power: 400 kW @ 1800 rpm</li>
+        <li>Max Torque: 2500 Nm @ 950–1400 rpm</li>
+      </ul>
+      <p class="small-note">
+        Delivers strong low-end torque for smooth heavy-load acceleration and grade climbing.
+      </p>
+
+      <h3 style="margin-top:22px;">ZF TraXon Automated Transmission</h3>
+      <ul class="clean">
+        <li>Model: ZF 12TX2621TD</li>
+        <li>12-speed AMT</li>
+        <li>Matched PTO configuration available</li>
+        <li>Ratio options: 3.08 / 3.36 / 3.7</li>
+      </ul>
+      <p class="small-note">
+        Provides efficient shifting and reduced driver fatigue for long-haul operations.
+      </p>
+
+      <h3 style="margin-top:22px;">Heavy-Duty 6x4 Driveline</h3>
+      <ul class="clean">
+        <li>GVM: 25,000 kg</li>
+        <li>Front Axle Design Load: 7,000 kg</li>
+        <li>Rear Axle Design Load: 18,000 kg</li>
+        <li>Differential Locks: Interwheel &amp; Interaxle</li>
+      </ul>
+      <p class="small-note">
+        Ensures reliable traction and stable load distribution.
+      </p>
+
+      <h3 style="margin-top:22px;">Reinforced Frame Structure</h3>
+      <ul class="clean">
+        <li>Main Beam Cross Section: 270 × 85 × 8 mm</li>
+        <li>Frame Width: Front 942 mm / Rear 762 mm</li>
+        <li>Trapezoidal ladder-type chassis</li>
+      </ul>
+      <p class="small-note">
+        Designed for durability under heavy-duty freight applications.
+      </p>
+
+      <h3 style="margin-top:22px;">Suspension &amp; Stability</h3>
+      <ul class="clean">
+        <li>Front: Parabolic leaf springs (3 leaves)</li>
+        <li>Rear: 8-airbag air suspension</li>
+      </ul>
+      <p class="small-note">
+        Enhances ride comfort and cargo stability.
+      </p>
+
+      <h3 style="margin-top:22px;">Advanced Safety Systems</h3>
+      <ul class="clean">
+        <li>Dual Circuit Compressed Air Brake</li>
+        <li>EBS + ESC + HSA</li>
+        <li>AEBS + LDW</li>
+        <li>NH4 PTO compatible with TraXon</li>
+      </ul>
+      <p class="small-note">
+        Supports compliance with modern fleet safety standards.
+      </p>
+    </div>
+
+    <!-- SPECIFICATIONS -->
+    <div class="block">
+      <h2>Specifications</h2>
+
+      <h3 style="margin-top:14px;">Weight &amp; Capability</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Kerb Weight</div><div class="v">8,800 kg</div></div>
+        <div class="item"><div class="k">GVM</div><div class="v">25,000 kg</div></div>
+        <div class="item"><div class="k">Max Speed</div><div class="v">100 km/h</div></div>
+        <div class="item"><div class="k">Max Gradeability</div><div class="v">≥30%</div></div>
+        <div class="item"><div class="k">Fuel Tank Capacity</div><div class="v">700 + 240 L</div></div>
+        <div class="item"><div class="k">Minimum Turning Diameter</div><div class="v">15.5 m</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Dimensions</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Overall Length</div><div class="v">7,042 mm</div></div>
+        <div class="item"><div class="k">Width</div><div class="v">2,500 mm</div></div>
+        <div class="item"><div class="k">Height (Unloaded)</div><div class="v">3,980 mm</div></div>
+        <div class="item"><div class="k">Wheelbase</div><div class="v">3,200 + 1,400 mm</div></div>
+        <div class="item"><div class="k">Front Overhang</div><div class="v">1,492 mm</div></div>
+        <div class="item"><div class="k">Rear Overhang</div><div class="v">950 mm</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Electrical System</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Operating Voltage</div><div class="v">24V</div></div>
+        <div class="item"><div class="k">Generator Power</div><div class="v">3 kW</div></div>
+        <div class="item"><div class="k">Batteries</div><div class="v">2 × 12V / 240Ah</div></div>
+      </div>
+    </div>
+
+    <!-- WHY CHOOSE -->
+    <div class="block">
+      <h2>Why Choose the G7S 6x4?</h2>
+      <p>
+        The SITRAK G7S 6x4 Prime Mover delivers the ideal balance of power,
+        efficiency and long-haul durability. With a high-output 12.42L engine,
+        ZF TraXon transmission and advanced safety systems, the G7S is designed
+        for fleet operators seeking reliable interstate performance and
+        long-term operational value.
+      </p>
+
+      <div style="margin-top:22px;">
+        <a class="btn" href="contact.html#enquiry">REQUEST A QUOTE</a>
+        <a class="btn secondary" style="margin-left:10px;" href="models.html#g7">BACK TO G7 SERIES</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="y"></span> RUMBLE Trucks
+  </div>
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
