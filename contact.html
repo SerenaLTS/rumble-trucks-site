@@ -162,54 +162,118 @@ p{margin:0;color:var(--muted); line-height:1.7}
 .btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
 .btn:active{transform:translateY(0)}
 
-/* ---------- Hero ---------- */
+/* ---------- Hero Media (video bg) ---------- */
 .hero-media{
   position:relative;
-  height:52vh;
-  min-height:380px;
+  height:78vh;
+  min-height:520px;
   overflow:hidden;
   border-bottom:1px solid var(--line);
-  background:var(--panel-soft);
-}
-/* ===== Hero video bg (same style as homepage) ===== */
-.hero-media .video-bg{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  overflow:hidden;
+  background:#000;
 }
 
-.hero-media .video-bg iframe{
+/* video iframe full-bleed */
+.hero-media iframe{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%, -50%);
   border:0;
+  z-index:0;
 }
 
 /* ✅ COVER：铺满无黑边（会裁剪），不依赖 16:9 */
-.hero-media.hero--cover .video-bg iframe{
+.hero-media.hero--cover iframe{
   width:140vmax;
   height:140vmax;
 }
 
-/* ✅ subtle overlay for readability */
-.hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to right, rgba(245,247,250,0.92), rgba(245,247,250,0.55));
-  z-index:1;
-}
+/* ✅ 不要整层蒙版：删除/覆盖任何 ::after 或 overlay 背景 */
+.hero-media::after{ content:none !important; }
 
-/* overlay/hero-box must be above video */
+/* overlay: centered + hidden by default */
 .hero-media .overlay{
   position:relative;
   z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  opacity:0;                 /* 默认隐藏 */
+  pointer-events:none;       /* 默认不挡视频 */
+  transition:opacity .25s ease;
+  padding:0 24px;
 }
 
-/* optional: hide placeholder when video exists */
-.hero-media .hero-placeholder{ display:none; }
+/* hover to show (desktop) */
+.hero-media:hover .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ✅ 点击显示（移动端/触摸屏） */
+.hero-media.is-open .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* glass text box */
+.hero-box{
+  max-width:860px;
+  padding:28px;
+  border:1px solid rgba(255,255,255,.30);
+  background:rgba(255,255,255,.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  border-radius:10px;
+
+  transform: translateY(10px);
+  transition: transform .25s ease;
+}
+
+.hero-media:hover .hero-box,
+.hero-media.is-open .hero-box{
+  transform: translateY(0);
+}
+
+/* ✅ 给用户一个“点击提示”，但不加蒙版 */
+.hero-media .tap-hint{
+  position:absolute;
+  left:24px;
+  bottom:22px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 14px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(0,0,0,.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius:999px;
+
+  color:#fff;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  user-select:none;
+  cursor:pointer;
+}
+
+/* overlay 打开后隐藏提示 */
+.hero-media.is-open .tap-hint{ display:none; }
+
+/* 手机端：不默认显示 overlay（你要求“点击才出现”） */
+@media (hover: none) and (pointer: coarse){
+  .hero-media .overlay{
+    opacity:0;
+    pointer-events:none;
+  }
+}
 
 /* ---------- Dark Cards ---------- */
 .card{
@@ -358,14 +422,17 @@ footer{
 </header>
 
 <!-- HERO -->
-<section class="hero-media hero--cover">
-  <div class="video-bg">
-    <iframe
-      src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
-  </div>
+<section class="hero-media hero--cover" id="contactHero">
+  <iframe
+    src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <!-- ✅ 点击提示（没有整层蒙版） -->
+  <button class="tap-hint" type="button" id="heroToggle">
+    TAP TO VIEW DETAILS
+  </button>
 
   <div class="overlay">
     <div class="wrap">
@@ -543,6 +610,29 @@ footer{
 
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hero = document.getElementById("contactHero");
+    const btn  = document.getElementById("heroToggle");
+
+    if (!hero || !btn) return;
+
+    const toggle = () => hero.classList.toggle("is-open");
+
+    btn.addEventListener("click", toggle);
+
+    // 点击空白区域也可以关闭（可选）
+    hero.addEventListener("click", (e) => {
+      // 点击在 hero-box 内不关闭
+      if (e.target.closest(".hero-box")) return;
+      // 点击提示按钮已经会 toggle，这里不重复
+      if (e.target.closest("#heroToggle")) return;
+      // 只有打开状态才允许点背景关闭
+      if (hero.classList.contains("is-open")) hero.classList.remove("is-open");
+    });
+  });
 </script>
 
 <script src="enquiry.js" defer></script>
