@@ -1,0 +1,437 @@
+<!-- g7s-8x4-tipper-cab-chassis.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SITRAK-G7S 8x4 Tipper Cab &amp; Chassis | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --radius:4px;
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, system-ui, sans-serif;
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+/* ---------- Header (match Contact final) ---------- */
+header{
+  background:#FFFFFF;
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:98px;
+  flex-wrap:nowrap;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  min-width:0;
+}
+
+/* ✅ ONLY header brand uses Black Ops One */
+.brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:42px;           /* ✅ required */
+  letter-spacing:.22em;
+  line-height:1;
+  white-space:nowrap;
+  transform:translateY(2px);
+}
+/* (optional) desktop更像军牌 */
+@media(min-width:981px){
+  .brand-text{ letter-spacing:.26em; }
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;
+  margin-left:auto;
+  min-width:0;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  white-space:nowrap;
+}
+
+.nav-links a{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1;
+  font-weight:500;
+}
+.nav-links a:hover{color:var(--accent)}
+
+.logo-plate{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+
+/* ✅ required logo height */
+.logo-plate img{
+  height:108px;             /* ✅ required */
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+}
+
+/* ---------- General (match Contact final: Roboto Condensed headings + Inter body) ---------- */
+section{padding:72px 0}
+h1,h2{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  font-weight:700;
+}
+h1{font-size:56px; margin:0 0 14px; line-height:.95}
+h2{font-size:40px; margin:0 0 12px; line-height:1}
+p{margin:0;color:var(--muted); line-height:1.7}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border:1px solid var(--accent);
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  letter-spacing:.08em;
+  border-radius:var(--radius);
+  transition:.2s;
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--accent);
+}
+.btn:hover{transform:translateY(-2px)}
+
+/* ================= TOP INTRO ================= */
+.intro-section{
+  padding:56px 0 36px;   /* ✅ 下边距缩小 */
+}
+.top-intro{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:40px;
+  align-items:center;
+}
+.product-image{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+
+  /* ✅ 自适应高度：不强制写死 */
+  aspect-ratio: 16 / 10;     /* 你可以改成 16/9 或 4/3 */
+  height:auto;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;          /* ✅ 铺满，会裁剪 */
+  object-position:center;
+}
+
+/* ================= Content Blocks ================= */
+.block{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+.block + .block{
+  margin-top:24px;
+}
+
+/* Table */
+.spec-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.spec-table th,
+.spec-table td{
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+.spec-table th{
+  text-align:left;
+  width:40%;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.06em;
+}
+
+/* Footer */
+footer{
+  background:#FFFFFF;
+  border-top:1px solid var(--line);
+  padding:48px 0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Responsive */
+@media(max-width:980px){
+  .top-intro{grid-template-columns:1fr}
+  .product-image{height:260px}
+  .brand-text{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="models.html">Models</a>
+        <a href="services.html">Services</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <span class="logo-plate">
+        <img src="logo.png" alt="RUMBLE logo">
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TOP SECTION ================= -->
+<section style="padding-bottom:40px;">
+  <div class="wrap top-intro">
+
+    <div>
+      <h1>SITRAK G7S 8x4 Tipper Cab &amp; Chassis</h1>
+      <p>
+        <strong>Maximum Payload Performance for Heavy Construction Operations.</strong><br><br>
+        The SITRAK G7S 8x4 Tipper Cab &amp; Chassis is engineered for high-capacity construction,
+        quarry and large-scale infrastructure transport across Australia. Featuring a powerful
+        12.42L engine, ZF TraXon automated transmission and reinforced 8x4 chassis configuration,
+        the G7S 8x4 Tipper delivers exceptional torque output, balanced load distribution and
+        long-term durability under demanding operating conditions.
+        <br><br>
+        Built to support heavy-duty tipper body integration, this configuration provides the
+        structural strength, traction and stability required for modern civil and infrastructure projects.
+      </p>
+
+      <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn" href="contact.html#enquiry">ENQUIRE NOW</a>
+        <a class="btn secondary" href="brochure/G7S_8x4_TipperCab&Chassis.pdf" target="_blank">
+          DOWNLOAD BROCHURE
+        </a>
+      </div>
+    </div>
+
+    <div class="product-image">
+      <!-- Replace with your Cloudflare image URL -->
+      <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/be452d7b-2a46-4926-874d-57d744609b00/public" alt="SITRAK G7S 8x4 Tipper Cab & Chassis">
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section style="padding-top:44px;">
+  <div class="wrap">
+
+    <!-- OVERVIEW -->
+    <div class="block">
+      <h2>Overview</h2>
+      <p>
+        Designed for heavy-duty tipping cycles and high-capacity payload operations,
+        the G7S 8x4 Tipper combines strong engine performance, reinforced chassis
+        engineering and advanced safety systems. Its 8x4 configuration ensures
+        improved load distribution and stability, making it well-suited for
+        demanding construction and quarry environments.
+      </p>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="block">
+      <h2>Applications</h2>
+      <ul class="clean">
+        <li><strong>Quarry &amp; Aggregate Haulage</strong> — Designed for sand, gravel, rock and bulk material transport.</li>
+        <li><strong>Large-Scale Civil &amp; Infrastructure Projects</strong> — Suitable for high-capacity construction supply and earthmoving support.</li>
+        <li><strong>Heavy Construction Fleets</strong> — Built for high-frequency tipping cycles and demanding operational environments.</li>
+        <li><strong>Custom Tipper Body Installations</strong> — Optimised for commercial body-builder compatibility.</li>
+      </ul>
+    </div>
+
+    <!-- KEY HIGHLIGHTS -->
+    <div class="block">
+      <h2>Key Highlights</h2>
+
+      <h3 style="margin-top:14px;">High-Output 12.42L Diesel Engine</h3>
+      <ul class="clean">
+        <li>Engine Model: 540HP MC13.54-61</li>
+        <li>Displacement: 12.42L</li>
+        <li>Max Power: 400 kW @ 1800 rpm</li>
+        <li>Max Torque: 2500 Nm @ 1000–1400 rpm</li>
+      </ul>
+      <p class="small-note">
+        Provides strong low-end torque for loaded start-up and steep grade performance.
+      </p>
+
+      <h3 style="margin-top:22px;">ZF TraXon 12-Speed AMT</h3>
+      <ul class="clean">
+        <li>Model: ZF 12TX2621TD</li>
+        <li>Smooth automated shifting</li>
+        <li>Matched PTO compatibility</li>
+      </ul>
+      <p class="small-note">
+        Delivers efficient power transfer and reduced driver fatigue.
+      </p>
+
+      <h3 style="margin-top:22px;">Heavy-Duty 8x4 Driveline</h3>
+      <ul class="clean">
+        <li>GVM: 31,000 kg</li>
+        <li>Front Axle Design Load: 11,500 kg (total)</li>
+        <li>Rear Axle Design Load: 18,000 kg (total)</li>
+        <li>Differential Locks: Interwheel &amp; Interaxle</li>
+        <li>Main Drive Ratio: 3.08</li>
+      </ul>
+      <p class="small-note">
+        Ensures stable traction and balanced load support on uneven surfaces.
+      </p>
+
+      <h3 style="margin-top:22px;">Reinforced Tipper-Ready Frame</h3>
+      <ul class="clean">
+        <li>Main Beam Cross Section: 300 × 80 × 8 mm</li>
+        <li>Trapezoidal ladder-type chassis</li>
+        <li>Frame Width: Front 940 mm / Rear 850 mm</li>
+      </ul>
+      <p class="small-note">
+        Engineered for durability under heavy-load tipping cycles.
+      </p>
+
+      <h3 style="margin-top:22px;">Suspension &amp; Stability</h3>
+      <ul class="clean">
+        <li>Front: Parabolic Leaf Springs (3/3)</li>
+        <li>Rear: 8 Airbag Air Suspension</li>
+      </ul>
+      <p class="small-note">
+        Enhances load balance and ride control during site operations.
+      </p>
+
+      <h3 style="margin-top:22px;">Advanced Braking &amp; Safety</h3>
+      <ul class="clean">
+        <li>Dual Circuit Compressed Air Brake</li>
+        <li>EBS + ESC + HSA</li>
+        <li>ACC + AEBS + LDW</li>
+        <li>Spring Energy Air-Cut Parking Brake</li>
+      </ul>
+      <p class="small-note">
+        Supports fleet safety compliance and operational reliability.
+      </p>
+    </div>
+
+    <!-- SPECIFICATIONS -->
+    <div class="block">
+      <h2>Specifications</h2>
+
+      <h3 style="margin-top:14px;">Weight &amp; Capability</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Kerb Weight</div><div class="v">10,400 kg</div></div>
+        <div class="item"><div class="k">GVM</div><div class="v">31,000 kg</div></div>
+        <div class="item"><div class="k">Max Speed</div><div class="v">100 km/h</div></div>
+        <div class="item"><div class="k">Max Gradeability</div><div class="v">≥25%</div></div>
+        <div class="item"><div class="k">Fuel Tank Capacity</div><div class="v">600 L</div></div>
+        <div class="item"><div class="k">Minimum Turning Diameter</div><div class="v">22.6 m</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Dimensions</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Overall Length</div><div class="v">9,092 mm</div></div>
+        <div class="item"><div class="k">Width</div><div class="v">2,492 mm</div></div>
+        <div class="item"><div class="k">Height (Unloaded)</div><div class="v">3,471 mm</div></div>
+        <div class="item"><div class="k">Wheelbase</div><div class="v">5,900 mm</div></div>
+        <div class="item"><div class="k">Front Overhang</div><div class="v">1,492 mm</div></div>
+        <div class="item"><div class="k">Rear Overhang</div><div class="v">1,000 mm</div></div>
+      </div>
+
+      <h3 style="margin-top:26px;">Electrical System</h3>
+      <div class="kv">
+        <div class="item"><div class="k">Operating Voltage</div><div class="v">24V</div></div>
+        <div class="item"><div class="k">Alternator Power</div><div class="v">3 kW</div></div>
+        <div class="item"><div class="k">Batteries</div><div class="v">2 × 12V / 240Ah</div></div>
+      </div>
+    </div>
+
+    <!-- WHY CHOOSE -->
+    <div class="block">
+      <h2>Why Choose the G7S 8x4 Tipper?</h2>
+      <p>
+        The SITRAK G7S 8x4 Tipper Cab &amp; Chassis delivers high payload capability,
+        structural strength and powerful torque performance for heavy-duty construction
+        environments. With reinforced engineering, advanced safety systems and reliable
+        drivetrain components, it provides a dependable and cost-effective solution for
+        modern Australian fleet operations.
+      </p>
+
+      <div style="margin-top:22px;">
+        <a class="btn" href="contact.html#enquiry">REQUEST A QUOTE</a>
+        <a class="btn secondary" style="margin-left:10px;" href="models.html#g7">BACK TO G7 SERIES</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="y"></span> RUMBLE Trucks
+  </div>
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
