@@ -253,6 +253,42 @@ p{margin:0;color:var(--muted); line-height:1.7}
   line-height:1.15;
   color:var(--card-text);
 }
+/* clickable contact links */
+.info-item a.value-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--card-text);
+  text-decoration:none;
+  border-bottom:1px solid rgba(96,165,250,.0);
+  transition:color .15s ease, border-color .15s ease, transform .15s ease, opacity .15s ease;
+}
+
+.info-item a.value-link:hover{
+  color:var(--card-accent);
+  border-bottom-color:rgba(96,165,250,.65);
+  transform:translateY(-1px);
+}
+
+.info-item a.value-link:active{
+  transform:translateY(0);
+  opacity:.9;
+}
+
+/* small icon bubble */
+.info-item .icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(96,165,250,.14);
+  border:1px solid rgba(96,165,250,.25);
+  color:var(--card-accent);
+  font-size:16px;
+  flex-shrink:0;
+}
 
 /* ---------- Form (white inputs) ---------- */
 input,select,textarea{
@@ -349,17 +385,36 @@ footer{
 
     <div class="grid3">
       <div class="info-item">
-        <div class="label">EMAIL</div>
-        <div class="value">sales@rumbletrucks.com</div>
-      </div>
-      <div class="info-item">
-        <div class="label">PHONE</div>
-        <div class="value">+61 4XX XXX XXX</div>
-      </div>
-      <div class="info-item">
-        <div class="label">LOCATION</div>
-        <div class="value">Australia</div>
-      </div>
+           <div class="label">EMAIL</div>
+           <div class="value">
+             <a class="value-link" href="mailto:info@rumbleauto.com.au">
+               <span class="icon">✉️</span>
+               info@rumbleauto.com.au
+             </a>
+           </div>
+         </div>
+         
+         <div class="info-item">
+           <div class="label">PHONE</div>
+           <div class="value">
+             <a class="value-link" href="tel:+61296262747">
+               <span class="icon">📞</span>
+               (02) 9626 2747
+             </a>
+           </div>
+         </div>
+         
+         <div class="info-item">
+           <div class="label">LOCATION</div>
+           <div class="value">
+             <a class="value-link"
+                href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+                target="_blank" rel="noopener">
+               <span class="icon">📍</span>
+               15 Contaplas St, Arndell Park NSW 2148
+             </a>
+           </div>
+         </div>
     </div>
   </div>
 </section>
