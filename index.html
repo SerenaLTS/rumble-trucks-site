@@ -630,7 +630,6 @@ body.nav-open .mobile-nav{
   .grid2,.grid3,.grid4{grid-template-columns:1fr}
   .nav{height:auto; padding:14px 0;}
   .nav-right{flex-wrap:wrap; justify-content:flex-end;}
-  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
   .logo-plate img{height:78px;}
   .brand-text{font-size:28px; letter-spacing:.22em;}
   h1{font-size:48px;}
@@ -641,47 +640,53 @@ body.nav-open .mobile-nav{
 <body>
 
 <header>
-  <div class="nav-right">
-    <nav class="nav-links">
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
+    <div class="nav-right">
+      <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
         <a href="fleet-finance.html">Fleet &amp; Finance</a>
         <a href="contact.html">Contact</a>
-    </nav>
+      </nav>
 
-    <!-- ✅ mobile hamburger -->
-    <button class="hamburger" type="button" aria-label="Open menu" id="openNavBtn">
+      <!-- ✅ mobile hamburger -->
+      <button class="hamburger" type="button" aria-label="Open menu" id="openNavBtn">
         <span></span>
-    </button>
+      </button>
 
-    <span class="logo-plate">
+      <span class="logo-plate">
         <img src="logo.png" alt="RUMBLE logo">
-    </span>
+      </span>
     </div>
-
-    <!-- ✅ mobile drawer + overlay (place right after header, still inside body) -->
-    <div class="mobile-nav-overlay" id="navOverlay" aria-hidden="true"></div>
-
-    <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <div class="mobile-nav-head">
-        <div class="mobile-nav-title">MENU</div>
-        <button class="mobile-nav-close" type="button" aria-label="Close menu" id="closeNavBtn">✕</button>
-    </div>
-
-    <nav class="mobile-nav-links">
-        <a href="index.html">Home</a>
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet &amp; Finance</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
-    <div style="margin-top:auto; padding:16px 18px; border-top:1px solid var(--line);">
-        <a class="btn" style="width:100%; text-align:center;" href="contact.html#enquiry">ENQUIRE NOW</a>
-    </div>
-    </aside>
+  </div>
 </header>
+
+<!-- ✅ overlay + drawer 建议放在 header 外面（更干净） -->
+<div class="mobile-nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-head">
+    <div class="mobile-nav-title">MENU</div>
+    <button class="mobile-nav-close" type="button" aria-label="Close menu" id="closeNavBtn">✕</button>
+  </div>
+
+  <nav class="mobile-nav-links">
+    <a href="index.html">Home</a>
+    <a href="models.html">Models</a>
+    <a href="services.html">Services</a>
+    <a href="fleet-finance.html">Fleet &amp; Finance</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div style="margin-top:auto; padding:16px 18px; border-top:1px solid var(--line);">
+    <a class="btn" style="width:100%; text-align:center;" href="contact.html#enquiry">ENQUIRE NOW</a>
+  </div>
+</aside>
 
 <!-- HERO -->
 <section class="hero-media">
