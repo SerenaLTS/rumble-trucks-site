@@ -356,6 +356,17 @@ p{margin:0;color:var(--muted); line-height:1.7}
   flex-shrink:0;
 }
 
+/* make whole card clickable */
+.info-item.link-card{
+  display:block;
+  cursor:pointer;
+}
+
+.info-item.link-card:focus{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(96,165,250,.18), var(--card-shadow);
+}
+
 /* ---------- Form (white inputs) ---------- */
 input,select,textarea{
   width:100%;
@@ -457,38 +468,43 @@ footer{
     <p style="margin-bottom:24px;">Our team will respond as soon as possible.</p>
 
     <div class="grid3">
-      <div class="info-item">
-           <div class="label">EMAIL</div>
-           <div class="value">
-             <a class="value-link" href="mailto:info@rumbleauto.com.au">
-               <span class="icon">✉️</span>
-               info@rumbleauto.com.au
-             </a>
-           </div>
-         </div>
          
-         <div class="info-item">
-           <div class="label">PHONE</div>
-           <div class="value">
-             <a class="value-link" href="tel:+61296262747">
-               <span class="icon">📞</span>
-               (02) 9626 2747
-             </a>
-           </div>
-         </div>
+           <!-- EMAIL -->
+           <a class="info-item link-card" href="mailto:info@rumbleauto.com.au">
+             <div class="label">EMAIL</div>
+             <div class="value">
+               <span class="value-link">
+                 <span class="icon">✉️</span>
+                 info@rumbleauto.com.au
+               </span>
+             </div>
+           </a>
          
-         <div class="info-item">
-           <div class="label">LOCATION</div>
-           <div class="value">
-             <a class="value-link"
-                href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
-                target="_blank" rel="noopener">
-               <span class="icon">📍</span>
-               15 Contaplas St, Arndell Park NSW 2148
-             </a>
-           </div>
+           <!-- PHONE -->
+           <a class="info-item link-card" href="tel:+61296262747">
+             <div class="label">PHONE</div>
+             <div class="value">
+               <span class="value-link">
+                 <span class="icon">📞</span>
+                 (02) 9626 2747
+               </span>
+             </div>
+           </a>
+         
+           <!-- LOCATION -->
+           <a class="info-item link-card"
+              href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+              target="_blank" rel="noopener">
+             <div class="label">LOCATION</div>
+             <div class="value">
+               <span class="value-link">
+                 <span class="icon">📍</span>
+                 15 Contaplas St, Arndell Park NSW 2148
+               </span>
+             </div>
+           </a>
+         
          </div>
-    </div>
   </div>
 </section>
 
