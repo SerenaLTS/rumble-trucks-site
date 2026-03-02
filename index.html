@@ -84,6 +84,66 @@ header{
   flex-shrink:0;
   min-width:0;
 }
+/* Make sure header is always clickable above hero iframe */
+header{ position:relative; z-index:3000; }
+
+/* Desktop vs Mobile brand */
+.brand-desktop{ display:flex; }
+.brand-mobile{ display:none; }
+
+.logo-desktop{ display:flex; }
+
+/* Mobile brand (bigger logo) */
+.brand-link{ gap:12px; text-decoration:none; }
+.brand-mark{
+  height:58px;   /* ✅ mobile logo bigger */
+  width:auto;
+  display:block;
+  object-fit:contain;
+}
+.brand-auto{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  letter-spacing:.22em;
+  font-size:24px;
+  line-height:1;
+  color:var(--text);
+  white-space:nowrap;
+  transform:translateY(1px);
+}
+
+/* Desktop logo bigger too */
+.logo-plate img{
+  height:120px;  /* ✅ desktop logo bigger (was 108px) */
+}
+
+/* Mobile header layout: left brand-mobile, right hamburger only */
+@media (max-width:900px){
+  .wrap{ padding:0 16px; }
+
+  .nav{
+    height:auto;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .brand-desktop{ display:none; }
+  .brand-mobile{ display:flex; align-items:center; }
+
+  .nav-links{ display:none; }       /* hide desktop links */
+  .logo-desktop{ display:none; }    /* ✅ remove right logo on mobile */
+
+  .nav-right{
+    margin-left:auto;
+    gap:10px;
+  }
+
+  .hamburger{
+    display:inline-flex;
+    width:50px;
+    height:50px;
+    border-radius:14px;
+  }
+}
 
 /* ✅ ONLY header brand uses Black Ops One */
 .brand-text{
@@ -285,7 +345,7 @@ section[id]{
   position:absolute;
   top:50%;
   left:50%;
-  width:177.78vh;         /* 16:9 反算 */
+  width:177.97vh;         /* 16:9 反算 */
   height:100vh;
   transform:translate(-50%, -50%);
   border:0;
@@ -780,15 +840,20 @@ body.nav-open .mobile-nav{
 <header>
   <div class="wrap nav">
 
-    <!-- Left: brand (mobile: logo + AUTO) -->
-    <a class="brand brand-link" href="index.html" aria-label="RUMBLE AUTO Home">
+    <!-- Desktop brand text -->
+    <div class="brand brand-desktop">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </div>
+
+    <!-- Mobile brand (logo + AUTO) -->
+    <a class="brand brand-mobile brand-link" href="index.html" aria-label="RUMBLE AUTO Home">
       <img class="brand-mark" src="logo.png" alt="RUMBLE logo">
       <span class="brand-auto">AUTO</span>
     </a>
 
-    <!-- Right: desktop links + hamburger -->
     <div class="nav-right">
 
+      <!-- Desktop nav links -->
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
@@ -797,13 +862,17 @@ body.nav-open .mobile-nav{
         <a href="contact.html">Contact</a>
       </nav>
 
-      <!-- ✅ mobile hamburger -->
-      <button class="hamburger" type="button" aria-label="Open menu" id="openNavBtn" aria-controls="mobileNav" aria-expanded="false">
+      <!-- Mobile hamburger (ONLY) -->
+      <button class="hamburger" type="button"
+              aria-label="Open menu"
+              id="openNavBtn"
+              aria-controls="mobileNav"
+              aria-expanded="false">
         <span></span>
       </button>
 
-      <!-- ✅ desktop only logo (hide on mobile) -->
-      <span class="logo-plate desktop-only">
+      <!-- Desktop right logo (keep for desktop, hidden on mobile) -->
+      <span class="logo-plate logo-desktop">
         <img src="logo.png" alt="RUMBLE logo">
       </span>
 
