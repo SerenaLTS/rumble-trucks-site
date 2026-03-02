@@ -98,6 +98,70 @@ header{
 @media(min-width:981px){
   .brand-text{ letter-spacing:.26em; }
 }
+/* ===== Mobile-friendly brand in header ===== */
+.brand-link{
+  gap:10px;
+  text-decoration:none;
+}
+.brand-mark{
+  height:46px;        /* mobile logo size */
+  width:auto;
+  display:block;
+  object-fit:contain;
+}
+.brand-auto{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  letter-spacing:.22em;
+  font-size:22px;
+  line-height:1;
+  color:var(--text);
+  transform:translateY(1px);
+  white-space:nowrap;
+}
+
+/* desktop-only helper */
+.desktop-only{ display:inline-flex; }
+
+/* tighten header on mobile */
+@media (max-width:900px){
+  .wrap{ padding:0 16px; } /* mobile side padding smaller */
+
+  .nav{
+    height:auto;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .nav-right{
+    gap:10px;
+    margin-left:auto;
+  }
+
+  /* hide big text brand on mobile (the old RUMBLE AUTO text) */
+  .brand-text{ display:none; }
+
+  /* hide desktop logo on mobile */
+  .desktop-only{ display:none; }
+
+  /* make hamburger always visible and not squeezed */
+  .hamburger{
+    width:46px;
+    height:46px;
+    border-radius:12px;
+  }
+
+  /* ensure brand never overflows */
+  .brand{
+    min-width:0;
+    flex:1;
+  }
+}
+
+/* desktop sizing */
+@media (min-width:901px){
+  .brand-mark{ height:54px; }
+  .brand-auto{ font-size:26px; }
+}
 
 .nav-right{
   display:flex;
@@ -715,12 +779,17 @@ body.nav-open .mobile-nav{
 
 <header>
   <div class="wrap nav">
-    <div class="brand">
-      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
-    </div>
 
+    <!-- Left: brand (mobile: logo + AUTO) -->
+    <a class="brand brand-link" href="index.html" aria-label="RUMBLE AUTO Home">
+      <img class="brand-mark" src="logo.png" alt="RUMBLE logo">
+      <span class="brand-auto">AUTO</span>
+    </a>
+
+    <!-- Right: desktop links + hamburger -->
     <div class="nav-right">
-      <nav class="nav-links">
+
+      <nav class="nav-links" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="models.html">Models</a>
         <a href="services.html">Services</a>
@@ -729,13 +798,15 @@ body.nav-open .mobile-nav{
       </nav>
 
       <!-- ✅ mobile hamburger -->
-      <button class="hamburger" type="button" aria-label="Open menu" id="openNavBtn">
+      <button class="hamburger" type="button" aria-label="Open menu" id="openNavBtn" aria-controls="mobileNav" aria-expanded="false">
         <span></span>
       </button>
 
-      <span class="logo-plate">
+      <!-- ✅ desktop only logo (hide on mobile) -->
+      <span class="logo-plate desktop-only">
         <img src="logo.png" alt="RUMBLE logo">
       </span>
+
     </div>
   </div>
 </header>
