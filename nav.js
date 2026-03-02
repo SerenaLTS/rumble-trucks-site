@@ -1,22 +1,50 @@
-  document.addEventListener("DOMContentLoaded", () => {
-    const openBtn = document.getElementById("openNavBtn");
-    const closeBtn = document.getElementById("closeNavBtn");
-    const overlay = document.getElementById("navOverlay");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("openNavBtn");
+  const closeBtn = document.getElementById("closeNavBtn");
+  const overlay = document.getElementById("navOverlay");
+  const drawer = document.getElementById("mobileNav");
 
-    const openNav = () => document.body.classList.add("nav-open");
-    const closeNav = () => document.body.classList.remove("nav-open");
+  if (!openBtn || !closeBtn || !overlay || !drawer) {
+    console.warn("Mobile nav elements missing.");
+    return;
+  }
 
-    if (openBtn) openBtn.addEventListener("click", openNav);
-    if (closeBtn) closeBtn.addEventListener("click", closeNav);
-    if (overlay) overlay.addEventListener("click", closeNav);
+  const openNav = () => {
+    document.body.classList.add("nav-open");
+    drawer.setAttribute("aria-hidden", "false");
+    overlay.setAttribute("aria-hidden", "false");
+    openBtn.setAttribute("aria-expanded", "true");
+  };
 
-    // ESC to close
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeNav();
-    });
+  const closeNav = () => {
+    document.body.classList.remove("nav-open");
+    drawer.setAttribute("aria-hidden", "true");
+    overlay.setAttribute("aria-hidden", "true");
+    openBtn.setAttribute("aria-expanded", "false");
+  };
 
-    // 点击抽屉里的链接后自动关闭（更像原生体验）
-    document.querySelectorAll(".mobile-nav a").forEach(a => {
-      a.addEventListener("click", closeNav);
-    });
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openNav();
   });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeNav();
+  });
+
+  overlay.addEventListener("click", closeNav);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeNav();
+  });
+
+  // 点击抽屉里的链接后自动关闭
+  drawer.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (a) closeNav();
+  });
+});
+</script>
