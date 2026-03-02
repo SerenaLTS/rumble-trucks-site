@@ -4,18 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay  = document.getElementById("navOverlay");
   const drawer   = document.getElementById("mobileNav");
 
-  if (!openBtn || !closeBtn || !overlay || !drawer) {
-    console.warn("[nav] Missing elements", { openBtn, closeBtn, overlay, drawer });
-    return;
-  }
+  if (!openBtn || !closeBtn || !overlay || !drawer) return;
 
   const openNav = () => {
     document.body.classList.add("nav-open");
     drawer.setAttribute("aria-hidden", "false");
     overlay.setAttribute("aria-hidden", "false");
     openBtn.setAttribute("aria-expanded", "true");
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
   };
 
   const closeNav = () => {
@@ -23,13 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     drawer.setAttribute("aria-hidden", "true");
     overlay.setAttribute("aria-hidden", "true");
     openBtn.setAttribute("aria-expanded", "false");
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
   };
 
   openBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    e.stopPropagation();
     openNav();
   });
 
