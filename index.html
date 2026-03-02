@@ -211,47 +211,34 @@ section[id]{
   min-height:520px;
   overflow:hidden;
   border-bottom:1px solid var(--line);
-  background:var(--panel-soft);
+  background:#000;
 }
 
-.hero-media video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;   /* ✅ 改这里 */
-  z-index:0;       /* ✅ 加这一行 */
-}
-
-.hero-media .hero-placeholder{
-  position:absolute;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-  background:
-    radial-gradient(1200px 600px at 20% 30%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, #EAF0FA 0%, #F5F7FA 55%, #EEF2F7 100%);
-  color:#64748B;
-  font-size:13px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
+/* ✅ 关键：用 inset+放大 解决竖屏留白 */
 .hero-media iframe{
   position:absolute;
-  top:50%;
-  left:50%;
-  width:100vw;
-  height:56.25vw;   /* 16:9 比例 */
-  min-height:100%;
-  min-width:177.78vh; /* 16:9 反算 */
-  transform:translate(-50%, -50%);
+  inset:0;
   border:0;
   z-index:0;
+
+  /* 先铺满容器 */
+  width:100%;
+  height:100%;
+
+  /* 再放大一点做 cover（裁剪掉黑边/留白） */
+  transform:scale(1.25);
+  transform-origin:center;
+}
+
+/* 移动端再稍微放大一点更稳 */
+@media (max-width:900px){
+  .hero-media{
+    height:64vh;
+    min-height:460px;
+  }
+  .hero-media iframe{
+    transform:scale(1.45);
+  }
 }
 
 /* ---------- Hero overlay (centered + glass mask, show on hover) ---------- */
@@ -263,11 +250,12 @@ section[id]{
   align-items:center;
   justify-content:center;
   text-align:center;
+  padding:0 16px; /* 手机更合理 */
+}
 
-  opacity:0;                 /* 默认隐藏 */
-  pointer-events:none;       /* 默认不挡视频 */
-  transition:opacity .25s ease;
-  padding:0 24px;
+.hero-media .slogan-box{
+  width:min(92vw, 720px);
+  margin:0 auto;
 }
 
 .hero-media:hover .overlay{
@@ -389,6 +377,75 @@ footer{
   margin-bottom:16px;
 }
 .footer-nav a:hover{color:var(--accent)}
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap:40px;
+  margin-bottom:22px;
+}
+
+.footer-brand p{
+  max-width:260px;
+  margin-top:10px;
+}
+
+.footer-logo{
+  height:44px;       /* ✅ 桌面和移动都好看 */
+  width:auto;
+  display:block;
+  object-fit:contain;
+  filter: drop-shadow(0 6px 18px rgba(15,23,42,.12));
+}
+
+.footer-col{
+  display:flex;
+  flex-direction:column;
+  gap:10px;          /* ✅ 标题下面竖向展开子项 */
+}
+
+.footer-title{
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:.14em;
+  font-family:"Roboto Condensed", sans-serif;
+  margin-bottom:6px;
+}
+
+.footer-col a{
+  color:var(--muted);
+}
+.footer-col a:hover{
+  color:var(--accent);
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  border-top:1px solid var(--line);
+  padding-top:16px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* ✅ 移动端 footer 排版：两列/一列 */
+@media (max-width:900px){
+  .footer-grid{
+    grid-template-columns: 1fr 1fr;
+    gap:22px;
+  }
+  .footer-brand{
+    grid-column:1 / -1; /* 品牌占一行 */
+  }
+}
+
+@media (max-width:520px){
+  .footer-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ---------- Models Slider ---------- */
 .models-slider{
@@ -805,77 +862,41 @@ body.nav-open .mobile-nav{
 <footer>
   <div class="wrap">
 
-    <div style="
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap:40px;
-      margin-bottom:24px;
-    ">
+    <div class="footer-grid">
 
-      <div>
-        <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
-          color:var(--text);
-        ">
-          RUMBLE
-        </div>
-        <p style="max-width:260px;">
-          Commercial trucks and fleet solutions built for real work.
-        </p>
+      <!-- ✅ Brand（用 logo 替换文字 RUMBLE） -->
+      <div class="footer-brand">
+        <img class="footer-logo" src="logo.png" alt="RUMBLE logo">
+        <p>Commercial trucks and fleet solutions built for real work.</p>
       </div>
 
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">MODELS</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="models.html">All Models</a>
-          <a href="models.html">Series</a>
-          <a href="models.html">Applications</a>
-        </div>
+      <div class="footer-col">
+        <div class="footer-title">MODELS</div>
+        <a href="models.html">All Models</a>
+        <a href="models.html#series">Series</a>
+        <a href="models.html#categories">Applications</a>
       </div>
 
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">SERVICES</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="services.html#maintenance">Maintenance</a>
-          <a href="services.html#parts">Genuine Parts</a>
-          <a href="services.html#fleet">Fleet Programs</a>
-          <a href="services.html#tech">Technical Support</a>
-        </div>
+      <div class="footer-col">
+        <div class="footer-title">SERVICES</div>
+        <a href="services.html#maintenance">Maintenance</a>
+        <a href="services.html#parts">Genuine Parts</a>
+        <a href="services.html#fleet">Fleet Programs</a>
+        <a href="services.html#tech">Technical Support</a>
       </div>
 
-      <div>
-        <strong style="display:block;margin-bottom:12px;color:var(--text);">COMPANY</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="#">About</a>
-          <a href="fleet-finance.html">Fleet & Finance</a>
-          <a href="contact.html">Contact</a>
-          <a href="#">Privacy Policy</a>
-        </div>
+      <div class="footer-col">
+        <div class="footer-title">COMPANY</div>
+        <a href="#">About</a>
+        <a href="fleet-finance.html">Fleet &amp; Finance</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Privacy Policy</a>
       </div>
 
     </div>
 
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12px;
-      color:var(--muted);
-    ">
+    <div class="footer-bottom">
       <div>© <span id="y"></span> RUMBLE Trucks</div>
-      <div style="display:flex;gap:20px;">
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet & Finance</a>
-        <a href="contact.html">Contact</a>
-      </div>
     </div>
 
   </div>
