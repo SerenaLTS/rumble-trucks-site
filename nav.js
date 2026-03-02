@@ -1,12 +1,11 @@
-<script>
 document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("openNavBtn");
+  const openBtn  = document.getElementById("openNavBtn");
   const closeBtn = document.getElementById("closeNavBtn");
-  const overlay = document.getElementById("navOverlay");
-  const drawer = document.getElementById("mobileNav");
+  const overlay  = document.getElementById("navOverlay");
+  const drawer   = document.getElementById("mobileNav");
 
   if (!openBtn || !closeBtn || !overlay || !drawer) {
-    console.warn("Mobile nav elements missing.");
+    console.warn("[nav] Missing elements", { openBtn, closeBtn, overlay, drawer });
     return;
   }
 
@@ -15,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     drawer.setAttribute("aria-hidden", "false");
     overlay.setAttribute("aria-hidden", "false");
     openBtn.setAttribute("aria-expanded", "true");
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
   };
 
   const closeNav = () => {
@@ -22,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     drawer.setAttribute("aria-hidden", "true");
     overlay.setAttribute("aria-hidden", "true");
     openBtn.setAttribute("aria-expanded", "false");
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
   };
 
   openBtn.addEventListener("click", (e) => {
@@ -41,10 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closeNav();
   });
 
-  // 点击抽屉里的链接后自动关闭
   drawer.addEventListener("click", (e) => {
-    const a = e.target.closest("a");
-    if (a) closeNav();
+    const link = e.target.closest("a");
+    if (link) closeNav();
   });
 });
-</script>
