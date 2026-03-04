@@ -1,43 +1,62 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const openBtn  = document.getElementById("openNavBtn");
+// nav.js
+(() => {
+  const openBtn = document.getElementById("openNavBtn");
   const closeBtn = document.getElementById("closeNavBtn");
-  const overlay  = document.getElementById("navOverlay");
-  const drawer   = document.getElementById("mobileNav");
+  const overlay = document.getElementById("navOverlay");
+  const mobileNav = document.getElementById("mobileNav");
 
-  if (!openBtn || !closeBtn || !overlay || !drawer) return;
+  if (!openBtn || !overlay || !mobileNav) return;
+
+  const setExpanded = (isOpen) => {
+    openBtn.setAttribute("aria-expanded", String(isOpen));
+    mobileNav.setAttribute("aria-hidden", String(!isOpen));
+    overlay.setAttribute("aria-hidden", String(!isOpen));
+  };
 
   const openNav = () => {
     document.body.classList.add("nav-open");
-    drawer.setAttribute("aria-hidden", "false");
-    overlay.setAttribute("aria-hidden", "false");
-    openBtn.setAttribute("aria-expanded", "true");
+    setExpanded(true);
   };
 
   const closeNav = () => {
     document.body.classList.remove("nav-open");
-    drawer.setAttribute("aria-hidden", "true");
-    overlay.setAttribute("aria-hidden", "true");
-    openBtn.setAttribute("aria-expanded", "false");
+    setExpanded(false);
   };
 
+  const toggleNav = () => {
+    const isOpen = document.body.classList.contains("nav-open");
+    if (isOpen) closeNav();
+    else openNav();
+  };
+
+  // ✅ 点击汉堡按钮：开/关 toggle
   openBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    openNav();
+    toggleNav();
   });
 
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeNav();
-  });
+  // ✅ 右上角 X 关闭
+  if (closeBtn) {
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeNav();
+    });
+  }
 
-  overlay.addEventListener("click", closeNav);
+  // ✅ 点击遮罩关闭
+  overlay.addEventListener("click", () => closeNav());
 
+  // ✅ ESC 关闭（桌面调试也舒服）
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeNav();
   });
 
-  drawer.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (link) closeNav();
+  // ✅ 点菜单里的链接后自动收回（体验更好）
+  mobileNav.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (a) closeNav();
   });
-});
+
+  // 初始状态同步
+  setExpanded(false);
+})();
