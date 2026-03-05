@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Models (Mobile) | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --panel-soft:#EEF2F7;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 16px 34px rgba(20,40,80,.12);
+
+  --radius:10px;
+  --max:1200px;
+
+  /* mobile header heights */
+  --header-h:78px;
+  --sticky-h:64px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; overflow-x:hidden;}
+a{text-decoration:none; color:inherit}
+img{max-width:100%; display:block}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
+
+/* =========================================================
+   MOBILE TOP BAR (logo + Rumble Auto, right Menu)
+   ========================================================= */
+.mobile-topbar{
+  position:sticky;
+  top:0;
+  z-index:5000;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.topbar-inner{
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+/* brand: bigger */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.brand img{
+  height:54px;           /* ✅ bigger logo */
+  width:auto;
+  object-fit:contain;
+}
+.brand .brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:22px;        /* ✅ bigger */
+  letter-spacing:.16em;
+  white-space:nowrap;
+  line-height:1;
+}
+
+/* menu button (text like JAC) */
+.menu-btn{
+  height:46px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.menu-icon{
+  width:18px; height:12px; position:relative; display:inline-block;
+}
+.menu-icon::before,
+.menu-icon::after,
+.menu-icon span{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+}
+.menu-icon::before{ top:0; }
+.menu-icon span{ top:5px; }
+.menu-icon::after{ bottom:0; }
+
+/* =========================================================
+   FROZEN PANE (two buttons under header)
+   ========================================================= */
+.frozen-pane{
+  position:sticky;
+  top:var(--header-h);
+  z-index:4500;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.frozen-inner{
+  height:var(--sticky-h);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:46px;
+  padding:0 16px;
+  border-radius:12px;
+  border:1px solid var(--accent);
+  font-weight:800;
+  letter-spacing:.08em;
+  font-size:13px;
+  white-space:nowrap;
+}
+.btn.primary{ background:var(--accent); color:#fff; }
+.btn.secondary{ background:transparent; color:var(--accent); }
+
+.frozen-inner .btn{
+  flex:1; /* 两个按钮平均铺满 */
+}
+
+/* =========================================================
+   MOBILE DRAWER MENU
+   ========================================================= */
+.nav-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:6000;
+}
+.nav-drawer{
+  position:fixed;
+  top:0; right:0;
+  width:min(86vw, 360px);
+  height:100svh;
+  background:#fff;
+  border-left:1px solid var(--line);
+  transform:translateX(105%);
+  transition:transform .22s ease;
+  z-index:6100;
+  display:flex;
+  flex-direction:column;
+}
+.drawer-head{
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.drawer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+}
+.drawer-close{
+  width:42px; height:42px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.drawer-links{
+  padding:16px;
+  display:grid;
+  gap:10px;
+}
+.drawer-links a{
+  padding:14px 12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:800;
+  letter-spacing:.06em;
+  background:#fff;
+}
+.drawer-links a:active{ transform:scale(.99); }
+.drawer-cta{
+  margin-top:auto;
+  padding:16px;
+  border-top:1px solid var(--line);
+}
+
+/* open state */
+body.nav-open .nav-overlay{ opacity:1; pointer-events:auto; }
+body.nav-open .nav-drawer{ transform:translateX(0); }
+
+/* =========================================================
+   HERO VIDEO (mobile ratio tuned)
+   ========================================================= */
+.hero-video{
+  position:relative;
+  width:100%;
+  background:#000;
+  /* 手机上做成“更像封面”的高度：减少黑边 */
+  height:58svh;
+  min-height:420px;
+  overflow:hidden;
+}
+
+/* ✅ 这里用 cover 思路：尽量铺满，允许裁剪，减少黑边 */
+.hero-video iframe{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border:0;
+
+  /* 关键：用更激进的尺寸，减少黑边（会裁剪） */
+  width:170vmax;
+  height:170vmax;
+}
+
+/* 如果你想“完整显示视频不裁剪”，把 body 加 class="video-contain"
+   会出现黑边但不裁剪 */
+body.video-contain .hero-video iframe{
+  width:100%;
+  height:100%;
+  transform:none;
+  top:0; left:0;
+}
+
+/* =========================================================
+   PAGE SECTIONS
+   ========================================================= */
+section{padding:28px 0}
+h1,h2,h3{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  margin:0 0 10px;
+  font-weight:900;
+  line-height:1.05;
+}
+h1{font-size:30px}
+h2{font-size:22px}
+p{margin:0; color:var(--muted); line-height:1.65}
+
+.badge{
+  display:inline-block;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--muted);
+  background:#fff;
+}
+
+.quick-jumps{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.hr{height:1px; background:var(--line); margin:16px 0}
+
+/* product list -> one column */
+.products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:14px;
+}
+.product-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.product-img{
+  height:200px;
+}
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.product-body{
+  padding:14px 14px 10px;
+}
+.product-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.10em;
+  font-weight:900;
+  font-size:18px;
+  margin:0 0 6px;
+}
+.product-meta{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0;
+}
+.product-actions{
+  padding:0 14px 14px;
+  display:flex;
+  gap:10px;
+}
+.product-actions a{ flex:1; }
+
+/* =========================================================
+   MOBILE FOOTER
+   ========================================================= */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:28px 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer-brand img{
+  height:56px;
+  width:auto;
+  object-fit:contain;
+}
+.footer-cols{
+  display:grid;
+  gap:16px;
+  margin-top:18px;
+}
+.footer-col{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.footer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.footer-links{
+  display:grid;
+  gap:10px;
+}
+.footer-links a{ color:var(--muted); font-weight:600; }
+.footer-bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="mobile-topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="mobile_index.html" aria-label="Rumble Auto Home">
+      <img src="logo.png" alt="RUMBLE logo">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </a>
+
+    <button class="menu-btn" type="button" id="menuBtn" aria-controls="navDrawer" aria-expanded="false">
+      <span class="menu-icon"><span></span></span>
+      MENU
+    </button>
+  </div>
+</div>
+
+<!-- FROZEN PANE -->
+<div class="frozen-pane">
+  <div class="wrap frozen-inner">
+    <a class="btn primary" href="#g5">VIEW OUR MODELS</a>
+    <a class="btn secondary" href="mobile_contact.html#enquiry">GET A QUOTE</a>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-title">MENU</div>
+    <button class="drawer-close" type="button" id="drawerClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="drawer-links">
+    <a href="mobile_index.html">Home</a>
+    <a href="mobile_models.html">Models</a>
+    <a href="mobile_services.html">Services</a>
+    <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+    <a href="mobile_contact.html">Contact</a>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn primary" style="width:100%;" href="mobile_contact.html#enquiry">ENQUIRE NOW</a>
+  </div>
+</aside>
+
+<!-- HERO VIDEO -->
+<div class="hero-video" aria-label="Models hero video">
+  <iframe
+    src="https://iframe.videodelivery.net/ed203e6756e13530e7214ab41c48f37f?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap">
+    <h1>OUR TRUCK RANGE</h1>
+    <p>Explore the SITRAK range available through RUMBLE AUTO.</p>
+
+    <div class="hr"></div>
+
+    <span class="badge">BY SERIES</span>
+    <div class="quick-jumps">
+      <a class="btn secondary" href="#g5">G5 SERIES</a>
+      <a class="btn secondary" href="#g7">G7 SERIES</a>
+      <a class="btn secondary" href="#c9">C9 SERIES</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== G5 ===================== -->
+<section id="g5">
+  <div class="wrap">
+    <h2>G5 SERIES</h2>
+    <p>
+      The G5S series is built for adaptability. With multiple axle configurations and body options, it provides the flexibility required across transport, construction and municipal sectors.
+    </p>
+
+    <div class="products">
+      <!-- 1 -->
+      <div class="product-card">
+        <a href="g5s-4x2-cargo-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/29157910-4ffc-4ba1-96bb-dab5c15a6200/public" alt="SITRAK G5S 4x2 Cargo" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">4x2 · Cargo Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-4x2-cargo-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_4x2_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="product-card">
+        <a href="g5s-6x4-cargo-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/9ffcdda7-a3e2-45fa-53d2-6b602a0cfb00/public" alt="SITRAK G5S 6x4 Cargo" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">6x4 · Cargo Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-6x4-cargo-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_6x4_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="product-card">
+        <a href="g5s-8x4-cargo-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/13023b08-e8ab-46cf-b6ab-4ca9226c9400/public" alt="SITRAK G5S 8x4 Cargo" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">8x4 · Cargo Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-8x4-cargo-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_8x4_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="product-card">
+        <a href="g5s-8x4-mixer-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/4d6d121e-76c7-4c17-eef9-dacc599b3d00/public" alt="SITRAK G5S 8x4 Mixer" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">8x4 · Mixer Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-8x4-mixer-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_8x4_MixerCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="product-card">
+        <a href="g5s-6x4-tipper-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/669c98ce-87c6-444e-d212-531cbf557800/public" alt="SITRAK G5S 6x4 Tipper" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">6x4 · Tipper Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-6x4-tipper-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_6x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="product-card">
+        <a href="g5s-8x4-tipper-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/76094861-f5a6-4bfa-4dae-3888f1083800/public" alt="SITRAK G5S 8x4 Tipper" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G5S</div>
+            <p class="product-meta">8x4 · Tipper Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g5s-8x4-tipper-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G5S_8x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== G7 ===================== -->
+<section id="g7">
+  <div class="wrap">
+    <h2>G7 SERIES</h2>
+    <p>
+      The G7S series bridges long-haul capability with construction durability. Designed for operators requiring versatility, the G7S handles both highway transport and demanding site work with confidence.
+    </p>
+
+    <div class="products">
+      <div class="product-card">
+        <a href="g7s-6x4-prime-mover.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/014dcec2-55d2-4dab-713b-756ce2b71000/public" alt="SITRAK G7S 6x4 Prime Mover" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G7S</div>
+            <p class="product-meta">6x4 · Prime Mover</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g7s-6x4-prime-mover.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G7S_6x4_PRIME_MOVER.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="g7s-6x4-tipper-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/653ac598-a71e-4125-244e-d2f23c413100/public" alt="SITRAK G7S 6x4 Tipper" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G7S</div>
+            <p class="product-meta">6x4 · Tipper Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g7s-6x4-tipper-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G7S_6x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <a href="g7s-8x4-tipper-cab-chassis.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/be452d7b-2a46-4926-874d-57d744609b00/public" alt="SITRAK G7S 8x4 Tipper" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-G7S</div>
+            <p class="product-meta">8x4 · Tipper Cab &amp; Chassis</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="g7s-8x4-tipper-cab-chassis.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/G7S_8x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== C9 ===================== -->
+<section id="c9">
+  <div class="wrap">
+    <h2>C9 SERIES</h2>
+    <p>The C9H represents the top tier of the SITRAK range, designed for heavy interstate transport and high-load applications.</p>
+
+    <div class="products">
+      <div class="product-card">
+        <a href="c9h-6x4-prime-mover.html" class="product-link">
+          <div class="product-img">
+            <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/2cc20bcf-fbc1-4f1b-ad5a-7db423318700/public" alt="SITRAK C9H 6x4 Prime Mover" loading="lazy">
+          </div>
+          <div class="product-body">
+            <div class="product-title">SITRAK-C9H</div>
+            <p class="product-meta">6x4 · Prime Mover</p>
+          </div>
+        </a>
+        <div class="product-actions">
+          <a class="btn primary" href="c9h-6x4-prime-mover.html">LEARN MORE</a>
+          <a class="btn secondary" href="brochure/C9H_6x4_PRIME_MOVER.pdf" target="_blank" rel="noopener">BROCHURE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="logo.png" alt="RUMBLE logo">
+      <div>
+        <div style="font-family:'Roboto Condensed',sans-serif; letter-spacing:.18em; font-weight:900; color:var(--text);">RUMBLE TRUCKS</div>
+        <div style="margin-top:6px;">Commercial trucks and fleet solutions built for real work.</div>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-title">MODELS</div>
+        <div class="footer-links">
+          <a href="#g5">G5 Series</a>
+          <a href="#g7">G7 Series</a>
+          <a href="#c9">C9 Series</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">SERVICES</div>
+        <div class="footer-links">
+          <a href="mobile_services.html#maintenance">Maintenance</a>
+          <a href="mobile_services.html#parts">Genuine Parts</a>
+          <a href="mobile_services.html#fleet">Fleet Programs</a>
+          <a href="mobile_services.html#tech">Technical Support</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">COMPANY</div>
+        <div class="footer-links">
+          <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+          <a href="mobile_contact.html">Contact</a>
+          <a href="mobile_index.html">Home</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="y"></span> RUMBLE Trucks</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mobile_index.html">Home</a>
+        <a href="mobile_models.html">Models</a>
+        <a href="mobile_services.html">Services</a>
+        <a href="mobile_contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* year */
+document.getElementById("y").textContent = new Date().getFullYear();
+
+/* drawer toggle: click MENU open/close, click overlay close, click X close */
+(function(){
+  const body = document.body;
+  const btn = document.getElementById("menuBtn");
+  const overlay = document.getElementById("navOverlay");
+  const closeBtn = document.getElementById("drawerClose");
+
+  function setOpen(open){
+    body.classList.toggle("nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function toggle(){
+    setOpen(!body.classList.contains("nav-open"));
+  }
+
+  btn.addEventListener("click", toggle);
+  overlay.addEventListener("click", () => setOpen(false));
+  closeBtn.addEventListener("click", () => setOpen(false));
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") setOpen(false);
+  });
+})();
+</script>
+
+</body>
+</html>
