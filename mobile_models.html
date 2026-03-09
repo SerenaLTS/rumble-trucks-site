@@ -297,6 +297,24 @@ p{margin:0; color:var(--muted); line-height:1.65}
   border-radius:16px;
   box-shadow:var(--shadow);
   overflow:hidden;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.product-card:hover,
+.product-card:active{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow2);
+  border-color:#B8C6DD;
+}
+
+.product-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+}
+
+.product-body{
+  padding:14px 14px 16px;
 }
 .product-img{
   height:200px;
@@ -306,9 +324,6 @@ p{margin:0; color:var(--muted); line-height:1.65}
   height:100%;
   object-fit:cover;
   object-position:center;
-}
-.product-body{
-  padding:14px 14px 10px;
 }
 .product-title{
   font-family:"Roboto Condensed", sans-serif;
@@ -324,12 +339,6 @@ p{margin:0; color:var(--muted); line-height:1.65}
   color:var(--muted);
   margin:0;
 }
-.product-actions{
-  padding:0 14px 14px;
-  display:flex;
-  gap:10px;
-}
-.product-actions a{ flex:1; }
 
 /* =========================================================
    MOBILE FOOTER
@@ -480,10 +489,6 @@ footer{
             <p class="product-meta">4x2 · Cargo Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-4x2-cargo-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_4x2_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <!-- 2 -->
@@ -497,10 +502,6 @@ footer{
             <p class="product-meta">6x4 · Cargo Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-6x4-cargo-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_6x4_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <!-- 3 -->
@@ -514,10 +515,6 @@ footer{
             <p class="product-meta">8x4 · Cargo Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-8x4-cargo-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_8x4_CargoCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <!-- 4 -->
@@ -531,10 +528,6 @@ footer{
             <p class="product-meta">8x4 · Mixer Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-8x4-mixer-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_8x4_MixerCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <!-- 5 -->
@@ -548,10 +541,6 @@ footer{
             <p class="product-meta">6x4 · Tipper Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-6x4-tipper-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_6x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <!-- 6 -->
@@ -565,10 +554,6 @@ footer{
             <p class="product-meta">8x4 · Tipper Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g5s-8x4-tipper-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G5S_8x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
     </div>
   </div>
@@ -593,10 +578,6 @@ footer{
             <p class="product-meta">6x4 · Prime Mover</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g7s-6x4-prime-mover.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G7S_6x4_PRIME_MOVER.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <div class="product-card">
@@ -609,10 +590,6 @@ footer{
             <p class="product-meta">6x4 · Tipper Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g7s-6x4-tipper-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G7S_6x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
 
       <div class="product-card">
@@ -625,10 +602,6 @@ footer{
             <p class="product-meta">8x4 · Tipper Cab &amp; Chassis</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="g7s-8x4-tipper-cab-chassis.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/G7S_8x4_TipperCab&Chassis.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
     </div>
   </div>
@@ -651,10 +624,6 @@ footer{
             <p class="product-meta">6x4 · Prime Mover</p>
           </div>
         </a>
-        <div class="product-actions">
-          <a class="btn primary" href="c9h-6x4-prime-mover.html">LEARN MORE</a>
-          <a class="btn secondary" href="brochure/C9H_6x4_PRIME_MOVER.pdf" target="_blank" rel="noopener">BROCHURE</a>
-        </div>
       </div>
     </div>
   </div>
