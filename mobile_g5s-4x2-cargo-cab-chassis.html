@@ -38,6 +38,10 @@ html,body{
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   overflow-x:hidden;
 }
+
+body{
+  padding-top: calc(var(--header-h) + var(--sticky-h));
+}
 a{text-decoration:none; color:inherit}
 img{max-width:100%; display:block}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
@@ -46,8 +50,10 @@ img{max-width:100%; display:block}
    MOBILE TOP BAR
    ========================================================= */
 .mobile-topbar{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  width:100%;
   z-index:5000;
   background:#fff;
   border-bottom:1px solid var(--line);
@@ -117,9 +123,11 @@ img{max-width:100%; display:block}
    FROZEN PANE
    ========================================================= */
 .frozen-pane{
-  position:sticky;
+  position:fixed;
   top:var(--header-h);
-  z-index:4500;
+  left:0;
+  width:100%;
+  z-index:4900;
   background:#fff;
   border-bottom:1px solid var(--line);
 }
