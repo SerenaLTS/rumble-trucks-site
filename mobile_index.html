@@ -34,7 +34,14 @@
     }
 
     *{box-sizing:border-box}
-    html, body{ margin:0; padding:0; overflow-x:hidden; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    html, body{
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; display:block; }
 
@@ -49,7 +56,7 @@
       z-index:3000;
       background:var(--panel);
       border-bottom:1px solid var(--line);
-      padding-top: var(--safe-top);
+      padding-top:var(--safe-top);
     }
     .topbar-inner{
       height:var(--topbar-h);
@@ -67,14 +74,14 @@
       min-width:0;
     }
     .brand img{
-      height:54px; /* ✅ bigger logo */
+      height:54px;
       width:auto;
       object-fit:contain;
     }
     .brand .name{
       font-family:"Black Ops One", system-ui, sans-serif;
       letter-spacing:.18em;
-      font-size:22px;  /* ✅ bigger text */
+      font-size:22px;
       white-space:nowrap;
       line-height:1;
     }
@@ -84,7 +91,7 @@
       padding:0 16px;
       border:1px solid var(--line);
       background:#fff;
-      border-radius:999px; /* ✅ pill like JAC */
+      border-radius:999px;
       font-weight:700;
       letter-spacing:.10em;
       cursor:pointer;
@@ -92,7 +99,7 @@
 
     .cta-bar{
       position:fixed;
-      top: calc(var(--safe-top) + var(--topbar-h));
+      top:calc(var(--safe-top) + var(--topbar-h));
       left:0;
       right:0;
       z-index:2900;
@@ -123,7 +130,7 @@
 
     /* ===== page content starts after fixed stack ===== */
     main{
-      padding-top: calc(var(--safe-top) + var(--topbar-h) + var(--cta-h));
+      padding-top:calc(var(--safe-top) + var(--topbar-h) + var(--cta-h));
     }
 
     /* ===== Hero video ===== */
@@ -133,7 +140,6 @@
       min-height:420px;
       overflow:hidden;
     }
-    
     .hero iframe{
       position:absolute;
       top:50%;
@@ -143,6 +149,7 @@
       transform:translate(-50%,-50%);
       border:0;
     }
+
     /* ===== Sections ===== */
     section{ padding:26px 0; }
     h2{
@@ -151,7 +158,16 @@
       font-size:30px;
       margin:0 0 10px;
     }
-    p{ margin:0; color:var(--muted); line-height:1.65; }
+    h3{
+      font-family:"Roboto Condensed", sans-serif;
+      letter-spacing:.10em;
+      margin:0;
+    }
+    p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+    }
 
     .cards{
       display:grid;
@@ -164,6 +180,7 @@
       border-radius:16px;
       padding:16px;
       color:#F8FAFC;
+      overflow:hidden;
     }
     .card .title{
       font-family:"Roboto Condensed", sans-serif;
@@ -171,7 +188,19 @@
       font-size:18px;
       margin:0 0 6px;
     }
-    .card .meta{ color:#CBD5E1; font-size:14px; line-height:1.5; }
+    .card .meta{
+      color:#CBD5E1;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .series-overlay{
+      margin-top:12px;
+    }
+    .series-overlay h3{
+      font-size:22px;
+      color:#F8FAFC;
+    }
 
     /* ===== Footer ===== */
     footer{
@@ -179,17 +208,38 @@
       border-top:1px solid var(--line);
       padding:28px 0;
     }
-    .footer-logo{ height:72px; width:auto; }
-    .footer-grid{ display:grid; gap:18px; margin-top:12px; }
-    .footer-col{ display:flex; flex-direction:column; gap:10px; }
+    .footer-logo{
+      height:72px;
+      width:auto;
+    }
+    .footer-grid{
+      display:grid;
+      gap:18px;
+      margin-top:12px;
+    }
+    .footer-col{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
     .footer-title{
       font-family:"Roboto Condensed", sans-serif;
       letter-spacing:.14em;
       font-size:18px;
       font-weight:700;
+      color:var(--text);
     }
-    .footer-col a{ font-size:15px; color:var(--muted); }
-    .footer-bottom{ margin-top:18px; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+    .footer-col a{
+      font-size:15px;
+      color:var(--muted);
+    }
+    .footer-bottom{
+      margin-top:18px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+    }
 
     /* ===== Mobile drawer ===== */
     .mobile-nav-overlay{
@@ -213,7 +263,7 @@
       z-index:4100;
       display:flex;
       flex-direction:column;
-      padding-top: var(--safe-top);
+      padding-top:var(--safe-top);
     }
     .mobile-nav-head{
       display:flex;
@@ -228,7 +278,8 @@
       font-weight:800;
     }
     .mobile-nav-close{
-      width:44px; height:44px;
+      width:44px;
+      height:44px;
       border:1px solid var(--line);
       border-radius:12px;
       background:#fff;
@@ -248,8 +299,13 @@
       background:#fff;
     }
 
-    body.nav-open .mobile-nav-overlay{ opacity:1; pointer-events:auto; }
-    body.nav-open .mobile-nav{ transform:translateX(0); }
+    body.nav-open .mobile-nav-overlay{
+      opacity:1;
+      pointer-events:auto;
+    }
+    body.nav-open .mobile-nav{
+      transform:translateX(0);
+    }
   </style>
 </head>
 
@@ -258,7 +314,7 @@
   <!-- Fixed header -->
   <div class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="mobile.html" aria-label="RUMBLE AUTO Home">
+      <a class="brand" href="mobile_index.html" aria-label="RUMBLE AUTO Home">
         <img src="logo.png" alt="RUMBLE logo">
         <span class="name">RUMBLE&nbsp;AUTO</span>
       </a>
@@ -285,6 +341,7 @@
       <div class="mobile-nav-title">MENU</div>
       <button class="mobile-nav-close" id="closeNavBtn" aria-label="Close menu">✕</button>
     </div>
+
     <nav class="mobile-nav-links">
       <a href="mobile_index.html">Home</a>
       <a href="mobile_models.html">Models</a>
@@ -292,8 +349,9 @@
       <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
       <a href="mobile_contact.html">Contact</a>
     </nav>
+
     <div style="margin-top:auto; padding:16px 18px; border-top:1px solid var(--line);">
-      <a class="btn primary" style="border-radius:14px;" href="mobile.html#enquiry">ENQUIRE NOW</a>
+      <a class="btn primary" style="border-radius:14px;" href="mobile_contact.html#enquiry">ENQUIRE NOW</a>
     </div>
   </aside>
 
@@ -316,19 +374,21 @@
         <p>Explore our three core SITRAK series.</p>
 
         <div class="cards">
-          <a class="card" href="models.html#g5">
+          <a class="card" href="mobile_models.html#g5">
             <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/ec05af1f-a1d4-45b7-1c8a-3505a188c900/public" alt="G5 Series">
             <div class="series-overlay">
               <h3>G5 SERIES</h3>
             </div>
           </a>
-          <a class="card" href="models.html#g7">
+
+          <a class="card" href="mobile_models.html#g7">
             <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/31b4129c-55dd-48e2-00e3-30ff910a8100/public" alt="G7 Series">
             <div class="series-overlay">
               <h3>G7 SERIES</h3>
             </div>
           </a>
-          <a class="card" href="models.html#c9">
+
+          <a class="card" href="mobile_models.html#c9">
             <img src="https://imagedelivery.net/NlU7356TBLI1Pfb6uhetLw/f0de15a8-5a97-4aee-56fd-96f746827b00/public" alt="C9 Series">
             <div class="series-overlay">
               <h3>C9 SERIES</h3>
@@ -345,10 +405,10 @@
         <p>Supporting your trucks throughout their working life.</p>
 
         <div class="cards">
-          <a class="card" href="services.html#maintenance"><div class="title">MAINTENANCE &amp; REPAIRS</div></a>
-          <a class="card" href="services.html#parts"><div class="title">GENUINE PARTS</div></a>
-          <a class="card" href="services.html#fleet"><div class="title">FLEET PROGRAMS</div></a>
-          <a class="card" href="services.html#tech"><div class="title">TECHNICAL SUPPORT</div></a>
+          <a class="card" href="mobile_services.html#maintenance"><div class="title">MAINTENANCE &amp; REPAIRS</div></a>
+          <a class="card" href="mobile_services.html#parts"><div class="title">GENUINE PARTS</div></a>
+          <a class="card" href="mobile_services.html#fleet"><div class="title">FLEET PROGRAMS</div></a>
+          <a class="card" href="mobile_services.html#tech"><div class="title">TECHNICAL SUPPORT</div></a>
         </div>
       </div>
     </section>
@@ -366,7 +426,7 @@
             <select name="enquiry_type" required style="padding:14px;border:1px solid var(--line);border-radius:14px;">
               <option value="">Enquiry Type</option>
               <option>Sales Enquiry</option>
-              <option>Service & Maintenance</option>
+              <option>Service &amp; Maintenance</option>
               <option>Parts Enquiry</option>
               <option>Fleet / Finance</option>
               <option>General Enquiry</option>
@@ -418,7 +478,6 @@
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 
-  <!-- 用你之前那个可 toggle 的 nav.js -->
   <script src="nav.js" defer></script>
   <script src="enquiry.js" defer></script>
 
