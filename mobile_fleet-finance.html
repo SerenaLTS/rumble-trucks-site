@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fleet &amp; Finance (Mobile) | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --panel-soft:#EEF2F7;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+
+  --radius:10px;
+  --max:1200px;
+
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 16px 34px rgba(20,40,80,.12);
+
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border:#1F2937;
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
+
+  --header-h:78px;
+  --sticky-h:64px;
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
+
+/* =========================================================
+   MOBILE TOP BAR
+   ========================================================= */
+.mobile-topbar{
+  position:sticky;
+  top:0;
+  z-index:5000;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.brand img{
+  height:54px;
+  width:auto;
+  object-fit:contain;
+}
+.brand .brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:22px;
+  letter-spacing:.16em;
+  white-space:nowrap;
+  line-height:1;
+}
+
+/* menu */
+.menu-btn{
+  height:46px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.menu-icon{
+  width:18px;
+  height:12px;
+  position:relative;
+  display:inline-block;
+}
+.menu-icon::before,
+.menu-icon::after,
+.menu-icon span{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+}
+.menu-icon::before{ top:0; }
+.menu-icon span{ top:5px; }
+.menu-icon::after{ bottom:0; }
+
+/* =========================================================
+   FROZEN PANE
+   ========================================================= */
+.frozen-pane{
+  position:sticky;
+  top:var(--header-h);
+  z-index:4500;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.frozen-inner{
+  height:var(--sticky-h);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--accent);
+  font-weight:800;
+  letter-spacing:.08em;
+  font-size:13px;
+  white-space:nowrap;
+  transition:transform .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.04); transform:translateY(-1px)}
+.btn.primary{ background:var(--accent); color:#fff; }
+.btn.secondary{ background:transparent; color:var(--accent); }
+.frozen-inner .btn{ flex:1; }
+
+/* =========================================================
+   MOBILE DRAWER MENU
+   ========================================================= */
+.nav-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:6000;
+}
+.nav-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(86vw, 360px);
+  height:100svh;
+  background:#fff;
+  border-left:1px solid var(--line);
+  transform:translateX(105%);
+  transition:transform .22s ease;
+  z-index:6100;
+  display:flex;
+  flex-direction:column;
+}
+.drawer-head{
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.drawer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+}
+.drawer-close{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.drawer-links{
+  padding:16px;
+  display:grid;
+  gap:10px;
+}
+.drawer-links a{
+  padding:14px 12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:800;
+  letter-spacing:.06em;
+  background:#fff;
+}
+.drawer-cta{
+  margin-top:auto;
+  padding:16px;
+  border-top:1px solid var(--line);
+}
+body.nav-open .nav-overlay{ opacity:1; pointer-events:auto; }
+body.nav-open .nav-drawer{ transform:translateX(0); }
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+section{padding:28px 0}
+h1,h2,h3{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  margin:0 0 10px;
+  font-weight:900;
+  line-height:1.05;
+}
+h1{font-size:30px}
+h2{font-size:22px}
+h3{font-size:18px}
+p{margin:0; color:var(--muted); line-height:1.65}
+.hr{height:1px; background:var(--line); margin:16px 0}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero-media{
+  position:relative;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  padding:0;
+  background:var(--panel-soft);
+}
+.hero-placeholder{
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+  background:
+    radial-gradient(1100px 520px at 20% 30%, #fff 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(135deg,#EAF0FA 0%,#F5F7FA 55%,#EEF2F7 100%);
+  color:#64748B;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(245,247,250,.88),
+    rgba(245,247,250,.55)
+  );
+}
+.hero-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+}
+.hero-box{
+  max-width:680px;
+  padding:22px 18px;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:16px;
+}
+.hero-box p{color:#475569}
+.hero-actions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.hero-actions .btn{
+  flex:1 1 calc(50% - 5px);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+.card,.step,.kpi .item{
+  background:var(--card-dark);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  box-shadow:var(--card-shadow);
+  color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.card:hover,.step:hover,.kpi .item:hover{
+  box-shadow:var(--card-shadow2);
+  border-color:#334155;
+  transform:translateY(-3px);
+  background:var(--card-dark-soft);
+}
+.card p,.step p{color:var(--card-muted)}
+.body{padding:18px}
+
+/* =========================================================
+   GRID SECTIONS
+   ========================================================= */
+.grid1{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.kpi{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.kpi .label{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+  text-transform:uppercase;
+}
+.kpi .value{
+  margin-top:8px;
+  font-family:"Roboto Condensed", sans-serif;
+  font-size:18px;
+  letter-spacing:.10em;
+  color:var(--card-text);
+  line-height:1.15;
+}
+.step{
+  padding:18px;
+}
+.step .num{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+.step h3{margin:0}
+.step p{margin-top:10px}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  outline:none;
+}
+input:focus, textarea:focus{
+  border-color:#9CB6E8;
+  box-shadow:0 0 0 4px rgba(31,79,216,.12);
+}
+textarea{min-height:120px; resize:vertical}
+
+/* =========================================================
+   MOBILE FOOTER - SAME AS OTHER MOBILE PAGES
+   ========================================================= */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:28px 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer-brand img{
+  height:56px;
+  width:auto;
+  object-fit:contain;
+}
+.footer-cols{
+  display:grid;
+  gap:16px;
+  margin-top:18px;
+}
+.footer-col{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.footer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.footer-links{
+  display:grid;
+  gap:10px;
+}
+.footer-links a{
+  color:var(--muted);
+  font-weight:600;
+}
+.footer-bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="mobile-topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="mobile_index.html" aria-label="Rumble Auto Home">
+      <img src="logo.png" alt="RUMBLE logo">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </a>
+
+    <button class="menu-btn" type="button" id="menuBtn" aria-controls="navDrawer" aria-expanded="false">
+      <span class="menu-icon"><span></span></span>
+      MENU
+    </button>
+  </div>
+</div>
+
+<!-- FROZEN PANE -->
+<div class="frozen-pane">
+  <div class="wrap frozen-inner">
+    <a class="btn primary" href="#fleet">FLEET SOLUTIONS</a>
+    <a class="btn secondary" href="#enquiry">REQUEST A QUOTE</a>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-title">MENU</div>
+    <button class="drawer-close" type="button" id="drawerClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="drawer-links">
+    <a href="mobile_index.html">Home</a>
+    <a href="mobile_models.html">Models</a>
+    <a href="mobile_services.html">Services</a>
+    <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+    <a href="mobile_contact.html">Contact</a>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn primary" style="width:100%;" href="mobile_contact.html#enquiry">ENQUIRE NOW</a>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero-media">
+  <div class="hero-placeholder">FLEET &amp; FINANCE MEDIA PLACEHOLDER</div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="wrap">
+      <div class="hero-box">
+        <h1>FLEET &amp; FINANCE</h1>
+        <p>Fleet planning and finance pathways tailored for commercial operators.</p>
+
+        <div class="hero-actions">
+          <a class="btn secondary" href="#fleet">FLEET SOLUTIONS</a>
+          <a class="btn secondary" href="#finance">FINANCE OPTIONS</a>
+          <a class="btn primary" href="#enquiry">REQUEST A QUOTE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet">
+  <div class="wrap grid1">
+    <div>
+      <h2>FLEET SOLUTIONS</h2>
+      <p>Support for multi-vehicle operations including planning, delivery coordination and uptime.</p>
+
+      <div class="hr"></div>
+
+      <div class="kpi">
+        <div class="item body">
+          <div class="label">PLANNING</div>
+          <div class="value">SPEC MATCHING</div>
+        </div>
+        <div class="item body">
+          <div class="label">DELIVERY</div>
+          <div class="value">COORDINATED</div>
+        </div>
+        <div class="item body">
+          <div class="label">UPTIME</div>
+          <div class="value">SUPPORT PATHWAYS</div>
+        </div>
+        <div class="item body">
+          <div class="label">PRICING</div>
+          <div class="value">VOLUME (TBC)</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <a class="btn secondary" href="mobile_models.html">BROWSE MODELS</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>FLEET CHECKLIST</h3>
+        <p style="margin-top:10px;">
+          Payload, routes, axle setup, body type, annual km and delivery timeframe.
+        </p>
+        <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+        <p style="font-size:13px;">
+          PLACEHOLDER: add your fleet brochure / PDF link later.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCE -->
+<section id="finance">
+  <div class="wrap">
+    <div>
+      <h2>FINANCE OPTIONS</h2>
+      <p>Structures depend on operator profile and requirements.</p>
+      <div style="margin-top:14px;">
+        <a class="btn secondary" href="#enquiry">TALK TO US</a>
+      </div>
+    </div>
+
+    <div class="grid1" style="margin-top:18px;">
+      <div class="card">
+        <div class="body">
+          <h3>BUSINESS FINANCE</h3>
+          <p style="margin-top:10px;">Predictable monthly payments for commercial operators.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: list example terms later.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <h3>LEASE / RENTAL</h3>
+          <p style="margin-top:10px;">Flexibility for fleet refresh cycles.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: add product notes later.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <h3>FLEET PACKAGE</h3>
+          <p style="margin-top:10px;">Bundle support services and maintenance planning.</p>
+          <div class="hr" style="background:rgba(214,222,232,.25)"></div>
+          <p style="font-size:13px;">PLACEHOLDER: package inclusions later.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="wrap">
+    <h2>HOW IT WORKS</h2>
+    <p style="margin-bottom:18px;">A simple flow from requirements to delivery.</p>
+
+    <div class="grid1">
+      <div class="step">
+        <div class="num">STEP 01</div>
+        <h3>REQUIREMENTS</h3>
+        <p>Tell us your application, payload, and delivery timeline.</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 02</div>
+        <h3>MODEL &amp; SPEC</h3>
+        <p>We propose suitable models and configurations.</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 03</div>
+        <h3>QUOTE</h3>
+        <p>Pricing, availability, and finance pathways if required.</p>
+      </div>
+
+      <div class="step">
+        <div class="num">STEP 04</div>
+        <h3>DELIVERY</h3>
+        <p>Coordinate delivery and aftersales support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section id="enquiry">
+  <div class="wrap">
+    <h2>FLEET &amp; FINANCE ENQUIRY</h2>
+    <p style="margin-bottom:18px;">Provide basic details and we’ll contact you with tailored options.</p>
+
+    <form class="form-grid">
+      <input placeholder="Business / Contact Name" required>
+      <input placeholder="Phone / Email" required>
+      <input placeholder="Fleet Size (optional)">
+      <input placeholder="Preferred Model / Application (optional)">
+      <textarea placeholder="Your requirements (routes, payload, body type, finance preference)"></textarea>
+      <div>
+        <button class="btn primary" type="submit">SUBMIT ENQUIRY</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="logo.png" alt="RUMBLE logo">
+      <div>
+        <div style="font-family:'Roboto Condensed',sans-serif; letter-spacing:.18em; font-weight:900; color:var(--text);">RUMBLE TRUCKS</div>
+        <div style="margin-top:6px;">Commercial trucks and fleet solutions built for real work.</div>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-title">MODELS</div>
+        <div class="footer-links">
+          <a href="mobile_models.html">All Models</a>
+          <a href="mobile_models.html#g5">G5 Series</a>
+          <a href="mobile_models.html#g7">G7 Series</a>
+          <a href="mobile_models.html#c9">C9 Series</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">SERVICES</div>
+        <div class="footer-links">
+          <a href="mobile_services.html#maintenance">Maintenance</a>
+          <a href="mobile_services.html#parts">Genuine Parts</a>
+          <a href="mobile_services.html#fleet">Fleet Programs</a>
+          <a href="mobile_services.html#tech">Technical Support</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">COMPANY</div>
+        <div class="footer-links">
+          <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+          <a href="mobile_contact.html">Contact</a>
+          <a href="mobile_index.html">Home</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="y"></span> RUMBLE Trucks</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mobile_index.html">Home</a>
+        <a href="mobile_models.html">Models</a>
+        <a href="mobile_services.html">Services</a>
+        <a href="mobile_contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+
+/* drawer toggle: same logic as working mobile models page */
+(function(){
+  const body = document.body;
+  const btn = document.getElementById("menuBtn");
+  const overlay = document.getElementById("navOverlay");
+  const closeBtn = document.getElementById("drawerClose");
+
+  function setOpen(open){
+    body.classList.toggle("nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function toggle(){
+    setOpen(!body.classList.contains("nav-open"));
+  }
+
+  btn.addEventListener("click", toggle);
+  overlay.addEventListener("click", () => setOpen(false));
+  closeBtn.addEventListener("click", () => setOpen(false));
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") setOpen(false);
+  });
+})();
+</script>
+
+</body>
+</html>
