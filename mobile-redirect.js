@@ -1,14 +1,18 @@
-<script>
 (function () {
-  var isMobile = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(navigator.userAgent);
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isMobile = /Android|iPhone|iPod|Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+
   if (!isMobile) return;
 
   var path = window.location.pathname;
-  var file = path.substring(path.lastIndexOf("/") + 1) || "index.html";
+  var file = path.split("/").pop();
+
+  if (!file || file === "index.html") {
+    window.location.replace("mobile_index.html");
+    return;
+  }
 
   var map = {
-    "": "mobile_index.html",
-    "index.html": "mobile_index.html",
     "models.html": "mobile_models.html",
     "services.html": "mobile_services.html",
     "fleet-finance.html": "mobile_fleet-finance.html",
@@ -28,16 +32,7 @@
     "c9h-6x4-prime-mover.html": "mobile_c9h-6x4-prime-mover.html"
   };
 
-  var target = map[file];
-  if (!target) return;
-
-  var currentUrl = new URL(window.location.href);
-  var targetUrl = new URL(target, window.location.origin + window.location.pathname.replace(file, ""));
-  targetUrl.hash = currentUrl.hash;
-  targetUrl.search = currentUrl.search;
-
-  if (file !== target) {
-    window.location.replace(targetUrl.toString());
+  if (map[file]) {
+    window.location.replace(map[file]);
   }
 })();
-</script>
