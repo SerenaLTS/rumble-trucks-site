@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Services | RUMBLE Trucks</title>
+<title>Services (Mobile) | RUMBLE Trucks</title>
 
-<!-- ✅ SAME AS CONTACT (fonts) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  /* ✅ same as Contact */
   --bg:#F5F7FA;
   --panel:#FFFFFF;
   --panel-soft:#EEF2F7;
@@ -22,158 +20,207 @@
   --accent:#1F4FD8;
 
   --shadow:0 12px 28px rgba(20,40,80,.08);
-  --shadow2:0 10px 22px rgba(20,40,80,.10);
+  --shadow2:0 16px 34px rgba(20,40,80,.12);
 
-  --radius:4px;
+  --radius:14px;
   --max:1200px;
 
-  /* ✅ dark card system */
+  --topbar-h:76px;
+  --cta-h:74px;
+  --safe-top: env(safe-area-inset-top);
+
   --card-dark:#0B1220;
   --card-dark-soft:#111827;
   --card-border-dark:#1F2937;
-
   --card-text:#F8FAFC;
   --card-muted:#CBD5E1;
   --card-accent:#60A5FA;
-
   --card-shadow:0 18px 36px rgba(0,0,0,.35);
   --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
-body{
+html,body{
   margin:0;
+  padding:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  overflow-x:hidden;
 }
 a{text-decoration:none;color:inherit}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+img{max-width:100%;display:block}
+.wrap{padding:0 16px}
 
-/* ================= HEADER (COPY FROM CONTACT — DO NOT TOUCH) ================= */
-header{
-  background:#FFFFFF;
+/* ===== Fixed header stack ===== */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:3000;
+  background:var(--panel);
   border-bottom:1px solid var(--line);
+  padding-top:var(--safe-top);
 }
-.nav{
+.topbar-inner{
+  height:var(--topbar-h);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  height:98px;
-  flex-wrap:nowrap;
-  gap:18px;
+  gap:12px;
+  padding:0 16px;
 }
 .brand{
   display:flex;
   align-items:center;
-  flex-shrink:0;
+  gap:12px;
   min-width:0;
 }
-/* ✅ ONLY header brand uses Black Ops One */
-.brand-text{
-  font-family:"Black Ops One", system-ui, sans-serif;
-  font-size:42px;
-  letter-spacing:.22em;
-  line-height:1;
-  white-space:nowrap;
-  transform:translateY(2px);
-}
-/* (optional same as contact) */
-@media(min-width:981px){
-  .brand-text{ letter-spacing:.26em; }
-}
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:28px;
-  flex-shrink:0;
-  margin-left:auto;
-  min-width:0;
-}
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:26px;
-  white-space:nowrap;
-}
-.nav-links a{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1;
-  font-weight:500;
-}
-.nav-links a:hover{color:var(--accent)}
-.logo-plate{
-  display:flex;
-  align-items:center;
-  flex-shrink:0;
-}
-.logo-plate img{
-  height:108px;
+.brand img{
+  height:54px;
   width:auto;
-  display:block;
   object-fit:contain;
-  filter: drop-shadow(0 6px 18px rgba(15,23,42,.18));
+}
+.brand .name{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  letter-spacing:.18em;
+  font-size:22px;
+  white-space:nowrap;
+  line-height:1;
+}
+.menu-btn{
+  height:44px;
+  padding:0 16px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.10em;
+  cursor:pointer;
 }
 
-/* ================= General (keep your Services structure, but align to Contact style) ================= */
-section{padding:64px 0}
+/* ===== CTA bar ===== */
+.cta-bar{
+  position:fixed;
+  top:calc(var(--safe-top) + var(--topbar-h));
+  left:0;
+  right:0;
+  z-index:2900;
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+}
+.cta-inner{
+  height:var(--cta-h);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  padding:14px 16px;
+}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 14px;
+  border-radius:999px;
+  border:1px solid var(--accent);
+  font-weight:800;
+  letter-spacing:.10em;
+  font-size:13px;
+  white-space:nowrap;
+  transition:transform .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.04); transform:translateY(-1px)}
+.btn.primary{ background:var(--accent); color:#fff; }
+.btn.ghost{ background:#fff; color:var(--accent); }
+
+/* ===== page content starts after fixed stack ===== */
+main{
+  padding-top:calc(var(--safe-top) + var(--topbar-h) + var(--cta-h));
+}
+
+/* ===== Mobile drawer ===== */
+.mobile-nav-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:4000;
+}
+.mobile-nav{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(86vw, 360px);
+  height:100vh;
+  background:#fff;
+  transform:translateX(105%);
+  transition:transform .22s ease;
+  z-index:4100;
+  display:flex;
+  flex-direction:column;
+  padding-top:var(--safe-top);
+}
+.mobile-nav-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+}
+.mobile-nav-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.12em;
+  font-weight:800;
+}
+.mobile-nav-close{
+  width:44px;
+  height:44px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  cursor:pointer;
+}
+.mobile-nav-links{
+  padding:14px 18px;
+  display:grid;
+  gap:10px;
+}
+.mobile-nav-links a{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:700;
+  letter-spacing:.04em;
+  background:#fff;
+}
+body.nav-open .mobile-nav-overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+body.nav-open .mobile-nav{
+  transform:translateX(0);
+}
+
+/* ===== PAGE ===== */
+section{padding:28px 0}
 h1,h2,h3{
   font-family:"Roboto Condensed", sans-serif;
   letter-spacing:.08em;
-  margin:0 0 14px;
-  font-weight:700;
+  margin:0 0 10px;
+  font-weight:900;
   line-height:1.05;
 }
-h1{font-size:40px}
-h2{font-size:28px}
-h3{font-size:16px}
-p{margin:0;color:var(--muted); line-height:1.7}
+h1{font-size:30px}
+h2{font-size:22px}
+h3{font-size:18px}
+p{margin:0; color:var(--muted); line-height:1.65}
+.hr{height:1px; background:var(--line); margin:16px 0}
 
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-
-/* ✅ Cards: dark base (your original services content, but aligned to contact look) */
-.card{
-  background:var(--card-dark);
-  border:1px solid var(--card-border-dark);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--card-shadow);
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  color:var(--card-text);
-}
-.card:hover{
-  box-shadow:var(--card-shadow2);
-  border-color:#334155;
-  transform:translateY(-3px);
-}
-.body{padding:18px}
-.card strong{color:var(--card-text)}
-.card .muted{color:var(--card-muted)}
-
-/* Buttons (match contact) */
-.btn{
-  display:inline-block;
-  padding:12px 22px;
-  border:1px solid var(--accent);
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:.08em;
-  background:var(--accent);
-  color:#fff;
-  transition:transform .12s ease, filter .12s ease;
-  border-radius:var(--radius);
-}
-.btn:hover{filter:brightness(1.05); transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn.secondary{
-  background:transparent;
-  color:var(--accent);
-}
-
-/* ---------- Page Hero (your services hero, keep layout) ---------- */
+/* ===== HERO ===== */
 .page-hero{
   position:relative;
   border-bottom:1px solid var(--line);
@@ -182,7 +229,7 @@ p{margin:0;color:var(--muted); line-height:1.7}
   background:var(--panel-soft);
 }
 .page-hero .hero-bg{
-  height:360px;
+  min-height:360px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -200,8 +247,8 @@ p{margin:0;color:var(--muted); line-height:1.7}
   position:absolute;
   inset:0;
   background:linear-gradient(
-    to right,
-    rgba(245,247,250,0.92),
+    to bottom,
+    rgba(245,247,250,0.88),
     rgba(245,247,250,0.55)
   );
 }
@@ -213,24 +260,56 @@ p{margin:0;color:var(--muted); line-height:1.7}
 }
 .hero-box{
   max-width:620px;
-  padding:24px;
+  padding:22px 18px;
   border:1px solid var(--line);
   background:#FFFFFF;
   box-shadow:var(--shadow);
-  border-radius:var(--radius);
+  border-radius:16px;
 }
 .hero-box p{color:#475569}
+.hero-actions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.hero-actions .btn{
+  flex:1 1 calc(50% - 5px);
+}
 
-/* ---------- Service Detail Blocks (your original) ---------- */
+/* ===== SERVICE OVERVIEW ===== */
+.service-overview{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.card{
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--card-shadow);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  color:var(--card-text);
+}
+.card:hover{
+  box-shadow:var(--card-shadow2);
+  border-color:#334155;
+  transform:translateY(-3px);
+}
+.body{padding:18px}
+.card strong{color:var(--card-text)}
+.card .muted{color:var(--card-muted)}
+
+/* ===== SERVICE DETAIL BLOCKS ===== */
 .service-block{
   display:grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap:28px;
-  align-items:stretch;
+  grid-template-columns:1fr;
+  gap:14px;
 }
-.service-block .block-img{
+.block-img{
   min-height:220px;
-  border-radius:var(--radius);
+  border-radius:16px;
   border:1px solid var(--card-border-dark);
   background:
     radial-gradient(900px 420px at 20% 25%, rgba(96,165,250,.22) 0%, rgba(96,165,250,0) 55%),
@@ -242,22 +321,23 @@ p{margin:0;color:var(--muted); line-height:1.7}
   font-size:13px;
   letter-spacing:.14em;
   text-transform:uppercase;
+  text-align:center;
+  padding:18px;
 }
-.service-block .block-card{
+.block-card{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
-  border-radius:var(--radius);
+  border-radius:16px;
   box-shadow:var(--card-shadow);
   padding:18px;
   color:var(--card-text);
 }
-.service-block .block-card p{ color:var(--card-muted); }
+.block-card p{color:var(--card-muted)}
 
-/* Pills */
 .kv{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:12px;
+  grid-template-columns:1fr;
+  gap:10px;
   margin-top:14px;
 }
 .kv .pill{
@@ -266,344 +346,388 @@ p{margin:0;color:var(--muted); line-height:1.7}
   font-size:12px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  border-radius:var(--radius);
+  border-radius:12px;
   background:rgba(255,255,255,.04);
   color:var(--card-muted);
+  text-align:center;
 }
 
-/* Form (same as contact) */
+/* ===== FORM ===== */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
 input,select,textarea{
   width:100%;
   padding:12px;
   background:#fff;
   border:1px solid var(--line);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   outline:none;
-  border-radius:var(--radius);
+  border-radius:14px;
 }
-input:focus, select:focus, textarea:focus{
+input:focus,select:focus,textarea:focus{
   border-color:#9CB6E8;
   box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
-textarea{min-height:110px}
-
-/* Footer (keep your services footer structure, same base) */
-footer{
-  background:#FFFFFF;
-  border-top:1px solid var(--line);
-  padding:48px 0;
-  font-size:13px;
-  color:var(--muted);
+textarea{min-height:110px; resize:vertical}
+.submit-row{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
 }
-footer a:hover{color:var(--accent)}
 
-/* Responsive (COPY CONTACT HEADER BEHAVIOR) */
-@media(max-width:980px){
-  .grid2,.grid3,.grid4{grid-template-columns:1fr}
-  .service-block{grid-template-columns:1fr}
-  .kv{grid-template-columns:1fr}
-
-  .nav{height:auto; padding:14px 0;}
-  .nav-right{flex-wrap:wrap; justify-content:flex-end;}
-  .nav-links{flex-wrap:wrap; row-gap:10px; justify-content:flex-end;}
-  .logo-plate img{height:78px;}
-  .brand-text{font-size:28px; letter-spacing:.22em;}
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:28px 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer-brand img{
+  height:56px;
+  width:auto;
+  object-fit:contain;
+}
+.footer-cols{
+  display:grid;
+  gap:16px;
+  margin-top:18px;
+}
+.footer-col{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.footer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.footer-links{
+  display:grid;
+  gap:10px;
+}
+.footer-links a{ color:var(--muted); font-weight:600; }
+.footer-bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
-    </div>
+<!-- Fixed header -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="mobile_index.html" aria-label="RUMBLE AUTO Home">
+      <img src="logo.png" alt="RUMBLE logo">
+      <span class="name">RUMBLE&nbsp;AUTO</span>
+    </a>
 
-    <div class="nav-right">
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet &amp; Finance</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <span class="logo-plate">
-        <img src="logo.png" alt="RUMBLE logo">
-      </span>
-    </div>
+    <button class="menu-btn" id="openNavBtn" aria-controls="mobileNav" aria-expanded="false">
+      MENU
+    </button>
   </div>
-</header>
+</div>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="hero-bg">SERVICE PAGE MEDIA PLACEHOLDER</div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
+<!-- Sticky CTA bar -->
+<div class="cta-bar">
+  <div class="cta-inner">
+    <a class="btn primary" href="#service-list">VIEW SERVICES</a>
+    <a class="btn ghost" href="#service-enquiry">BOOK A SERVICE</a>
+  </div>
+</div>
+
+<!-- Drawer -->
+<div class="mobile-nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-head">
+    <div class="mobile-nav-title">MENU</div>
+    <button class="mobile-nav-close" id="closeNavBtn" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="mobile-nav-links">
+    <a href="mobile_index.html">Home</a>
+    <a href="mobile_models.html">Models</a>
+    <a href="mobile_services.html">Services</a>
+    <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+    <a href="mobile_contact.html">Contact</a>
+  </nav>
+
+  <div style="margin-top:auto; padding:16px 18px; border-top:1px solid var(--line);">
+    <a class="btn primary" style="border-radius:14px;" href="mobile_contact.html#enquiry">ENQUIRE NOW</a>
+  </div>
+</aside>
+
+<main>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-bg">SERVICE PAGE MEDIA PLACEHOLDER</div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="wrap">
+        <div class="hero-box">
+          <h1>SERVICES &amp; SUPPORT</h1>
+          <p>
+            Keep your trucks running with maintenance, parts, technical support, and fleet service programs.
+            Built for uptime — designed for real work.
+          </p>
+          <div class="hero-actions">
+            <a class="btn ghost" href="#service-list">VIEW SERVICES</a>
+            <a class="btn primary" href="#service-enquiry">BOOK A SERVICE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE OVERVIEW -->
+  <section id="service-list">
     <div class="wrap">
-      <div class="hero-box">
-        <h1>SERVICES & SUPPORT</h1>
-        <p>
-          Keep your trucks running with maintenance, parts, technical support, and fleet service programs.
-          Built for uptime — designed for real work.
-        </p>
-        <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn secondary" href="#service-list">VIEW SERVICES</a>
-          <a class="btn" href="#service-enquiry">BOOK A SERVICE</a>
+      <h2>WHAT WE OFFER</h2>
+      <p style="margin-bottom:18px;">
+        Core support services for owners and fleet operators. Details can be refined once your final program is confirmed.
+      </p>
+
+      <div class="service-overview">
+        <a class="card" href="#maintenance">
+          <div class="body">
+            <strong>MAINTENANCE &amp; REPAIRS</strong><br>
+            <span class="muted" style="font-size:13px;">Scheduled servicing &amp; diagnostics</span>
+          </div>
+        </a>
+        <a class="card" href="#parts">
+          <div class="body">
+            <strong>GENUINE PARTS</strong><br>
+            <span class="muted" style="font-size:13px;">OEM parts &amp; consumables</span>
+          </div>
+        </a>
+        <a class="card" href="#fleet">
+          <div class="body">
+            <strong>FLEET PROGRAMS</strong><br>
+            <span class="muted" style="font-size:13px;">Service plans for operators</span>
+          </div>
+        </a>
+        <a class="card" href="#tech">
+          <div class="body">
+            <strong>TECHNICAL SUPPORT</strong><br>
+            <span class="muted" style="font-size:13px;">Warranty, training &amp; guidance</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="maintenance">
+    <div class="wrap">
+      <h2>MAINTENANCE &amp; REPAIRS</h2>
+      <div class="service-block">
+        <div class="block-img">IMAGE PLACEHOLDER</div>
+        <div class="block-card">
+          <p>
+            Routine servicing, diagnostics, and repairs to keep vehicles operating safely and efficiently.
+            We can support both single-unit owners and fleet schedules.
+          </p>
+          <div class="kv">
+            <div class="pill">Scheduled Service</div>
+            <div class="pill">Diagnostics</div>
+            <div class="pill">Repairs</div>
+          </div>
+          <div style="margin-top:18px;">
+            <a class="btn primary" href="#service-enquiry">ENQUIRE</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICE OVERVIEW -->
-<section id="service-list">
-  <div class="wrap">
-    <h2>WHAT WE OFFER</h2>
-    <p style="margin-bottom:24px;">
-      Core support services for owners and fleet operators. (Details can be refined once your final program is confirmed.)
-    </p>
-
-    <div class="grid4">
-      <a class="card" href="#maintenance">
-        <div class="body">
-          <strong>MAINTENANCE &amp; REPAIRS</strong><br>
-          <span class="muted" style="font-size:13px;">Scheduled servicing &amp; diagnostics</span>
-        </div>
-      </a>
-      <a class="card" href="#parts">
-        <div class="body">
-          <strong>GENUINE PARTS</strong><br>
-          <span class="muted" style="font-size:13px;">OEM parts &amp; consumables</span>
-        </div>
-      </a>
-      <a class="card" href="#fleet">
-        <div class="body">
-          <strong>FLEET PROGRAMS</strong><br>
-          <span class="muted" style="font-size:13px;">Service plans for operators</span>
-        </div>
-      </a>
-      <a class="card" href="#tech">
-        <div class="body">
-          <strong>TECHNICAL SUPPORT</strong><br>
-          <span class="muted" style="font-size:13px;">Warranty, training &amp; guidance</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- DETAILS -->
-<section id="maintenance">
-  <div class="wrap">
-    <h2>MAINTENANCE &amp; REPAIRS</h2>
-    <div class="service-block">
-      <div class="block-img">IMAGE PLACEHOLDER</div>
-      <div class="block-card">
-        <p>
-          Routine servicing, diagnostics, and repairs to keep vehicles operating safely and efficiently.
-          We can support both single-unit owners and fleet schedules.
-        </p>
-        <div class="kv">
-          <div class="pill">Scheduled Service</div>
-          <div class="pill">Diagnostics</div>
-          <div class="pill">Repairs</div>
-        </div>
-        <div style="margin-top:18px;">
-          <a class="btn" href="#service-enquiry">ENQUIRE</a>
+  <section id="parts">
+    <div class="wrap">
+      <h2>GENUINE PARTS</h2>
+      <div class="service-block">
+        <div class="block-img">IMAGE PLACEHOLDER</div>
+        <div class="block-card">
+          <p>
+            Genuine parts help protect reliability and uptime. We can supply common replacement parts,
+            filters, brakes, fluids, and wear components based on your models and availability.
+          </p>
+          <div class="kv">
+            <div class="pill">OEM Parts</div>
+            <div class="pill">Consumables</div>
+            <div class="pill">Fast Ordering</div>
+          </div>
+          <div style="margin-top:18px;">
+            <a class="btn primary" href="#service-enquiry">REQUEST PARTS</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="parts">
-  <div class="wrap">
-    <h2>GENUINE PARTS</h2>
-    <div class="service-block">
-      <div class="block-img">IMAGE PLACEHOLDER</div>
-      <div class="block-card">
-        <p>
-          Genuine parts help protect reliability and uptime. We can supply common replacement parts,
-          filters, brakes, fluids, and wear components (based on your models and availability).
-        </p>
-        <div class="kv">
-          <div class="pill">OEM Parts</div>
-          <div class="pill">Consumables</div>
-          <div class="pill">Fast Ordering</div>
-        </div>
-        <div style="margin-top:18px;">
-          <a class="btn" href="#service-enquiry">REQUEST PARTS</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="fleet">
-  <div class="wrap">
-    <h2>FLEET PROGRAMS</h2>
-    <div class="service-block">
-      <div class="block-img">IMAGE PLACEHOLDER</div>
-      <div class="block-card">
-        <p>
-          Fleet support options designed for uptime: servicing schedules, inspection routines,
-          priority booking (if available), and tailored support for operators.
-        </p>
-        <div class="kv">
-          <div class="pill">Service Plans</div>
-          <div class="pill">Inspections</div>
-          <div class="pill">Operator Support</div>
-        </div>
-        <div style="margin-top:18px;">
-          <a class="btn secondary" href="fleet-finance.html">FLEET &amp; FINANCE</a>
+  <section id="fleet">
+    <div class="wrap">
+      <h2>FLEET PROGRAMS</h2>
+      <div class="service-block">
+        <div class="block-img">IMAGE PLACEHOLDER</div>
+        <div class="block-card">
+          <p>
+            Fleet support options designed for uptime: servicing schedules, inspection routines,
+            priority booking if available, and tailored support for operators.
+          </p>
+          <div class="kv">
+            <div class="pill">Service Plans</div>
+            <div class="pill">Inspections</div>
+            <div class="pill">Operator Support</div>
+          </div>
+          <div style="margin-top:18px;">
+            <a class="btn ghost" href="mobile_fleet-finance.html">FLEET &amp; FINANCE</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="tech">
-  <div class="wrap">
-    <h2>TECHNICAL SUPPORT</h2>
-    <div class="service-block">
-      <div class="block-img">IMAGE PLACEHOLDER</div>
-      <div class="block-card">
-        <p>
-          Product guidance, warranty support and technical assistance to help you operate confidently.
-          (We can align this section to your real warranty and service policy later.)
-        </p>
-        <div class="kv">
-          <div class="pill">Warranty Support</div>
-          <div class="pill">Operator Guidance</div>
-          <div class="pill">Product Advice</div>
-        </div>
-        <div style="margin-top:18px;">
-          <a class="btn" href="#service-enquiry">CONTACT SUPPORT</a>
+  <section id="tech">
+    <div class="wrap">
+      <h2>TECHNICAL SUPPORT</h2>
+      <div class="service-block">
+        <div class="block-img">IMAGE PLACEHOLDER</div>
+        <div class="block-card">
+          <p>
+            Product guidance, warranty support and technical assistance to help you operate confidently.
+            We can align this section to your real warranty and service policy later.
+          </p>
+          <div class="kv">
+            <div class="pill">Warranty Support</div>
+            <div class="pill">Operator Guidance</div>
+            <div class="pill">Product Advice</div>
+          </div>
+          <div style="margin-top:18px;">
+            <a class="btn primary" href="#service-enquiry">CONTACT SUPPORT</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICE ENQUIRY -->
-<section id="service-enquiry">
-  <div class="wrap">
-    <h2>SERVICE ENQUIRY</h2>
-    <p style="margin-bottom:24px;">Tell us what you need — our team will get back to you.</p>
+  <!-- SERVICE ENQUIRY -->
+  <section id="service-enquiry">
+    <div class="wrap">
+      <h2>SERVICE ENQUIRY</h2>
+      <p style="margin-bottom:18px;">Tell us what you need — our team will get back to you.</p>
 
-    <form class="grid2">
-      <input placeholder="Name" required>
-      <input placeholder="Phone / Email" required>
+      <form class="form-grid">
+        <input placeholder="Name" required>
+        <input placeholder="Phone / Email" required>
 
-      <select required>
-        <option value="">Enquiry Type</option>
-        <option>Sales Enquiry</option>
-        <option selected>Service &amp; Maintenance</option>
-        <option>Parts Enquiry</option>
-        <option>Fleet / Finance</option>
-        <option>General Enquiry</option>
-      </select>
+        <select required>
+          <option value="">Enquiry Type</option>
+          <option>Sales Enquiry</option>
+          <option selected>Service &amp; Maintenance</option>
+          <option>Parts Enquiry</option>
+          <option>Fleet / Finance</option>
+          <option>General Enquiry</option>
+        </select>
 
-      <input placeholder="Truck Model / VIN (optional)">
-      <input placeholder="Preferred Service Date (optional)">
+        <input placeholder="Truck Model / VIN (optional)">
+        <input placeholder="Preferred Service Date (optional)">
 
-      <textarea
-        placeholder="Describe the issue, service required, or parts needed"
-        required
-      ></textarea>
+        <textarea
+          placeholder="Describe the issue, service required, or parts needed"
+          required
+        ></textarea>
 
-      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-        <button class="btn" type="submit">SUBMIT REQUEST</button>
-        <span style="color:var(--muted); font-size:13px;">
-          (Our service team will contact you.)
-        </span>
-      </div>
-    </form>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div style="
-      display:grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap:40px;
-      margin-bottom:24px;
-    ">
-
-      <div>
-        <div style="
-          font-family:'Roboto Condensed', sans-serif;
-          letter-spacing:.2em;
-          font-size:18px;
-          margin-bottom:12px;
-          color:var(--text);
-        ">RUMBLE</div>
-        <p style="max-width:260px;">Commercial trucks and fleet solutions built for real work.</p>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px; color:var(--text);">MODELS</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="models.html">All Models</a>
-          <a href="models.html#series">Series</a>
-          <a href="models.html#categories">Applications</a>
+        <div class="submit-row">
+          <button class="btn primary" type="submit">SUBMIT REQUEST</button>
+          <span style="color:var(--muted); font-size:13px;">
+            Our service team will contact you.
+          </span>
         </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px; color:var(--text);">SERVICES</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="#maintenance">Maintenance</a>
-          <a href="#parts">Genuine Parts</a>
-          <a href="#fleet">Fleet Programs</a>
-          <a href="#tech">Technical Support</a>
-        </div>
-      </div>
-
-      <div>
-        <strong style="display:block;margin-bottom:12px; color:var(--text);">COMPANY</strong>
-        <div style="display:grid;gap:8px;">
-          <a href="index.html">Home</a>
-          <a href="fleet-finance.html">Fleet &amp; Finance</a>
-          <a href="contact.html">Contact</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
-
+      </form>
     </div>
+  </section>
 
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12px;
-      color:var(--muted);
-    ">
-      <div>© <span id="y"></span> RUMBLE Trucks</div>
+  <footer>
+    <div class="wrap">
+      <div class="footer-brand">
+        <img src="logo.png" alt="RUMBLE logo">
+        <div>
+          <div style="font-family:'Roboto Condensed',sans-serif; letter-spacing:.18em; font-weight:900; color:var(--text);">RUMBLE TRUCKS</div>
+          <div style="margin-top:6px;">Commercial trucks and fleet solutions built for real work.</div>
+        </div>
+      </div>
 
-      <div style="display:flex;gap:20px; flex-wrap:wrap;">
-        <a href="index.html">Home</a>
-        <a href="models.html">Models</a>
-        <a href="services.html">Services</a>
-        <a href="fleet-finance.html">Fleet &amp; Finance</a>
-        <a href="contact.html">Contact</a>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-title">MODELS</div>
+          <div class="footer-links">
+            <a href="mobile_models.html">All Models</a>
+            <a href="mobile_models.html#g5">G5 Series</a>
+            <a href="mobile_models.html#g7">G7 Series</a>
+            <a href="mobile_models.html#c9">C9 Series</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">SERVICES</div>
+          <div class="footer-links">
+            <a href="#maintenance">Maintenance</a>
+            <a href="#parts">Genuine Parts</a>
+            <a href="#fleet">Fleet Programs</a>
+            <a href="#tech">Technical Support</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">COMPANY</div>
+          <div class="footer-links">
+            <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+            <a href="mobile_contact.html">Contact</a>
+            <a href="mobile_index.html">Home</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="y"></span> RUMBLE Trucks</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="mobile_index.html">Home</a>
+          <a href="mobile_models.html">Models</a>
+          <a href="mobile_services.html">Services</a>
+          <a href="mobile_contact.html">Contact</a>
+        </div>
       </div>
     </div>
-
-  </div>
-</footer>
+  </footer>
+</main>
 
 <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
+
+<script src="nav.js" defer></script>
 
 </body>
 </html>
