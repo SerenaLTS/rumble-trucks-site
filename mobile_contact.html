@@ -266,13 +266,6 @@ p{
   justify-content:center;
   text-align:center;
   padding:0 16px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .25s ease;
-}
-.hero-media.is-open .overlay{
-  opacity:1;
-  pointer-events:auto;
 }
 .hero-box{
   max-width:760px;
@@ -283,34 +276,7 @@ p{
   -webkit-backdrop-filter:blur(10px);
   box-shadow:0 12px 28px rgba(0,0,0,.18);
   border-radius:16px;
-  transform:translateY(10px);
-  transition:transform .25s ease;
 }
-.hero-media.is-open .hero-box{
-  transform:translateY(0);
-}
-.tap-hint{
-  position:absolute;
-  left:16px;
-  bottom:16px;
-  z-index:3;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.25);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  border-radius:999px;
-  color:#fff;
-  font-size:12px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  user-select:none;
-  cursor:pointer;
-}
-.hero-media.is-open .tap-hint{ display:none; }
 
 /* ===== Info cards ===== */
 .info-grid{
@@ -529,14 +495,12 @@ footer{
 
 <main>
   <!-- HERO -->
-  <div class="hero-media" id="contactHero" aria-label="Contact hero video">
+  <div class="hero-media" aria-label="Contact hero video">
     <iframe
       src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
-
-    <button class="tap-hint" type="button" id="heroToggle">TAP TO VIEW DETAILS</button>
 
     <div class="overlay">
       <div class="wrap">
@@ -692,24 +656,6 @@ footer{
 
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
-
-/* hero details toggle */
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("contactHero");
-  const btn  = document.getElementById("heroToggle");
-
-  if (!hero || !btn) return;
-
-  const toggleHero = () => hero.classList.toggle("is-open");
-
-  btn.addEventListener("click", toggleHero);
-
-  hero.addEventListener("click", (e) => {
-    if (e.target.closest(".hero-box")) return;
-    if (e.target.closest("#heroToggle")) return;
-    if (hero.classList.contains("is-open")) hero.classList.remove("is-open");
-  });
-});
 </script>
 
 <script src="nav.js" defer></script>
