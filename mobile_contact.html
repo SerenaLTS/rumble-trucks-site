@@ -731,52 +731,8 @@ footer{
   </div>
 </footer>
 
-<script>
-document.getElementById("y").textContent = new Date().getFullYear();
 
-(function(){
-  const body = document.body;
-  const btn = document.getElementById("menuBtn");
-  const overlay = document.getElementById("navOverlay");
-  const closeBtn = document.getElementById("drawerClose");
-
-  function setOpen(open){
-    body.classList.toggle("nav-open", open);
-    btn.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-  function toggle(){
-    setOpen(!body.classList.contains("nav-open"));
-  }
-
-  btn.addEventListener("click", toggle);
-  overlay.addEventListener("click", () => setOpen(false));
-  closeBtn.addEventListener("click", () => setOpen(false));
-
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") setOpen(false);
-  });
-})();
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("contactHero");
-  const btn  = document.getElementById("heroToggle");
-
-  if (!hero || !btn) return;
-
-  const toggle = () => hero.classList.toggle("is-open");
-
-  btn.addEventListener("click", toggle);
-
-  hero.addEventListener("click", (e) => {
-    if (e.target.closest(".hero-box")) return;
-    if (e.target.closest("#heroToggle")) return;
-    if (hero.classList.contains("is-open")) hero.classList.remove("is-open");
-  });
-});
-</script>
-
+<script src="nav.js" defer></script>
 <script src="enquiry.js" defer></script>
 
 </body>
