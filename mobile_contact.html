@@ -6,12 +6,12 @@
 <meta http-equiv="Content-Security-Policy"
 content="default-src 'self';
          connect-src 'self' https://api.rumbleauto.com.au https://rumble-api.serena-wang.workers.dev;
-         script-src 'self' https://iframe.videodelivery.net https://fonts.googleapis.com https://fonts.gstatic.com;
+         script-src 'self' 'unsafe-inline' https://iframe.videodelivery.net https://fonts.googleapis.com https://fonts.gstatic.com;
          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
          font-src https://fonts.gstatic.com;
          img-src * data:;
          frame-src https://iframe.videodelivery.net;">
-<title>Contact | RUMBLE Trucks</title>
+<title>Contact (Mobile) | RUMBLE Trucks</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,11 +39,9 @@ content="default-src 'self';
   --card-dark:#0B1220;
   --card-dark-soft:#111827;
   --card-border-dark:#1F2937;
-
   --card-text:#F8FAFC;
   --card-muted:#CBD5E1;
   --card-accent:#60A5FA;
-
   --card-shadow:0 18px 36px rgba(0,0,0,.35);
   --card-shadow2:0 26px 52px rgba(0,0,0,.45);
 }
@@ -57,21 +55,16 @@ html,body{
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   overflow-x:hidden;
 }
-body{
-  padding-top: calc(var(--header-h) + var(--sticky-h));
-}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+a{text-decoration:none; color:inherit}
+img{max-width:100%; display:block}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
 
 /* =========================================================
    MOBILE TOP BAR
    ========================================================= */
 .mobile-topbar{
-  position:fixed;
+  position:sticky;
   top:0;
-  left:0;
-  width:100%;
   z-index:5000;
   background:#fff;
   border-bottom:1px solid var(--line);
@@ -102,7 +95,7 @@ img{max-width:100%;display:block}
   line-height:1;
 }
 
-/* menu */
+/* menu button */
 .menu-btn{
   height:46px;
   padding:0 14px;
@@ -133,19 +126,17 @@ img{max-width:100%;display:block}
   background:var(--text);
   border-radius:2px;
 }
-.menu-icon::before{top:0}
-.menu-icon span{top:5px}
-.menu-icon::after{bottom:0}
+.menu-icon::before{ top:0; }
+.menu-icon span{ top:5px; }
+.menu-icon::after{ bottom:0; }
 
 /* =========================================================
    FROZEN PANE
    ========================================================= */
 .frozen-pane{
-  position:fixed;
+  position:sticky;
   top:var(--header-h);
-  left:0;
-  width:100%;
-  z-index:4900;
+  z-index:4500;
   background:#fff;
   border-bottom:1px solid var(--line);
 }
@@ -169,13 +160,13 @@ img{max-width:100%;display:block}
   white-space:nowrap;
   transition:transform .12s ease, filter .12s ease;
 }
-.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
-.btn.primary{background:var(--accent);color:#fff}
-.btn.secondary{background:transparent;color:var(--accent)}
-.frozen-inner .btn{flex:1}
+.btn:hover{filter:brightness(1.04); transform:translateY(-1px)}
+.btn.primary{ background:var(--accent); color:#fff; }
+.btn.secondary{ background:transparent; color:var(--accent); }
+.frozen-inner .btn{ flex:1; }
 
 /* =========================================================
-   DRAWER
+   MOBILE DRAWER MENU
    ========================================================= */
 .nav-overlay{
   position:fixed;
@@ -238,13 +229,8 @@ img{max-width:100%;display:block}
   padding:16px;
   border-top:1px solid var(--line);
 }
-body.nav-open .nav-overlay{
-  opacity:1;
-  pointer-events:auto;
-}
-body.nav-open .nav-drawer{
-  transform:translateX(0);
-}
+body.nav-open .nav-overlay{ opacity:1; pointer-events:auto; }
+body.nav-open .nav-drawer{ transform:translateX(0); }
 
 /* =========================================================
    PAGE
@@ -263,12 +249,12 @@ h3{font-size:18px}
 p{
   margin:0;
   color:var(--muted);
-  line-height:1.7;
+  line-height:1.65;
 }
 .hr{
   height:1px;
   background:var(--line);
-  margin:18px 0;
+  margin:16px 0;
 }
 
 /* =========================================================
@@ -276,36 +262,35 @@ p{
    ========================================================= */
 .hero-media{
   position:relative;
+  width:100%;
   background:#000;
-  border-bottom:1px solid var(--line);
-  overflow:hidden;
+  height:58svh;
   min-height:420px;
+  overflow:hidden;
 }
 .hero-media iframe{
   position:absolute;
   top:50%;
   left:50%;
-  transform:translate(-50%, -50%);
+  transform:translate(-50%,-50%);
   border:0;
-  z-index:0;
-  width:140vmax;
-  height:140vmax;
+  width:170vmax;
+  height:170vmax;
 }
-.hero-media::after{
-  content:none !important;
-}
+.hero-media::after{ content:none !important; }
+
 .hero-media .overlay{
   position:relative;
   z-index:2;
-  min-height:420px;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
+  padding:0 16px;
   opacity:0;
   pointer-events:none;
   transition:opacity .25s ease;
-  padding:22px 16px;
 }
 .hero-media.is-open .overlay{
   opacity:1;
@@ -347,13 +332,14 @@ p{
   user-select:none;
   cursor:pointer;
 }
-.hero-media.is-open .tap-hint{display:none}
+.hero-media.is-open .tap-hint{ display:none; }
 
 /* =========================================================
    INFO CARDS
    ========================================================= */
 .info-grid{
   display:grid;
+  grid-template-columns:1fr;
   gap:14px;
 }
 .info-item{
@@ -384,7 +370,8 @@ p{
   line-height:1.2;
   color:var(--card-text);
 }
-.info-item a.value-link{
+.info-item a.value-link,
+.value-link{
   display:inline-flex;
   align-items:flex-start;
   gap:10px;
@@ -393,14 +380,11 @@ p{
   border-bottom:1px solid rgba(96,165,250,0);
   transition:color .15s ease, border-color .15s ease, transform .15s ease, opacity .15s ease;
 }
-.info-item a.value-link:hover{
+.info-item a.value-link:hover,
+.value-link:hover{
   color:var(--card-accent);
   border-bottom-color:rgba(96,165,250,.65);
   transform:translateY(-1px);
-}
-.info-item a.value-link:active{
-  transform:translateY(0);
-  opacity:.9;
 }
 .info-item .icon{
   width:34px;
@@ -429,6 +413,7 @@ p{
    ========================================================= */
 .enquiry-grid{
   display:grid;
+  grid-template-columns:1fr;
   gap:18px;
 }
 .card{
@@ -440,10 +425,10 @@ p{
 }
 .body{padding:18px}
 .card p{color:var(--card-muted)}
-.card h3,.card strong{color:var(--card-text)}
 
 .form-grid{
   display:grid;
+  grid-template-columns:1fr;
   gap:12px;
 }
 input,select,textarea{
@@ -452,18 +437,21 @@ input,select,textarea{
   background:#fff;
   border:1px solid var(--line);
   color:var(--text);
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   outline:none;
   border-radius:12px;
 }
-input:focus,select:focus,textarea:focus{
+input:focus, select:focus, textarea:focus{
   border-color:#9CB6E8;
   box-shadow:0 0 0 4px rgba(31,79,216,.12);
 }
-textarea{min-height:120px;resize:vertical}
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
 
 /* =========================================================
-   FOOTER - SAME AS OTHER MOBILE PAGES
+   MOBILE FOOTER - SAME STYLE AS MODEL PAGE
    ========================================================= */
 footer{
   background:#fff;
@@ -542,7 +530,7 @@ footer{
 <div class="frozen-pane">
   <div class="wrap frozen-inner">
     <a class="btn primary" href="mobile_models.html">VIEW OUR MODELS</a>
-    <a class="btn secondary" href="#enquiry">SEND ENQUIRY</a>
+    <a class="btn secondary" href="#enquiry">GET A QUOTE</a>
   </div>
 </div>
 
@@ -569,16 +557,14 @@ footer{
 </aside>
 
 <!-- HERO -->
-<section class="hero-media hero--cover" id="contactHero">
+<div class="hero-media" id="contactHero" aria-label="Contact hero video">
   <iframe
     src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
     allow="autoplay; encrypted-media"
     allowfullscreen>
   </iframe>
 
-  <button class="tap-hint" type="button" id="heroToggle">
-    TAP TO VIEW DETAILS
-  </button>
+  <button class="tap-hint" type="button" id="heroToggle">TAP TO VIEW DETAILS</button>
 
   <div class="overlay">
     <div class="wrap">
@@ -594,7 +580,7 @@ footer{
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- CONTACT INFO -->
 <section>
@@ -660,7 +646,7 @@ footer{
           <select name="enquiry_type" required>
             <option value="">Enquiry Type</option>
             <option>Sales Enquiry</option>
-            <option>Service & Maintenance</option>
+            <option>Service &amp; Maintenance</option>
             <option>Parts Enquiry</option>
             <option>Fleet / Finance</option>
             <option>General Enquiry</option>
@@ -731,8 +717,52 @@ footer{
   </div>
 </footer>
 
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
 
-<script src="nav.js" defer></script>
+/* drawer toggle: same logic as working models page */
+(function(){
+  const body = document.body;
+  const btn = document.getElementById("menuBtn");
+  const overlay = document.getElementById("navOverlay");
+  const closeBtn = document.getElementById("drawerClose");
+
+  function setOpen(open){
+    body.classList.toggle("nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function toggle(){
+    setOpen(!body.classList.contains("nav-open"));
+  }
+
+  btn.addEventListener("click", toggle);
+  overlay.addEventListener("click", () => setOpen(false));
+  closeBtn.addEventListener("click", () => setOpen(false));
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") setOpen(false);
+  });
+})();
+
+/* hero details toggle */
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.getElementById("contactHero");
+  const btn  = document.getElementById("heroToggle");
+
+  if (!hero || !btn) return;
+
+  const toggleHero = () => hero.classList.toggle("is-open");
+
+  btn.addEventListener("click", toggleHero);
+
+  hero.addEventListener("click", (e) => {
+    if (e.target.closest(".hero-box")) return;
+    if (e.target.closest("#heroToggle")) return;
+    if (hero.classList.contains("is-open")) hero.classList.remove("is-open");
+  });
+});
+</script>
+
 <script src="enquiry.js" defer></script>
 
 </body>
