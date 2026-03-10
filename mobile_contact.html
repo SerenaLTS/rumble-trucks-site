@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self';
+         connect-src 'self' https://api.rumbleauto.com.au https://rumble-api.serena-wang.workers.dev;
+         script-src 'self' https://iframe.videodelivery.net https://fonts.googleapis.com https://fonts.gstatic.com;
+         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+         font-src https://fonts.gstatic.com;
+         img-src * data:;
+         frame-src https://iframe.videodelivery.net;">
+<title>Contact | RUMBLE Trucks</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5F7FA;
+  --panel:#FFFFFF;
+  --panel-soft:#EEF2F7;
+  --line:#D6DEE8;
+  --text:#0F172A;
+  --muted:#64748B;
+  --accent:#1F4FD8;
+
+  --shadow:0 12px 28px rgba(20,40,80,.08);
+  --shadow2:0 16px 34px rgba(20,40,80,.12);
+
+  --radius:10px;
+  --max:1200px;
+
+  --header-h:78px;
+  --sticky-h:64px;
+
+  --card-dark:#0B1220;
+  --card-dark-soft:#111827;
+  --card-border-dark:#1F2937;
+
+  --card-text:#F8FAFC;
+  --card-muted:#CBD5E1;
+  --card-accent:#60A5FA;
+
+  --card-shadow:0 18px 36px rgba(0,0,0,.35);
+  --card-shadow2:0 26px 52px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  overflow-x:hidden;
+}
+body{
+  padding-top: calc(var(--header-h) + var(--sticky-h));
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+/* =========================================================
+   MOBILE TOP BAR
+   ========================================================= */
+.mobile-topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:5000;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.brand img{
+  height:54px;
+  width:auto;
+  object-fit:contain;
+}
+.brand .brand-text{
+  font-family:"Black Ops One", system-ui, sans-serif;
+  font-size:22px;
+  letter-spacing:.16em;
+  white-space:nowrap;
+  line-height:1;
+}
+
+/* menu */
+.menu-btn{
+  height:46px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.menu-icon{
+  width:18px;
+  height:12px;
+  position:relative;
+  display:inline-block;
+}
+.menu-icon::before,
+.menu-icon::after,
+.menu-icon span{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+}
+.menu-icon::before{top:0}
+.menu-icon span{top:5px}
+.menu-icon::after{bottom:0}
+
+/* =========================================================
+   FROZEN PANE
+   ========================================================= */
+.frozen-pane{
+  position:fixed;
+  top:var(--header-h);
+  left:0;
+  width:100%;
+  z-index:4900;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.frozen-inner{
+  height:var(--sticky-h);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--accent);
+  font-weight:800;
+  letter-spacing:.08em;
+  font-size:13px;
+  white-space:nowrap;
+  transition:transform .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.secondary{background:transparent;color:var(--accent)}
+.frozen-inner .btn{flex:1}
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+.nav-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:6000;
+}
+.nav-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(86vw, 360px);
+  height:100svh;
+  background:#fff;
+  border-left:1px solid var(--line);
+  transform:translateX(105%);
+  transition:transform .22s ease;
+  z-index:6100;
+  display:flex;
+  flex-direction:column;
+}
+.drawer-head{
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.drawer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+}
+.drawer-close{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.drawer-links{
+  padding:16px;
+  display:grid;
+  gap:10px;
+}
+.drawer-links a{
+  padding:14px 12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-weight:800;
+  letter-spacing:.06em;
+  background:#fff;
+}
+.drawer-cta{
+  margin-top:auto;
+  padding:16px;
+  border-top:1px solid var(--line);
+}
+body.nav-open .nav-overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+body.nav-open .nav-drawer{
+  transform:translateX(0);
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+section{padding:28px 0}
+h1,h2,h3{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.08em;
+  margin:0 0 10px;
+  font-weight:900;
+  line-height:1.05;
+}
+h1{font-size:30px}
+h2{font-size:22px}
+h3{font-size:18px}
+p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.hr{
+  height:1px;
+  background:var(--line);
+  margin:18px 0;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero-media{
+  position:relative;
+  background:#000;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  min-height:420px;
+}
+.hero-media iframe{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border:0;
+  z-index:0;
+  width:140vmax;
+  height:140vmax;
+}
+.hero-media::after{
+  content:none !important;
+}
+.hero-media .overlay{
+  position:relative;
+  z-index:2;
+  min-height:420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+  padding:22px 16px;
+}
+.hero-media.is-open .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+.hero-box{
+  max-width:760px;
+  padding:22px 18px;
+  border:1px solid rgba(255,255,255,.30);
+  background:rgba(255,255,255,.38);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  border-radius:16px;
+  transform:translateY(10px);
+  transition:transform .25s ease;
+}
+.hero-media.is-open .hero-box{
+  transform:translateY(0);
+}
+.tap-hint{
+  position:absolute;
+  left:16px;
+  bottom:16px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(0,0,0,.25);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border-radius:999px;
+  color:#fff;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  user-select:none;
+  cursor:pointer;
+}
+.hero-media.is-open .tap-hint{display:none}
+
+/* =========================================================
+   INFO CARDS
+   ========================================================= */
+.info-grid{
+  display:grid;
+  gap:14px;
+}
+.info-item{
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
+  padding:18px;
+  border-radius:16px;
+  color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.info-item:hover{
+  box-shadow:var(--card-shadow2);
+  border-color:#334155;
+  transform:translateY(-3px);
+}
+.info-item .label{
+  font-size:12px;
+  letter-spacing:.12em;
+  color:var(--card-muted);
+  margin-bottom:8px;
+  text-transform:uppercase;
+}
+.info-item .value{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.05em;
+  font-size:18px;
+  line-height:1.2;
+  color:var(--card-text);
+}
+.info-item a.value-link{
+  display:inline-flex;
+  align-items:flex-start;
+  gap:10px;
+  color:var(--card-text);
+  text-decoration:none;
+  border-bottom:1px solid rgba(96,165,250,0);
+  transition:color .15s ease, border-color .15s ease, transform .15s ease, opacity .15s ease;
+}
+.info-item a.value-link:hover{
+  color:var(--card-accent);
+  border-bottom-color:rgba(96,165,250,.65);
+  transform:translateY(-1px);
+}
+.info-item a.value-link:active{
+  transform:translateY(0);
+  opacity:.9;
+}
+.info-item .icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(96,165,250,.14);
+  border:1px solid rgba(96,165,250,.25);
+  color:var(--card-accent);
+  font-size:16px;
+  flex-shrink:0;
+}
+.info-item.link-card{
+  display:block;
+  cursor:pointer;
+}
+.info-item.link-card:focus{
+  outline:none;
+  box-shadow:0 0 0 4px rgba(96,165,250,.18), var(--card-shadow);
+}
+
+/* =========================================================
+   ENQUIRY
+   ========================================================= */
+.enquiry-grid{
+  display:grid;
+  gap:18px;
+}
+.card{
+  background:var(--card-dark);
+  border:1px solid var(--card-border-dark);
+  box-shadow:var(--card-shadow);
+  border-radius:16px;
+  color:var(--card-text);
+}
+.body{padding:18px}
+.card p{color:var(--card-muted)}
+.card h3,.card strong{color:var(--card-text)}
+
+.form-grid{
+  display:grid;
+  gap:12px;
+}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--text);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  outline:none;
+  border-radius:12px;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#9CB6E8;
+  box-shadow:0 0 0 4px rgba(31,79,216,.12);
+}
+textarea{min-height:120px;resize:vertical}
+
+/* =========================================================
+   FOOTER - SAME AS OTHER MOBILE PAGES
+   ========================================================= */
+footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:28px 0 18px;
+  color:var(--muted);
+  font-size:14px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer-brand img{
+  height:56px;
+  width:auto;
+  object-fit:contain;
+}
+.footer-cols{
+  display:grid;
+  gap:16px;
+  margin-top:18px;
+}
+.footer-col{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.footer-title{
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.18em;
+  font-weight:900;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.footer-links{
+  display:grid;
+  gap:10px;
+}
+.footer-links a{
+  color:var(--muted);
+  font-weight:600;
+}
+.footer-bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="mobile-topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="mobile_index.html" aria-label="Rumble Auto Home">
+      <img src="logo.png" alt="RUMBLE logo">
+      <span class="brand-text">RUMBLE&nbsp;AUTO</span>
+    </a>
+
+    <button class="menu-btn" type="button" id="menuBtn" aria-controls="navDrawer" aria-expanded="false">
+      <span class="menu-icon"><span></span></span>
+      MENU
+    </button>
+  </div>
+</div>
+
+<!-- FROZEN PANE -->
+<div class="frozen-pane">
+  <div class="wrap frozen-inner">
+    <a class="btn primary" href="mobile_models.html">VIEW OUR MODELS</a>
+    <a class="btn secondary" href="#enquiry">SEND ENQUIRY</a>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-title">MENU</div>
+    <button class="drawer-close" type="button" id="drawerClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="drawer-links">
+    <a href="mobile_index.html">Home</a>
+    <a href="mobile_models.html">Models</a>
+    <a href="mobile_services.html">Services</a>
+    <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+    <a href="mobile_contact.html">Contact</a>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn primary" style="width:100%;" href="#enquiry">ENQUIRE NOW</a>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero-media hero--cover" id="contactHero">
+  <iframe
+    src="https://iframe.videodelivery.net/594fa48858b82b623fe733457ffd1ba0?autoplay=1&muted=1&loop=1&controls=0&background=1&preload=auto"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <button class="tap-hint" type="button" id="heroToggle">
+    TAP TO VIEW DETAILS
+  </button>
+
+  <div class="overlay">
+    <div class="wrap">
+      <div class="hero-box">
+        <h1>CONTACT US</h1>
+        <p>
+          Get in touch with our team for sales enquiries, fleet solutions,
+          service support or general questions.
+        </p>
+        <div style="margin-top:18px;">
+          <a class="btn primary" href="#enquiry">SEND AN ENQUIRY</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT INFO -->
+<section>
+  <div class="wrap">
+    <h2>CONTACT INFORMATION</h2>
+    <p style="margin-bottom:18px;">Our team will respond as soon as possible.</p>
+
+    <div class="info-grid">
+      <a class="info-item link-card" href="mailto:info@rumbleauto.com.au">
+        <div class="label">EMAIL</div>
+        <div class="value">
+          <span class="value-link">
+            <span class="icon">✉️</span>
+            info@rumbleauto.com.au
+          </span>
+        </div>
+      </a>
+
+      <a class="info-item link-card" href="tel:+61296262747">
+        <div class="label">PHONE</div>
+        <div class="value">
+          <span class="value-link">
+            <span class="icon">📞</span>
+            (02) 9626 2747
+          </span>
+        </div>
+      </a>
+
+      <a class="info-item link-card"
+         href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+         target="_blank" rel="noopener">
+        <div class="label">LOCATION</div>
+        <div class="value">
+          <span class="value-link">
+            <span class="icon">📍</span>
+            15 Contaplas St, Arndell Park NSW 2148
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section id="enquiry">
+  <div class="wrap enquiry-grid">
+    <div>
+      <h2>ENQUIRY</h2>
+      <p>Submit your enquiry and our team will contact you shortly.</p>
+      <div class="hr"></div>
+      <p>
+        For service or parts enquiries, visit our
+        <a href="mobile_services.html" style="text-decoration:underline; color:var(--accent);">Services page</a>.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <form id="enquiryForm" class="form-grid">
+          <input name="name" placeholder="Name" required>
+          <input name="contact" placeholder="Phone / Email" required>
+
+          <select name="enquiry_type" required>
+            <option value="">Enquiry Type</option>
+            <option>Sales Enquiry</option>
+            <option>Service & Maintenance</option>
+            <option>Parts Enquiry</option>
+            <option>Fleet / Finance</option>
+            <option>General Enquiry</option>
+          </select>
+
+          <input name="preferred_model" placeholder="Preferred Model / Topic">
+          <textarea name="message" placeholder="Message" required></textarea>
+
+          <div style="margin-top:4px;">
+            <button class="btn primary" type="submit">SUBMIT ENQUIRY</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="logo.png" alt="RUMBLE logo">
+      <div>
+        <div style="font-family:'Roboto Condensed',sans-serif; letter-spacing:.18em; font-weight:900; color:var(--text);">RUMBLE TRUCKS</div>
+        <div style="margin-top:6px;">Commercial trucks and fleet solutions built for real work.</div>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-title">MODELS</div>
+        <div class="footer-links">
+          <a href="mobile_models.html">All Models</a>
+          <a href="mobile_models.html#g5">G5 Series</a>
+          <a href="mobile_models.html#g7">G7 Series</a>
+          <a href="mobile_models.html#c9">C9 Series</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">SERVICES</div>
+        <div class="footer-links">
+          <a href="mobile_services.html#maintenance">Maintenance</a>
+          <a href="mobile_services.html#parts">Genuine Parts</a>
+          <a href="mobile_services.html#fleet">Fleet Programs</a>
+          <a href="mobile_services.html#tech">Technical Support</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">COMPANY</div>
+        <div class="footer-links">
+          <a href="mobile_fleet-finance.html">Fleet &amp; Finance</a>
+          <a href="mobile_contact.html">Contact</a>
+          <a href="mobile_index.html">Home</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="y"></span> RUMBLE Trucks</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mobile_index.html">Home</a>
+        <a href="mobile_models.html">Models</a>
+        <a href="mobile_services.html">Services</a>
+        <a href="mobile_contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+
+(function(){
+  const body = document.body;
+  const btn = document.getElementById("menuBtn");
+  const overlay = document.getElementById("navOverlay");
+  const closeBtn = document.getElementById("drawerClose");
+
+  function setOpen(open){
+    body.classList.toggle("nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function toggle(){
+    setOpen(!body.classList.contains("nav-open"));
+  }
+
+  btn.addEventListener("click", toggle);
+  overlay.addEventListener("click", () => setOpen(false));
+  closeBtn.addEventListener("click", () => setOpen(false));
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") setOpen(false);
+  });
+})();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.getElementById("contactHero");
+  const btn  = document.getElementById("heroToggle");
+
+  if (!hero || !btn) return;
+
+  const toggle = () => hero.classList.toggle("is-open");
+
+  btn.addEventListener("click", toggle);
+
+  hero.addEventListener("click", (e) => {
+    if (e.target.closest(".hero-box")) return;
+    if (e.target.closest("#heroToggle")) return;
+    if (hero.classList.contains("is-open")) hero.classList.remove("is-open");
+  });
+});
+</script>
+
+<script src="enquiry.js" defer></script>
+
+</body>
+</html>
