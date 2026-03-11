@@ -9,8 +9,8 @@ content="default-src 'self';
          script-src 'self' https://iframe.videodelivery.net https://fonts.googleapis.com https://fonts.gstatic.com;
          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
          font-src https://fonts.gstatic.com;
-         img-src * data: https://maps.googleapis.com https://maps.gstatic.com https://placehold.co;
-         frame-src https://iframe.videodelivery.net;">
+         img-src * data:;
+         frame-src https://iframe.videodelivery.net https://www.google.com https://maps.google.com;">
 
 <title>Contact SITRAK Sydney NSW | RUMBLE Auto Arndell Park</title>
 <meta name="description" content="Contact RUMBLE Auto in Arndell Park Sydney NSW for SITRAK truck sales, fleet solutions, service support and general enquiries. Get in touch about G5, G7 and C9H trucks, parts, finance and fleet applications.">
@@ -256,73 +256,70 @@ p{margin:0;color:var(--muted); line-height:1.7}
   border-radius:10px;
 }
 
-/* ---------- Contact row ---------- */
-.contact-row{
+/* ---------- Contact info layout ---------- */
+.contact-layout{
   display:grid;
-  grid-template-columns:1.15fr .85fr;
+  grid-template-columns:1.1fr .8fr;
   gap:24px;
   align-items:stretch;
 }
 
-.contact-panel{
+.contact-cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+.info-item{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
   box-shadow:var(--card-shadow);
+  padding:22px 20px;
   border-radius:var(--radius);
-  overflow:hidden;
-  min-height:100%;
-}
-
-.contact-list{
-  display:grid;
-  grid-template-rows:repeat(3, 1fr);
-  height:100%;
-}
-
-.contact-line{
+  color:var(--card-text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  min-height:112px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:20px 22px;
-  border-bottom:1px solid rgba(255,255,255,.08);
 }
-.contact-line:last-child{
-  border-bottom:none;
+.info-item:hover{
+  box-shadow:var(--card-shadow2);
+  border-color:#334155;
+  transform:translateY(-3px);
 }
-
-.contact-line .left{
-  min-width:110px;
+.info-item .label{
+  width:110px;
   flex-shrink:0;
-}
-.contact-line .label{
   font-size:12px;
   letter-spacing:.12em;
   color:var(--card-muted);
   text-transform:uppercase;
 }
-
-.contact-line .right{
+.info-item .value{
   flex:1;
-  display:flex;
-  justify-content:flex-start;
+  font-family:"Roboto Condensed", sans-serif;
+  letter-spacing:.06em;
+  font-size:18px;
+  line-height:1.3;
+  color:var(--card-text);
 }
-
-.contact-link{
+.info-item a.value-link{
   display:inline-flex;
   align-items:center;
   gap:12px;
   color:var(--card-text);
   text-decoration:none;
   transition:color .15s ease, transform .15s ease;
-  line-height:1.45;
 }
-.contact-link:hover{
+.info-item a.value-link:hover{
   color:var(--card-accent);
   transform:translateY(-1px);
 }
-
-.contact-link .icon{
+.info-item a.value-link:active{
+  transform:translateY(0);
+  opacity:.9;
+}
+.info-item .icon{
   width:34px;
   height:34px;
   border-radius:10px;
@@ -335,55 +332,52 @@ p{margin:0;color:var(--muted); line-height:1.7}
   font-size:16px;
   flex-shrink:0;
 }
-
-.contact-link .text{
-  font-family:"Roboto Condensed", sans-serif;
-  letter-spacing:.04em;
-  font-size:18px;
-  line-height:1.3;
-  color:inherit;
+.info-item.link-card{
+  display:flex;
+  cursor:pointer;
+}
+.info-item.link-card:focus{
+  outline:none;
+  box-shadow:0 0 0 4px rgba(96,165,250,.18), var(--card-shadow);
 }
 
-.map-thumb{
-  position:relative;
-  display:block;
-  height:100%;
-  min-height:246px;
-  background:var(--card-dark);
-  border:1px solid var(--card-border-dark);
-  box-shadow:var(--card-shadow);
+/* ---------- Map ---------- */
+.map-card{
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
   border-radius:var(--radius);
   overflow:hidden;
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  min-height:368px;
+  position:relative;
 }
-.map-thumb img{
+.map-card iframe{
   width:100%;
   height:100%;
+  min-height:368px;
+  border:0;
   display:block;
-  object-fit:cover;
 }
-.map-thumb::after{
-  content:"OPEN MAP";
+.map-actions{
   position:absolute;
   right:14px;
   bottom:14px;
-  padding:8px 12px;
-  border-radius:999px;
-  background:rgba(11,18,32,.78);
+  z-index:2;
+}
+.map-actions a{
+  display:inline-block;
+  padding:10px 14px;
+  background:rgba(11,18,32,.85);
   color:#fff;
+  border-radius:999px;
   font-size:11px;
   font-weight:700;
   letter-spacing:.12em;
-  border:1px solid rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.16);
   backdrop-filter:blur(4px);
 }
-.map-thumb:hover{
-  transform:translateY(-3px);
-  box-shadow:var(--card-shadow2);
-  border-color:#334155;
-}
 
-/* ---------- Dark Cards ---------- */
+/* ---------- Form ---------- */
 .card{
   background:var(--card-dark);
   border:1px solid var(--card-border-dark);
@@ -399,7 +393,6 @@ p{margin:0;color:var(--muted); line-height:1.7}
 }
 .body{padding:20px}
 
-/* ---------- Form ---------- */
 input,select,textarea{
   width:100%;
   padding:12px;
@@ -431,16 +424,23 @@ footer{
 /* ---------- Responsive ---------- */
 @media(max-width:980px){
   .grid2{grid-template-columns:1fr}
-  .contact-row{grid-template-columns:1fr}
-  .map-thumb{
-    aspect-ratio:1 / 1;
+  .contact-layout{grid-template-columns:1fr}
+  .map-card,
+  .map-card iframe{
+    min-height:360px;
+  }
+
+  .info-item{
     min-height:auto;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:12px;
   }
-  .contact-list{
-    grid-template-rows:auto;
+  .info-item .label{
+    width:auto;
   }
-  .contact-line{
-    padding:18px;
+  .info-item .value{
+    width:100%;
   }
 
   .nav{height:auto; padding:14px 0;}
@@ -509,60 +509,58 @@ footer{
       fleet applications, service support and general dealer enquiries.
     </p>
 
-    <div class="contact-row">
+    <div class="contact-layout">
 
-      <div class="contact-panel">
-        <div class="contact-list">
-
-          <div class="contact-line">
-            <div class="left">
-              <div class="label">EMAIL</div>
-            </div>
-            <div class="right">
-              <a class="contact-link" href="mailto:info@rumbleauto.com.au">
-                <span class="icon">✉️</span>
-                <span class="text">info@rumbleauto.com.au</span>
-              </a>
-            </div>
+      <div class="contact-cards">
+        <a class="info-item link-card" href="mailto:info@rumbleauto.com.au">
+          <div class="label">EMAIL</div>
+          <div class="value">
+            <span class="value-link">
+              <span class="icon">✉️</span>
+              info@rumbleauto.com.au
+            </span>
           </div>
+        </a>
 
-          <div class="contact-line">
-            <div class="left">
-              <div class="label">PHONE</div>
-            </div>
-            <div class="right">
-              <a class="contact-link" href="tel:+61296262747">
-                <span class="icon">📞</span>
-                <span class="text">(02) 9626 2747</span>
-              </a>
-            </div>
+        <a class="info-item link-card" href="tel:+61296262747">
+          <div class="label">PHONE</div>
+          <div class="value">
+            <span class="value-link">
+              <span class="icon">📞</span>
+              (02) 9626 2747
+            </span>
           </div>
+        </a>
 
-          <div class="contact-line">
-            <div class="left">
-              <div class="label">LOCATION</div>
-            </div>
-            <div class="right">
-              <a class="contact-link"
-                 href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
-                 target="_blank" rel="noopener">
-                <span class="icon">📍</span>
-                <span class="text">15 Contaplas St, Arndell Park NSW 2148</span>
-              </a>
-            </div>
+        <a class="info-item link-card"
+           href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+           target="_blank" rel="noopener">
+          <div class="label">LOCATION</div>
+          <div class="value">
+            <span class="value-link">
+              <span class="icon">📍</span>
+              15 Contaplas St, Arndell Park NSW 2148
+            </span>
           </div>
-
-        </div>
+        </a>
       </div>
 
-      <a class="map-thumb"
-         href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
-         target="_blank" rel="noopener"
-         aria-label="Open RUMBLE Auto location in Google Maps">
-        <img
-          src="https://placehold.co/800x800/eef2f7/0f172a?text=RUMBLE+AUTO%0A15+Contaplas+St%0AArndell+Park+NSW+2148"
-          alt="RUMBLE Auto location map placeholder">
-      </a>
+      <div class="map-card">
+        <iframe
+          src="https://www.google.com/maps?q=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148&z=15&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="RUMBLE Auto location map">
+        </iframe>
+
+        <div class="map-actions">
+          <a href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+             target="_blank" rel="noopener">
+            OPEN MAP
+          </a>
+        </div>
+      </div>
 
     </div>
   </div>
