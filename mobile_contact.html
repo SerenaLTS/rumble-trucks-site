@@ -10,7 +10,7 @@ content="default-src 'self';
          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
          font-src https://fonts.gstatic.com;
          img-src * data:;
-         frame-src https://iframe.videodelivery.net;">
+         frame-src https://iframe.videodelivery.net https://www.google.com https://maps.google.com;">
 <title>Contact (Mobile) | RUMBLE Trucks</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -350,6 +350,34 @@ p{
   box-shadow:0 0 0 4px rgba(96,165,250,.18), var(--card-shadow);
 }
 
+/* ===== Map card ===== */
+.map-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.map-embed{
+  width:100%;
+  height:280px;
+  border:0;
+  display:block;
+}
+.map-actions{
+  padding:14px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  background:#fff;
+}
+.map-actions .btn{
+  min-height:42px;
+  padding:10px 14px;
+  font-size:12px;
+  letter-spacing:.1em;
+}
+
 /* ===== Enquiry ===== */
 .enquiry-grid{
   display:grid;
@@ -556,6 +584,24 @@ footer{
             </span>
           </div>
         </a>
+
+        <div class="map-card">
+          <iframe
+            class="map-embed"
+            src="https://www.google.com/maps?q=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148&z=15&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            title="RUMBLE Auto location map">
+          </iframe>
+          <div class="map-actions">
+            <a class="btn ghost"
+               href="https://www.google.com/maps/search/?api=1&query=15%20Contaplas%20St%2C%20Arndell%20Park%20NSW%202148"
+               target="_blank" rel="noopener">
+              OPEN IN GOOGLE MAPS
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
